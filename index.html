@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Origin Systems Foundation/title>
+  <title>Origin Documentation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
@@ -12,121 +12,62 @@
       --content: #121417;
       --code: #0b1624;
       --border: #1f2a3a;
-
       --text: #e5e7eb;
       --muted: #9aa4b2;
       --accent: #4f7cff;
       --link: #6da8ff;
+      --table-header: #1a2638;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                   Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
     }
 
-    a {
-      color: var(--link);
-      text-decoration: none;
-    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    .layout { display: flex; min-height: 100vh; }
 
-    /* Layout */
-    .layout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* Sidebar */
     .sidebar {
       width: 280px;
       background: var(--sidebar);
       border-right: 1px solid var(--border);
       padding: 24px 20px;
       position: fixed;
-      top: 0;
-      bottom: 0;
+      top: 0; bottom: 0;
       overflow-y: auto;
     }
 
-    .sidebar h1 {
-      font-size: 1.6rem;
-      margin: 0 0 20px 0;
-      color: white;
-    }
+    .sidebar h1 { font-size: 1.6rem; margin: 0 0 10px 0; color: white; }
+    .sidebar p { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; }
 
-    .sidebar p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 24px;
-    }
-
-    .nav-section {
-      margin-bottom: 20px;
-    }
-
+    .nav-section { margin-bottom: 20px; }
     .nav-section h3 {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--muted);
       margin-bottom: 8px;
     }
+    .nav-section a { display: block; padding: 4px 0; font-size: 0.9rem; }
 
-    .nav-section a {
-      display: block;
-      padding: 6px 0;
-      font-size: 0.95rem;
-    }
+    .content { margin-left: 280px; padding: 48px 64px; max-width: 1000px; }
 
-    /* Content */
-    .content {
-      margin-left: 280px;
-      padding: 48px 64px;
-      max-width: 900px;
-    }
-
-    h2 {
-      font-size: 2.1rem;
-      margin-top: 0;
-      margin-bottom: 12px;
-    }
-
-    h3 {
-      margin-top: 40px;
-      font-size: 1.4rem;
-    }
-
-    p {
-      max-width: 800px;
-      line-height: 1.65;
-      margin-bottom: 16px;
-    }
-
-    ul {
-      padding-left: 22px;
-      margin-bottom: 20px;
-    }
-
-    li {
-      margin: 8px 0;
-    }
-
+    h2 { font-size: 2.1rem; margin-top: 40px; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h3 { margin-top: 30px; font-size: 1.4rem; color: var(--accent); }
+    p { line-height: 1.65; margin-bottom: 16px; }
+    
     code {
       background: var(--code);
       padding: 2px 6px;
-      border-radius: 6px;
+      border-radius: 4px;
       font-family: "JetBrains Mono", monospace;
-      font-size: 0.95em;
+      font-size: 0.9em;
       color: #d6e0ff;
     }
 
@@ -139,11 +80,20 @@
       margin: 16px 0 24px;
     }
 
-    pre code {
-      background: none;
-      padding: 0;
-      color: #e6ebff;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
     }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border: 1px solid var(--border);
+    }
+
+    th { background: var(--table-header); color: white; }
 
     .note {
       background: rgba(79,124,255,0.1);
@@ -154,149 +104,124 @@
     }
   </style>
 </head>
-
 <body>
 
 <div class="layout">
-
-  <!-- Sidebar -->
   <aside class="sidebar">
     <h1>Origin</h1>
-    <p>Official language documentation</p>
-
+    <p>v1.0 Documentation</p>
     <div class="nav-section">
-      <h3>Getting Started</h3>
-      <a href="#Origin Documentation">Origin Documentation</a>
-      <a href="#syntax">Basic Syntax</a>
+      <h3>Core</h3>
+      <a href="#overview">Overview</a>
+      <a href="#lexical">Lexical Structure</a>
       <a href="#types">Data Types</a>
     </div>
-
     <div class="nav-section">
-      <h3>Language Reference</h3>
-      <a href="#expressions">Expressions</a>
+      <h3>Syntax</h3>
+      <a href="#variables">Variables & Assignment</a>
+      <a href="#expressions">Expressions & Operators</a>
       <a href="#control">Control Flow</a>
-      <a href="#lists">Lists</a>
-      <a href="#imports">Imports</a>
-    </div>
-
+      <a href="#functions">Functions & Calls</a>
+    </nav-section>
     <div class="nav-section">
-      <h3>Structure</h3>
-      <a href="#blocks">Blocks</a>
-      <a href="#design">Design Philosophy</a>
+      <h3>Advanced</h3>
+      <a href="#lists">Lists & Indexing</a>
+      <a href="#io">Input / Output</a>
+      <a href="#ast">AST Node Reference</a>
     </div>
   </aside>
 
-  <!-- Content -->
   <main class="content">
-
-    <section id="Origin Documentation">
-      <h2>Origin Documentation</h2>
-      <p>
-        Origin is a minimalist interpreted programming language built with a
-        custom lexer, parser, AST, and interpreter.
-      </p>
-
-      <div class="note">
-        Origin prioritizes explicit structure and predictable execution.
-      </div>
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>Origin is a high-level, dynamically typed programming language designed for simplicity and expressiveness. It supports procedural and functional programming paradigms with a syntax inspired by Python, JavaScript, and C.</p>
     </section>
 
-    <section id="syntax">
-      <h2>Basic Syntax</h2>
+    <section id="lexical">
+      <h2>Lexical Structure</h2>
+      <h3>Tokens</h3>
+      <table>
+        <thead>
+          <tr><th>Token Type</th><th>Examples</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>KEYWORD</td><td><code>let, const, if, elif, else, for, while, print, return, yield, break, continue, input, true, false, int, float, str, import</code></td></tr>
+          <tr><td>IDENTIFIER</td><td><code>x, myVar, calculate</code></td></tr>
+          <tr><td>NUMBER</td><td><code>123, 3.14</code></td></tr>
+          <tr><td>ASSIGN / ASSIGN_OP</td><td><code>=, +=, -=, *=, /=, %=, **=, //=, &=, `=</code></td></tr>
+          <tr><td>ARITH / COMP</td><td><code>+, -, *, /, **, //, %, ==, !=, <=, >=, <, ></code></td></tr>
+          <tr><td>LOGIC</td><td><code>and, or, not, &&, ||, !</code></td></tr>
+          <tr><td>UNARY</td><td><code>++, --</code></td></tr>
+          <tr><td>SPECIAL</td><td><code>??, ->, =>, <=>, ::</code></td></tr>
+        </tbody>
+      </table>
+      <h3>Comments</h3>
+      <p>Single-line comments start with <code>#</code>.</p>
+      <pre><code># This is a comment
+let x = 5</code></pre>
+    </section>
 
-      <h3>Variables</h3>
+    <section id="variables">
+      <h2>Variables and Assignment</h2>
+      <h3>Declaration</h3>
       <pre><code>let x = 10
-let name = "Origin"</code></pre>
-
-      <h3>Printing</h3>
-      <pre><code>print x
-print "Hello, World"</code></pre>
-
-      <h3>Input</h3>
-      <pre><code>let age = input "Enter age"</code></pre>
-    </section>
-
-    <section id="types">
-      <h2>Data Types</h2>
-      <ul>
-        <li><code>int</code></li>
-        <li><code>float</code></li>
-        <li><code>string</code></li>
-        <li><code>bool</code> (<code>true</code>, <code>false</code>)</li>
-        <li><code>list</code></li>
-        <li><code>range</code></li>
-      </ul>
-
-      <h3>Type Casting</h3>
-      <pre><code>let a = int("42")
-let b = float("3.14")
-let c = str(100)</code></pre>
+const y = 20</code></pre>
+      <h3>Compound Assignment</h3>
+      <p>Origin supports shorthand operations on variables and list indices.</p>
+      <pre><code>x += 5
+arr[0] -= 1</code></pre>
     </section>
 
     <section id="expressions">
       <h2>Expressions</h2>
-      <pre><code>let a = 5 + 3
-let b = a * 2
-let c = b / 4
-let ok = a &gt; 3</code></pre>
+      <p>Origin includes standard arithmetic and comparison, as well as unique unary and special operators.</p>
+      <pre><code># Unary
+++x
+--y
+
+# Special Operators
+result = val ?? default
+chain = a -> b => c</code></pre>
     </section>
 
     <section id="control">
       <h2>Control Flow</h2>
-
-      <h3>If / Elif / Else</h3>
-      <pre><code>if x &gt; 10 {
-  print "big"
-} elif x &gt; 5 {
-  print "medium"
-} else {
-  print "small"
-}</code></pre>
-
-      <h3>While</h3>
-      <pre><code>let i = 0
-while i &lt; 5 {
-  print i
-  i = i + 1
-}</code></pre>
-
-      <h3>For</h3>
-      <pre><code>for i in range(0, 5) {
-  print i
+      <h3>Loops</h3>
+      <p>Supports <code>while</code> loops and <code>for...in range</code> expressions.</p>
+      <pre><code>for i in range(1, 5) {
+    if i == 3 { continue }
+    print i
 }</code></pre>
     </section>
 
-    <section id="lists">
-      <h2>Lists</h2>
-      <pre><code>let nums = [1, 2, 3]
-print nums[0]
-nums[1] = 99</code></pre>
+    <section id="functions">
+      <h2>Functions and Calls</h2>
+      <p>Functions are first-class objects. Origin supports both <code>return</code> for standard values and <code>yield</code> for generator-like behavior.</p>
+      <pre><code>result = myFunc(42)
+return x + 5
+yield x</code></pre>
     </section>
 
-    <section id="imports">
-      <h2>Imports</h2>
-      <pre><code>import math</code></pre>
+    <section id="ast">
+      <h2>AST Node Reference</h2>
+      <p>The parser generates the following nodes for the interpreter:</p>
+      <table>
+        <thead>
+          <tr><th>Node Type</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>NumberNode / StringNode</code></td><td>Literal values</td></tr>
+          <tr><td><code>VarNode / AssignNode</code></td><td>Variable access and declaration</td></tr>
+          <tr><td><code>CompoundAssignNode</code></td><td>Handling <code>+=</code>, <code>-=</code>, etc.</td></tr>
+          <tr><td><code>BinOpNode / LogicOpNode</code></td><td>Arithmetic and boolean logic</td></tr>
+          <tr><td><code>IfNode / ElifNode</code></td><td>Conditional branching</td></tr>
+          <tr><td><code>WhileNode / ForNode</code></td><td>Iteration structures</td></tr>
+          <tr><td><code>CallNode</code></td><td>Function invocation</td></tr>
+          <tr><td><code>IndexNode / IndexAssignNode</code></td><td>List manipulation</td></tr>
+        </tbody>
+      </table>
     </section>
-
-    <section id="blocks">
-      <h2>Blocks</h2>
-      <pre><code>{
-  print "Explicit block"
-}</code></pre>
-    </section>
-
-    <section id="design">
-      <h2>Design Philosophy</h2>
-      <ul>
-        <li>Explicit syntax</li>
-        <li>No hidden behavior</li>
-        <li>AST-first execution</li>
-        <li>Interpreter clarity</li>
-      </ul>
-    </section>
-
   </main>
-
 </div>
 
 </body>
