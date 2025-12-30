@@ -2,23 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Origin Language Documentation</title>
+  <title>Origin Documentation</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
     :root {
-      /* Core palette */
-      --bg: #121417;          /* dark grey */
-      --panel: #0f1a2b;       /* navy blue */
-      --code: #0b1624;        /* deep navy */
+      --bg: #121417;
+      --sidebar: #0f1a2b;
+      --content: #121417;
+      --code: #0b1624;
       --border: #1f2a3a;
 
-      /* Text */
       --text: #e5e7eb;
       --muted: #9aa4b2;
-
-      /* Accent */
       --accent: #4f7cff;
+      --link: #6da8ff;
     }
 
     * {
@@ -27,169 +25,227 @@
 
     body {
       margin: 0;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Roboto, Helvetica, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
     }
 
-    header {
-      padding: 72px 32px;
-      text-align: center;
-      background: linear-gradient(180deg, #121417, #0d1117);
-      border-bottom: 1px solid var(--border);
+    a {
+      color: var(--link);
+      text-decoration: none;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin: 0;
-      letter-spacing: -0.03em;
+    a:hover {
+      text-decoration: underline;
     }
 
-    header p {
+    /* Layout */
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: var(--sidebar);
+      border-right: 1px solid var(--border);
+      padding: 24px 20px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar h1 {
+      font-size: 1.6rem;
+      margin: 0 0 20px 0;
+      color: white;
+    }
+
+    .sidebar p {
+      font-size: 0.9rem;
       color: var(--muted);
-      max-width: 640px;
-      margin: 16px auto 0;
-      font-size: 1.1rem;
+      margin-bottom: 24px;
     }
 
-    main {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 56px 24px;
+    .nav-section {
+      margin-bottom: 20px;
     }
 
-    section {
-      margin-bottom: 80px;
+    .nav-section h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .nav-section a {
+      display: block;
+      padding: 6px 0;
+      font-size: 0.95rem;
+    }
+
+    /* Content */
+    .content {
+      margin-left: 280px;
+      padding: 48px 64px;
+      max-width: 900px;
     }
 
     h2 {
-      font-size: 2rem;
-      margin-bottom: 14px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border);
+      font-size: 2.1rem;
+      margin-top: 0;
+      margin-bottom: 12px;
     }
 
     h3 {
-      margin-top: 32px;
-      font-size: 1.35rem;
-      color: #dbe1ea;
+      margin-top: 40px;
+      font-size: 1.4rem;
     }
 
     p {
       max-width: 800px;
+      line-height: 1.65;
+      margin-bottom: 16px;
     }
 
     ul {
       padding-left: 22px;
+      margin-bottom: 20px;
     }
 
     li {
-      margin: 10px 0;
+      margin: 8px 0;
     }
 
     code {
       background: var(--code);
-      color: #d6e0ff;
       padding: 2px 6px;
       border-radius: 6px;
       font-family: "JetBrains Mono", monospace;
       font-size: 0.95em;
+      color: #d6e0ff;
     }
 
     pre {
       background: var(--code);
-      padding: 18px;
-      border-radius: 14px;
-      overflow-x: auto;
       border: 1px solid var(--border);
-      margin-top: 12px;
+      border-radius: 10px;
+      padding: 16px;
+      overflow-x: auto;
+      margin: 16px 0 24px;
     }
 
     pre code {
-      padding: 0;
       background: none;
+      padding: 0;
       color: #e6ebff;
     }
 
-    footer {
-      text-align: center;
-      padding: 36px;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
-      background: #0e1117;
-    }
-
-    .badge {
-      display: inline-block;
-      background: rgba(79,124,255,0.15);
-      color: var(--accent);
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      margin-left: 8px;
-      vertical-align: middle;
+    .note {
+      background: rgba(79,124,255,0.1);
+      border-left: 4px solid var(--accent);
+      padding: 12px 16px;
+      margin: 24px 0;
+      border-radius: 6px;
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>Origin</h1>
-  <p>
-    A minimalist interpreted language built with a custom lexer, parser,
-    AST, and execution engine.
-  </p>
-</header>
+<div class="layout">
 
-<main>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h1>Origin</h1>
+    <p>Official language documentation</p>
 
-  <section>
-    <h2>Overview</h2>
-    <p>
-      Origin is designed for explicit structure, predictable execution,
-      and full control over parsing and interpretation.
-    </p>
-  </section>
+    <div class="nav-section">
+      <h3>Getting Started</h3>
+      <a href="#overview">Overview</a>
+      <a href="#syntax">Basic Syntax</a>
+      <a href="#types">Data Types</a>
+    </div>
 
-  <section>
-    <h2>Variables & Output</h2>
+    <div class="nav-section">
+      <h3>Language Reference</h3>
+      <a href="#expressions">Expressions</a>
+      <a href="#control">Control Flow</a>
+      <a href="#lists">Lists</a>
+      <a href="#imports">Imports</a>
+    </div>
 
-    <h3>Variable Declaration</h3>
-    <pre><code>let x = 10
+    <div class="nav-section">
+      <h3>Structure</h3>
+      <a href="#blocks">Blocks</a>
+      <a href="#design">Design Philosophy</a>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main class="content">
+
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        Origin is a minimalist interpreted programming language built with a
+        custom lexer, parser, AST, and interpreter.
+      </p>
+
+      <div class="note">
+        Origin prioritizes explicit structure and predictable execution.
+      </div>
+    </section>
+
+    <section id="syntax">
+      <h2>Basic Syntax</h2>
+
+      <h3>Variables</h3>
+      <pre><code>let x = 10
 let name = "Origin"</code></pre>
 
-    <h3>Printing</h3>
-    <pre><code>print x
+      <h3>Printing</h3>
+      <pre><code>print x
 print "Hello, World"</code></pre>
 
-    <h3>User Input</h3>
-    <pre><code>let age = input "Enter age"</code></pre>
-  </section>
+      <h3>Input</h3>
+      <pre><code>let age = input "Enter age"</code></pre>
+    </section>
 
-  <section>
-    <h2>Data Types</h2>
-    <ul>
-      <li><code>int</code></li>
-      <li><code>float</code></li>
-      <li><code>string</code></li>
-      <li><code>bool</code> (<code>true</code>, <code>false</code>)</li>
-      <li><code>list</code></li>
-      <li><code>range</code></li>
-    </ul>
+    <section id="types">
+      <h2>Data Types</h2>
+      <ul>
+        <li><code>int</code></li>
+        <li><code>float</code></li>
+        <li><code>string</code></li>
+        <li><code>bool</code> (<code>true</code>, <code>false</code>)</li>
+        <li><code>list</code></li>
+        <li><code>range</code></li>
+      </ul>
 
-    <h3>Type Casting</h3>
-    <pre><code>let a = int("42")
+      <h3>Type Casting</h3>
+      <pre><code>let a = int("42")
 let b = float("3.14")
 let c = str(100)</code></pre>
-  </section>
+    </section>
 
-  <section>
-    <h2>Control Flow</h2>
+    <section id="expressions">
+      <h2>Expressions</h2>
+      <pre><code>let a = 5 + 3
+let b = a * 2
+let c = b / 4
+let ok = a &gt; 3</code></pre>
+    </section>
 
-    <h3>If / Elif / Else</h3>
-    <pre><code>if x &gt; 10 {
+    <section id="control">
+      <h2>Control Flow</h2>
+
+      <h3>If / Elif / Else</h3>
+      <pre><code>if x &gt; 10 {
   print "big"
 } elif x &gt; 5 {
   print "medium"
@@ -197,44 +253,51 @@ let c = str(100)</code></pre>
   print "small"
 }</code></pre>
 
-    <h3>While Loop</h3>
-    <pre><code>let i = 0
+      <h3>While</h3>
+      <pre><code>let i = 0
 while i &lt; 5 {
   print i
   i = i + 1
 }</code></pre>
 
-    <h3>For Loop</h3>
-    <pre><code>for i in range(0, 5) {
+      <h3>For</h3>
+      <pre><code>for i in range(0, 5) {
   print i
 }</code></pre>
-  </section>
+    </section>
 
-  <section>
-    <h2>Lists & Indexing</h2>
-    <pre><code>let nums = [1, 2, 3]
+    <section id="lists">
+      <h2>Lists</h2>
+      <pre><code>let nums = [1, 2, 3]
 print nums[0]
 nums[1] = 99</code></pre>
-  </section>
+    </section>
 
-  <section>
-    <h2>Imports</h2>
-    <pre><code>import math</code></pre>
-  </section>
+    <section id="imports">
+      <h2>Imports</h2>
+      <pre><code>import math</code></pre>
+    </section>
 
-  <section>
-    <h2>Blocks</h2>
-    <p>All control structures use explicit curly-brace blocks.</p>
-    <pre><code>{
+    <section id="blocks">
+      <h2>Blocks</h2>
+      <pre><code>{
   print "Explicit block"
 }</code></pre>
-  </section>
+    </section>
 
-</main>
+    <section id="design">
+      <h2>Design Philosophy</h2>
+      <ul>
+        <li>Explicit syntax</li>
+        <li>No hidden behavior</li>
+        <li>AST-first execution</li>
+        <li>Interpreter clarity</li>
+      </ul>
+    </section>
 
-<footer>
-  Origin Language — Engineered from first principles
-</footer>
+  </main>
+
+</div>
 
 </body>
 </html>
