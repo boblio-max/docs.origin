@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Origin Language Documentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      /* Core palette */
+      --bg: #121417;          /* dark grey */
+      --panel: #0f1a2b;       /* navy blue */
+      --code: #0b1624;        /* deep navy */
+      --border: #1f2a3a;
+
+      /* Text */
+      --text: #e5e7eb;
+      --muted: #9aa4b2;
+
+      /* Accent */
+      --accent: #4f7cff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 72px 32px;
+      text-align: center;
+      background: linear-gradient(180deg, #121417, #0d1117);
+      border-bottom: 1px solid var(--border);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      letter-spacing: -0.03em;
+    }
+
+    header p {
+      color: var(--muted);
+      max-width: 640px;
+      margin: 16px auto 0;
+      font-size: 1.1rem;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 56px 24px;
+    }
+
+    section {
+      margin-bottom: 80px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      margin-top: 32px;
+      font-size: 1.35rem;
+      color: #dbe1ea;
+    }
+
+    p {
+      max-width: 800px;
+    }
+
+    ul {
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    code {
+      background: var(--code);
+      color: #d6e0ff;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: var(--code);
+      padding: 18px;
+      border-radius: 14px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      margin-top: 12px;
+    }
+
+    pre code {
+      padding: 0;
+      background: none;
+      color: #e6ebff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 36px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      background: #0e1117;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(79,124,255,0.15);
+      color: var(--accent);
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Origin</h1>
+  <p>
+    A minimalist interpreted language built with a custom lexer, parser,
+    AST, and execution engine.
+  </p>
+</header>
+
+<main>
+
+  <section>
+    <h2>Overview</h2>
+    <p>
+      Origin is designed for explicit structure, predictable execution,
+      and full control over parsing and interpretation.
+    </p>
+  </section>
+
+  <section>
+    <h2>Variables & Output</h2>
+
+    <h3>Variable Declaration</h3>
+    <pre><code>let x = 10
+let name = "Origin"</code></pre>
+
+    <h3>Printing</h3>
+    <pre><code>print x
+print "Hello, World"</code></pre>
+
+    <h3>User Input</h3>
+    <pre><code>let age = input "Enter age"</code></pre>
+  </section>
+
+  <section>
+    <h2>Data Types</h2>
+    <ul>
+      <li><code>int</code></li>
+      <li><code>float</code></li>
+      <li><code>string</code></li>
+      <li><code>bool</code> (<code>true</code>, <code>false</code>)</li>
+      <li><code>list</code></li>
+      <li><code>range</code></li>
+    </ul>
+
+    <h3>Type Casting</h3>
+    <pre><code>let a = int("42")
+let b = float("3.14")
+let c = str(100)</code></pre>
+  </section>
+
+  <section>
+    <h2>Control Flow</h2>
+
+    <h3>If / Elif / Else</h3>
+    <pre><code>if x &gt; 10 {
+  print "big"
+} elif x &gt; 5 {
+  print "medium"
+} else {
+  print "small"
+}</code></pre>
+
+    <h3>While Loop</h3>
+    <pre><code>let i = 0
+while i &lt; 5 {
+  print i
+  i = i + 1
+}</code></pre>
+
+    <h3>For Loop</h3>
+    <pre><code>for i in range(0, 5) {
+  print i
+}</code></pre>
+  </section>
+
+  <section>
+    <h2>Lists & Indexing</h2>
+    <pre><code>let nums = [1, 2, 3]
+print nums[0]
+nums[1] = 99</code></pre>
+  </section>
+
+  <section>
+    <h2>Imports</h2>
+    <pre><code>import math</code></pre>
+  </section>
+
+  <section>
+    <h2>Blocks</h2>
+    <p>All control structures use explicit curly-brace blocks.</p>
+    <pre><code>{
+  print "Explicit block"
+}</code></pre>
+  </section>
+
+</main>
+
+<footer>
+  Origin Language — Engineered from first principles
+</footer>
+
+</body>
+</html>
