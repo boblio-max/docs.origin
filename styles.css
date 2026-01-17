@@ -1,0 +1,287 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'SF Mono', 'Monaco', "Inconsolata", "Liberation Mono", "Fira Code", monospace;
+    background: black;
+    color: #e0e0e0;
+    overflow-x: hidden;
+    line-height:1.6;
+}
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right:0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #222;
+}
+.logo {
+        font-size: 1rem;
+        font-weight: 400;
+        color: #fff;
+        letter-spacing: 2px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 3rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: #888;
+        text-decoration: none;
+        transition: color 0.3s;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+    }
+
+    .nav-links a:hover {
+        color: #fff;
+    }
+
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 4%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .hero-content {
+        max-width: 900px;
+    }
+
+    .label {
+        font-size: 1.75rem;
+        color: #767474;
+        letter-spacing: 3px;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+    }
+
+    h1 {
+        font-size: 6rem;
+        font-weight: 300;
+        line-height: 1.1;
+        margin-bottom: 2rem;
+        color: #fff;
+        letter-spacing: -3px;
+    }
+
+    .highlight {
+        display: block;
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    .description {
+        font-size: 1.1rem;
+        color: #888;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        letter-spacing: 0.5px;
+    }
+    .description1 {
+        font-size: 1rem;
+        text-align: center;
+        color: #444;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        letter-spacing: 0.5px;
+    }
+
+    .description2 {
+        font-size: 1rem;
+        text-align: center;
+        color: #444;
+        margin-bottom: 3rem;
+        max-width: 600px;
+        letter-spacing: 0.5px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    .btn {
+        padding: 0.8rem 0;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+        letter-spacing: 1px;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        color: #fff;
+        border-bottom: 2px solid #fff;
+    }
+
+    .btn-primary:hover {
+        opacity: 0.6;
+    }
+
+    .btn-secondary {
+        color: #666;
+        border-bottom: 1px solid #333;
+    }
+
+    .btn-secondary:hover {
+        color: #fff;
+        border-bottom-color: #fff;
+    }
+
+    .code-section {
+        padding: 8rem 4%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .section-label {
+        font-size: 0.75rem;
+        color: #444;
+        letter-spacing: 2px;
+        margin-bottom: 3rem;
+    }
+
+    .code-display {
+        background: #0a0a0a;
+        border: 1px solid #1a1a1a;
+        padding: 3rem;
+        font-family: inherit;
+        font-size: 1.5rem;
+        line-height: 2;
+        color: #fff;
+        position: relative;
+    }
+
+    .code-display::before {
+        content: '→';
+        position: absolute;
+        left: 1rem;
+        top: 3rem;
+        color: #333;
+        font-size: 1.2rem;
+    }
+
+    .code-line {
+        display: block;
+        padding-left: 3rem;
+    }
+
+    .syntax-fn { color: #888; }
+    .syntax-name { color: #fff; }
+    .syntax-string { color: #666; font-style: italic; }
+
+    .features {
+        padding: 8rem 4% 12rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 4rem;
+        margin-top: 4rem;
+    }
+
+    .feature {
+        padding: 0;
+    }
+
+    .feature-number {
+        font-size: 0.75rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .feature h3 {
+        font-size: 1.8rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
+        color: #fff;
+        letter-spacing: -1px;
+    }
+
+    .feature p {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.8;
+        letter-spacing: 0.3px;
+    }
+
+    .divider {
+        height: 1px;
+        background: #1a1a1a;
+        margin: 8rem 0;
+    }
+
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 3rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+
+        .code-display {
+            font-size: 1rem;
+            padding: 2rem;
+        }
+
+        .code-line {
+            padding-left: 2rem;
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .codeEditor {
+        color: black;
+        text-align: left;
+    }
+    .spacer {
+        color: transparent;
+    }
+    .hero-content > * {
+        animation: fadeIn 0.8s ease-out backwards;
+    }
+
+    .label { animation-delay: 0.1s; }
+    h1 { animation-delay: 0.2s; }
+    .description { animation-delay: 0.3s; }
+    .actions { animation-delay: 0.4s; }
