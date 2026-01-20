@@ -235,7 +235,27 @@ nav {
         background: #1a1a1a;
         margin: 8rem 0;
     }
+    .container {
+        display: flex;
+        /* Optional: adds space around/between items */
+        justify-content: space-around; 
+    }
 
+    .box {
+        background-color: black;
+        margin: 10px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        width: 10000px; /* Example width */
+    }
+    .box1 {
+        background-color: black;
+        margin: 10px;
+        font-size: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        width: 600px; /* Example width */
+    }
     @media (max-width: 768px) {
         h1 {
             font-size: 3rem;
