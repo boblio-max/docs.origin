@@ -1,7 +1,7 @@
 # ORIGIN
 Documentation of ORIGIN that let's users explore it inside and out
 
-## Check out our [WEBSITE]( docs-origin.onrender.com )
+## Check out our [WEBSITE]( https://docs-origin.onrender.com )
 ## Description
 
 Welcome to the official documentation website for **ORIGIN**.
