@@ -1,265 +1,350 @@
-<!DOCTYPE html>
+]<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Origin v1.5 Docs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css">
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Language — Reference</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+<!-- ── TOP NAV ── -->
 <nav>
-    <div class="logo">ORIGIN DOCUMENTATION</div>
+    <div class="logo">Origin</div>
     <ul class="nav-links">
-        <li><a href="docs.html" class="btn btn-primary">Origin Docs</a></li>
-        <li><a href="index.html">Origin</a></li>
-        <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+        <li><a href="#variables">Fundamentals</a></li>
+        <li><a href="#servo">Hardware</a></li>
+        <li><a href="#v1-5-imports">Modules</a></li>
+        <li><a href="#error-handling">Errors</a></li>
     </ul>
 </nav>
 
-<section class="hero">
-    <div class="hero-content">
-        <div class="label">VERSION 1.5</div>
-        <h1><span class="highlight">Origin Documentation</span></h1>
-        <p class="description">> Origin is a domain specific language that enables developers to build AI systems with ease.</p>
-        <p class="description">> Origin combines the structure of Java with the power and simplicity of python.</p>
-        <p class="description">> COMING SOON: Origin is soon going to incorporate a bytecode compiler instead of an interpreter.</p>
+<!-- ── DOCS LAYOUT ── -->
+<div class="docs-layout">
 
-        <h2 class="description1">Scroll Down</h2>
-        <h2 class="description2">↓</h2>
-    </div>
-</section>
+    <!-- SIDEBAR -->
+    <aside class="docs-sidebar">
 
-<div class="divider"></div>
+        <div class="sidebar-group">
+            <div class="sidebar-group-label">Fundamentals</div>
+            <ul>
+                <li><a href="#variables">Variables &amp; Constants</a></li>
+                <li><a href="#control-flow">Control Flow</a></li>
+                <li><a href="#functions">Functions</a></li>
+            </ul>
+        </div>
 
-<section class="content-section">
-    <div class="section-header">OVERVIEW</div>
-    <h2>Overview</h2>
-    <p>Origin is a high-level, dynamically typed programming language designed for simplicity and expressiveness. It supports procedural and functional programming paradigms with a syntax inspired by Python, JavaScript, and C.</p>
-</section>
+        <div class="sidebar-group">
+            <div class="sidebar-group-label">Hardware &amp; I/O</div>
+            <ul>
+                <li><a href="#servo">Servo Control</a></li>
+                <li><a href="#io">Input / Output</a></li>
+            </ul>
+        </div>
 
-<div class="divider"></div>
+        <div class="sidebar-group">
+            <div class="sidebar-group-label">Advanced</div>
+            <ul>
+                <li><a href="#v1-5-imports">Modules <span class="nav-badge">v1.5</span></a></li>
+                <li><a href="#error-handling">Error Handling</a></li>
+            </ul>
+        </div>
 
-<section class="content-section">
-    <div class="section-header">LEXICAL STRUCTURE</div>
-    <h2>Lexical Structure</h2>
-    
-    <h3>Tokens</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Token Type</th>
-                <th>Examples</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>KEYWORD</td>
-                <td><code>let, const, if, elif, else, for, while, print, return, yield, break, continue, input, true, false, int, float, str, import, len, append</code></td>
-            </tr>
-            <tr>
-                <td>IDENTIFIER</td>
-                <td><code>x, myVar, calculate</code></td>
-            </tr>
-            <tr>
-                <td>NUMBER</td>
-                <td><code>123, 3.14</code></td>
-            </tr>
-            <tr>
-                <td>ASSIGN / ASSIGN_OP</td>
-                <td><code>=, +=, -=, *=, /=, %=, **=, //=</code></td>
-            </tr>
-            <tr>
-                <td>ARITH / COMP</td>
-                <td><code>+, -, *, /, **, //, %, ==, !=, <=, >=, <, ></code></td>
-            </tr>
-            <tr>
-                <td>LOGIC</td>
-                <td><code>and, or, not, &&, ||, !</code></td>
-            </tr>
-            <tr>
-                <td>UNARY</td>
-                <td><code>++, --</code></td>
-            </tr>
-            <tr>
-                <td>SPECIAL</td>
-                <td><code>??, ->, =>, <=>, ::</code></td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <h3>Comments</h3>
-    <p>Single-line comments start with <code>#</code>.</p>
-    <pre><code># This is a comment
-let x = 5</code></pre>
-</section>
+    </aside>
 
-<div class="divider"></div>
+    <!-- MAIN CONTENT -->
+    <main class="docs-main">
 
-<section class="content-section">
-    <div class="section-header">VARIABLES</div>
-    <h2>Variables and Assignment</h2>
-    
-    <h3>Declaration</h3>
-    <pre><code>let x = 10
-const y = 20</code></pre>
-    
-    <h3>Compound Assignment</h3>
-    <p>Origin supports shorthand operations on variables and list indices.</p>
-    <pre><code>x += 5
-arr[0] -= 1</code></pre>
-</section>
+        <!-- PAGE HEADER -->
+        <header class="docs-header">
+            <div class="label">Language Reference</div>
+            <h1>Origin <span class="highlight">Documentation</span></h1>
+            <p class="description">Complete reference for the Origin programming language — hardware-first, expressive, and built for control.</p>
+            <div class="version-row">
+                <span class="version-tag">v1.0</span>
+                <span class="version-tag current">v1.5 — current</span>
+            </div>
+        </header>
 
-<div class="divider"></div>
+        <!-- ── VARIABLES ── -->
+        <section id="variables" class="doc-section">
+            <div class="doc-section-header">
+                <h2>Variables &amp; Data</h2>
+            </div>
+            <div class="section-divider"></div>
+            <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. Use <code>const</code> for values that must not change after assignment — the compiler enforces immutability at runtime.</p>
 
-<section class="content-section">
-    <div class="section-header">EXPRESSIONS</div>
-    <h2>Expressions</h2>
-    <p>Origin includes arithmetic, comparison, unary, logic, and special operators.</p>
-    <pre><code># Unary
-++x
---y
+            <div class="doc-code-block">
+                <div class="doc-code-header">
+                    <span class="doc-code-filename">declaration.org</span>
+                    <span class="doc-code-lang">origin</span>
+                </div>
+                <pre><code><span class="t-k">let</span>   x       = <span class="t-n">10</span>
+<span class="t-k">let</span>   name    = <span class="t-s">"Origin"</span>
+<span class="t-k">const</span> pi      = <span class="t-n">3.14159</span>     <span class="t-c"># immutable — reassignment raises ImmutableError</span>
+<span class="t-k">const</span> MAX_VAL = <span class="t-n">255</span>         <span class="t-c"># convention: ALL_CAPS for module-level constants</span></code></pre>
+            </div>
 
-# Logic
-x and y or not z
+            <div class="callout info">
+                <span class="callout-tag">INFO</span>
+                <span>Attempting to reassign a <code>const</code> at runtime raises an <code>ImmutableError</code>. See the <a href="#error-handling" style="color:inherit;text-decoration:underline;opacity:0.7">Error Handling</a> section for recovery patterns.</span>
+            </div>
+        </section>
 
-# Special Operators
-result = val ?? default
-chain = a -> b => c</code></pre>
-</section>
+        <hr class="divider">
 
-<div class="divider"></div>
+        <!-- ── CONTROL FLOW ── -->
+        <section id="control-flow" class="doc-section">
+            <div class="doc-section-header">
+                <h2>Control Flow</h2>
+            </div>
+            <div class="section-divider"></div>
+            <p>Origin uses indentation to denote block scope — no braces required. Standard control structures include <code>if / elif / else</code>, <code>while</code>, and <code>for</code> range loops.</p>
 
-<section class="content-section">
-    <div class="section-header">CONTROL FLOW</div>
-    <h2>Control Flow</h2>
-    
-    <h3>Conditionals</h3>
-    <pre><code>if x > 5 {
-    print "big"
-} elif x == 5 {
-    print "equal"
-} else {
-    print "small"
-}</code></pre>
-    
-    <h3>Loops</h3>
-    <p>Supports <code>while</code> and <code>for...in range</code> loops.</p>
-    <pre><code>for i in range(1, 5) {
-    if i == 3 { continue }
-    print i
-}
+            <div class="doc-code-block">
+                <div class="doc-code-header">
+                    <span class="doc-code-filename">control.org</span>
+                    <span class="doc-code-lang">origin</span>
+                </div>
+                <pre><code><span class="t-c"># Conditional</span>
+<span class="t-k">if</span> x &gt; <span class="t-n">100</span>
+    <span class="t-k">print</span> <span class="t-s">"high"</span>
+<span class="t-k">elif</span> x &gt; <span class="t-n">50</span>
+    <span class="t-k">print</span> <span class="t-s">"mid"</span>
+<span class="t-k">else</span>
+    <span class="t-k">print</span> <span class="t-s">"low"</span>
 
-while x < 10 {
-    x += 1
-    if x == 7 { break }
-}</code></pre>
-</section>
+<span class="t-c"># Range loop  (start, stop, step)</span>
+<span class="t-k">for</span> i <span class="t-k">in</span> range <span class="t-n">0</span>, <span class="t-n">10</span>, <span class="t-n">2</span>
+    <span class="t-k">print</span> i
 
-<div class="divider"></div>
+<span class="t-c"># While loop</span>
+<span class="t-k">let</span> count = <span class="t-n">0</span>
+<span class="t-k">while</span> count &lt; <span class="t-n">5</span>
+    count = count + <span class="t-n">1</span></code></pre>
+            </div>
+        </section>
 
-<section class="content-section">
-    <div class="section-header">FUNCTIONS</div>
-    <h2>Functions and Calls</h2>
-    <p>Functions are first-class objects. Supports <code>return</code> and <code>yield</code>.</p>
-    <pre><code>result = myFunc(42)
-return x + 5
-yield x</code></pre>
-</section>
+        <hr class="divider">
 
-<div class="divider"></div>
+        <!-- ── FUNCTIONS ── -->
+        <section id="functions" class="doc-section">
+            <div class="doc-section-header">
+                <h2>Functions</h2>
+            </div>
+            <div class="section-divider"></div>
+            <p>Functions are defined with the <code>fn</code> keyword. They are first-class values and can be passed as arguments. Return values are indicated with <code>return</code>.</p>
 
-<section class="content-section">
-    <div class="section-header">LISTS</div>
-    <h2>Lists & Indexing</h2>
-    <pre><code>let mylist = [1, 2, 3]
-mylist[0] = 10
-mylist.append(4)
-print mylist</code></pre>
-    <p>Lists support indexing, assignment, and the <code>append()</code> method.</p>
-</section>
+            <div class="doc-code-block">
+                <div class="doc-code-header">
+                    <span class="doc-code-filename">functions.org</span>
+                    <span class="doc-code-lang">origin</span>
+                </div>
+                <pre><code><span class="t-k">fn</span> <span class="t-fn">add</span>(a, b)
+    <span class="t-k">return</span> a + b
 
-<div class="divider"></div>
+<span class="t-k">fn</span> <span class="t-fn">greet</span>(name)
+    <span class="t-k">print</span> <span class="t-s">"Hello, "</span> + name
 
-<section class="content-section">
-    <div class="section-header">LENGTH FUNCTION</div>
-    <h2>len() Function</h2>
-    <p>The <code>len()</code> function returns the number of elements in a list or string.</p>
-    <pre><code>let mylist = [1, 2, 3]
-print(len(mylist))  # 3
+<span class="t-k">let</span> result = <span class="t-fn">add</span> <span class="t-n">4</span>, <span class="t-n">7</span>    <span class="t-c"># → 11</span>
+<span class="t-fn">greet</span> <span class="t-s">"world"</span>              <span class="t-c"># → Hello, world</span></code></pre>
+            </div>
+        </section>
 
-let mystr = "hello"
-print(len(mystr))   # 5</code></pre>
-</section>
+        <hr class="divider">
 
-<div class="divider"></div>
+        <!-- ── SERVO CONTROL ── -->
+        <section id="servo" class="doc-section">
+            <div class="doc-section-header">
+                <h2>Hardware Control</h2>
+            </div>
+            <div class="section-divider"></div>
+            <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Commands execute synchronously against the connected device and are available on all supported boards.</p>
 
-<section class="content-section">
-    <div class="section-header">INPUT / OUTPUT</div>
-    <h2>Input / Output</h2>
-    <pre><code>x = input("Enter a number: ")
-print x</code></pre>
-</section>
+            <div class="doc-code-block">
+                <div class="doc-code-header">
+                    <span class="doc-code-filename">servo_sweep.org</span>
+                    <span class="doc-code-lang">origin</span>
+                </div>
+                <pre><code><span class="t-c"># Move servo at index 0 to 90°</span>
+<span class="t-k">set</span> servo.angle <span class="t-n">0</span>, <span class="t-n">90</span>
 
-<div class="divider"></div>
+<span class="t-c"># Sweep servo 1 from 0° → 180° in 10° steps</span>
+<span class="t-k">let</span> pos = <span class="t-n">0</span>
+<span class="t-k">while</span> pos &lt;= <span class="t-n">180</span>
+    <span class="t-k">set</span> servo.angle <span class="t-n">1</span>, pos
+    pos = pos + <span class="t-n">10</span></code></pre>
+            </div>
 
-<section class="content-section">
-    <div class="section-header">AST REFERENCE</div>
-    <h2>AST Node Reference</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Node Type</th>
-                <th>Purpose</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><code>NumberNode / StringNode / BoolNode</code></td>
-                <td>Literal values</td>
-            </tr>
-            <tr>
-                <td><code>VarNode / AssignNode / CompoundAssignNode</code></td>
-                <td>Variable access and assignment</td>
-            </tr>
-            <tr>
-                <td><code>BinOpNode / LogicOpNode / UnaryOpNode / SpecialOpNode</code></td>
-                <td>Arithmetic, logic, unary, and special operations</td>
-            </tr>
-            <tr>
-                <td><code>IfNode / ElifNode</code></td>
-                <td>Conditional branching</td>
-            </tr>
-            <tr>
-                <td><code>WhileNode / ForNode</code></td>
-                <td>Iteration structures</td>
-            </tr>
-            <tr>
-                <td><code>BreakNode / ContinueNode</code></td>
-                <td>Loop control</td>
-            </tr>
-            <tr>
-                <td><code>ReturnNode / YieldNode</code></td>
-                <td>Function return and generator yield</td>
-            </tr>
-            <tr>
-                <td><code>CallNode</code></td>
-                <td>Function invocation</td>
-            </tr>
-            <tr>
-                <td><code>IndexNode / IndexAssignNode</code></td>
-                <td>List access and assignment</td>
-            </tr>
-            <tr>
-                <td><code>LenNode</code></td>
-                <td>Length of list or string</td>
-            </tr>
-        </tbody>
-    </table>
-</section>
+            <div class="doc-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Parameters</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>set servo.angle</code></td>
+                            <td><span class="param">(index: int, degrees: float)</span></td>
+                            <td>Moves servo at <em>index</em> to specified angle. Range: 0 – 180°.</td>
+                        </tr>
+                        <tr>
+                            <td><code>set servo.speed</code></td>
+                            <td><span class="param">(index: int, speed: float)</span></td>
+                            <td>Sets rotation speed for continuous-rotation servos. 0 = stop, ±1 = max.</td>
+                        </tr>
+                        <tr>
+                            <td><code>set pin.high</code></td>
+                            <td><span class="param">(pin: int)</span></td>
+                            <td>Drives the specified GPIO pin to high (3.3 V) state.</td>
+                        </tr>
+                        <tr>
+                            <td><code>set pin.low</code></td>
+                            <td><span class="param">(pin: int)</span></td>
+                            <td>Drives the specified GPIO pin to low (0 V) state.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-<div style="height: 8rem;"></div>
+            <div class="callout warn">
+                <span class="callout-tag">WARN</span>
+                <span>Sending angles outside the 0 – 180° range may damage physical servo hardware. Origin does not clamp values automatically.</span>
+            </div>
+        </section>
 
+        <hr class="divider">
+
+        <!-- ── I/O ── -->
+        <section id="io" class="doc-section">
+            <div class="doc-section-header">
+                <h2>Input / Output</h2>
+            </div>
+            <div class="section-divider"></div>
+            <p>Standard output is written with <code>print</code>. User input can be read from stdin using <code>read</code>, which always returns a string — cast explicitly if a numeric value is needed.</p>
+
+            <div class="doc-code-block">
+                <div class="doc-code-header">
+                    <span class="doc-code-filename">io_example.org</span>
+                    <span class="doc-code-lang">origin</span>
+                </div>
+                <pre><code><span class="t-k">print</span> <span class="t-s">"Enter a number:"</span>
+<span class="t-k">let</span> raw   = <span class="t-fn">read</span>
+<span class="t-k">let</span> value = <span class="t-fn">int</span>(raw)     <span class="t-c"># explicit cast — raises CastError if non-numeric</span>
+<span class="t-k">print</span> <span class="t-s">"You entered: "</span> + value</code></pre>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── MODULES ── -->
+        <section id="v1-5-imports" class="doc-section">
+            <div class="doc-section-header">
+                <h2>Module System</h2>
+                <span class="badge">New in v1.5</span>
+            </div>
+            <div class="section-divider"></div>
+            <p>Version 1.5 introduced a first-class module system for standard library access and cross-file code reuse. Import an entire namespace or pull named exports directly.</p>
+
+            <div class="doc-code-block">
+                <div class="doc-code-header">
+                    <span class="doc-code-filename">math_example.org</span>
+                    <span class="doc-code-lang">origin</span>
+                </div>
+                <pre><code><span class="t-k">import</span> math
+
+<span class="t-k">print</span> math.sqrt <span class="t-n">16</span>           <span class="t-c"># → 4.0</span>
+<span class="t-k">print</span> math.pow  <span class="t-n">2</span>, <span class="t-n">8</span>         <span class="t-c"># → 256.0</span>
+
+<span class="t-c"># Named import — drops the namespace prefix</span>
+<span class="t-k">from</span> math <span class="t-k">import</span> sqrt, floor
+
+<span class="t-k">print</span> sqrt  <span class="t-n">25</span>               <span class="t-c"># → 5.0</span>
+<span class="t-k">print</span> floor <span class="t-n">3.7</span>              <span class="t-c"># → 3</span></code></pre>
+            </div>
+
+            <div class="callout info">
+                <span class="callout-tag">INFO</span>
+                <span>Module resolution searches the working directory first, then the standard library path. Third-party packages are not yet supported in v1.5.</span>
+            </div>
+        </section>
+
+        <hr class="divider">
+
+        <!-- ── ERROR HANDLING ── -->
+        <section id="error-handling" class="doc-section">
+            <div class="doc-section-header">
+                <h2>Error Handling</h2>
+            </div>
+            <div class="section-divider"></div>
+            <p>Runtime errors are caught with <code>try / catch</code>. The caught object exposes a <code>.type</code> string and a <code>.message</code> string for programmatic inspection.</p>
+
+            <div class="doc-code-block">
+                <div class="doc-code-header">
+                    <span class="doc-code-filename">error_handling.org</span>
+                    <span class="doc-code-lang">origin</span>
+                </div>
+                <pre><code><span class="t-k">try</span>
+    <span class="t-k">const</span> x = <span class="t-n">1</span>
+    x = <span class="t-n">2</span>                    <span class="t-c"># raises ImmutableError</span>
+<span class="t-k">catch</span> err
+    <span class="t-k">print</span> err.type           <span class="t-c"># → "ImmutableError"</span>
+    <span class="t-k">print</span> err.message        <span class="t-c"># → "cannot reassign const 'x'"</span></code></pre>
+            </div>
+
+            <div class="doc-table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Error Type</th>
+                            <th>Trigger</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>ImmutableError</code></td>
+                            <td>Reassignment of a <code>const</code> variable.</td>
+                        </tr>
+                        <tr>
+                            <td><code>CastError</code></td>
+                            <td>Failed type conversion (e.g. <code>int("abc")</code>).</td>
+                        </tr>
+                        <tr>
+                            <td><code>ImportError</code></td>
+                            <td>Module not found during <code>import</code> resolution.</td>
+                        </tr>
+                        <tr>
+                            <td><code>HardwareError</code></td>
+                            <td>Device not connected or <code>set</code> command rejected by board.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<script>
+    const sections = document.querySelectorAll('.doc-section[id]');
+    const navLinks = document.querySelectorAll('.sidebar-group a');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(a => a.classList.remove('active'));
+                const active = document.querySelector(`.sidebar-group a[href="#${entry.target.id}"]`);
+                if (active) active.classList.add('active');
+            }
+        });
+    }, { rootMargin: '-15% 0px -75% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+</script>
 </body>
 </html>
