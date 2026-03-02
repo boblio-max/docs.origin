@@ -1,180 +1,222 @@
-]<!DOCTYPE html>
+]
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Origin Language — Reference</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
 
-<!-- ── TOP NAV ── -->
-<nav>
-    <div class="logo">Origin</div>
-    <ul class="nav-links">
-        <li><a href="index.html">Origin</a></li>
-        <li><a href="#variables">Fundamentals</a></li>
-        <li><a href="#servo">Hardware</a></li>
-        <li><a href="#v1-5-imports">Modules</a></li>
-        <li><a href="#error-handling">Errors</a></li>
-    </ul>
-</nav>
+    <!-- ── TOP NAV ── -->
+    <nav>
+        <div class="logo">Origin</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Origin</a></li>
+            <li><a href="#variables">Fundamentals</a></li>
+            <li><a href="#servo">Hardware</a></li>
+            <li><a href="#v1-5-imports">Modules</a></li>
+            <li><a href="#error-handling">Errors</a></li>
+        </ul>
+    </nav>
 
-<!-- ── DOCS LAYOUT ── -->
-<div class="docs-layout">
+    <!-- ── DOCS LAYOUT ── -->
+    <div class="docs-layout">
 
-    <!-- SIDEBAR -->
-    <aside class="docs-sidebar">
+        <!-- SIDEBAR -->
+        <aside class="docs-sidebar">
 
-        <div class="sidebar-group">
-            <div class="sidebar-group-label">Fundamentals</div>
-            <ul>
-                <li><a href="#variables">Variables &amp; Constants</a></li>
-                <li><a href="#control-flow">Control Flow</a></li>
-                <li><a href="#functions">Functions</a></li>
-            </ul>
-        </div>
-
-        <div class="sidebar-group">
-            <div class="sidebar-group-label">Hardware &amp; I/O</div>
-            <ul>
-                <li><a href="#servo">Servo Control</a></li>
-                <li><a href="#io">Input / Output</a></li>
-            </ul>
-        </div>
-
-        <div class="sidebar-group">
-            <div class="sidebar-group-label">Advanced</div>
-            <ul>
-                <li><a href="#v1-5-imports">Modules <span class="nav-badge">v1.5</span></a></li>
-                <li><a href="#error-handling">Error Handling</a></li>
-            </ul>
-        </div>
-
-    </aside>
-
-    <!-- MAIN CONTENT -->
-    <main class="docs-main">
-
-        <!-- PAGE HEADER -->
-        <header class="docs-header">
-            <div class="label">Language Reference</div>
-            <h1>Origin <span class="highlight">Documentation</span></h1>
-            <p class="description">Complete reference for the Origin programming language — hardware-first, expressive, and built for control.</p>
-            <div class="version-row">
-                <span class="version-tag">v1.0</span>
-                <span class="version-tag current">v1.5 — current</span>
+            <div class="sidebar-group">
+                <div class="sidebar-group-label">Fundamentals</div>
+                <ul>
+                    <li><a href="#variables">Variables &amp; Constants</a></li>
+                    <li><a href="#data-structures">Data Structures</a></li>
+                    <li><a href="#control-flow">Control Flow</a></li>
+                    <li><a href="#functions">Functions</a></li>
+                </ul>
             </div>
-        </header>
 
-        <!-- ── VARIABLES ── -->
-        <section id="variables" class="doc-section">
-            <div class="doc-section-header">
-                <h2>Variables &amp; Data</h2>
+            <div class="sidebar-group">
+                <div class="sidebar-group-label">Hardware &amp; I/O</div>
+                <ul>
+                    <li><a href="#servo">Servo Control</a></li>
+                    <li><a href="#io">Input / Output</a></li>
+                </ul>
             </div>
-            <div class="section-divider"></div>
-            <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. Use <code>const</code> for values that must not change after assignment — the compiler enforces immutability at runtime.</p>
 
-            <div class="doc-code-block">
-                <div class="doc-code-header">
-                    <span class="doc-code-filename">declaration.org</span>
-                    <span class="doc-code-lang">origin</span>
+            <div class="sidebar-group">
+                <div class="sidebar-group-label">Advanced</div>
+                <ul>
+                    <li><a href="#v1-5-imports">Modules <span class="nav-badge">v1.5</span></a></li>
+                    <li><a href="#error-handling">Error Handling</a></li>
+                </ul>
+            </div>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="docs-main">
+
+            <!-- PAGE HEADER -->
+            <header class="docs-header">
+                <div class="label">Language Reference</div>
+                <h1>Origin <span class="highlight">Documentation</span></h1>
+                <p class="description">Complete reference for the Origin programming language — hardware-first,
+                    expressive, and built for control.</p>
+                <div class="version-row">
+                    <span class="version-tag">v1.0</span>
+                    <span class="version-tag current">v1.5 — current</span>
                 </div>
-                <pre><code><span class="t-k">let</span>   x       = <span class="t-n">10</span>
-<span class="t-k">let</span>   name    = <span class="t-s">"Origin"</span>
-<span class="t-k">const</span> pi      = <span class="t-n">3.14159</span>     <span class="t-c"># immutable — reassignment raises ImmutableError</span>
-<span class="t-k">const</span> MAX_VAL = <span class="t-n">255</span>         <span class="t-c"># convention: ALL_CAPS for module-level constants</span></code></pre>
-            </div>
+            </header>
 
-            <div class="callout info">
-                <span class="callout-tag">INFO</span>
-                <span>Attempting to reassign a <code>const</code> at runtime raises an <code>ImmutableError</code>. See the <a href="#error-handling" style="color:inherit;text-decoration:underline;opacity:0.7">Error Handling</a> section for recovery patterns.</span>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <!-- ── CONTROL FLOW ── -->
-        <section id="control-flow" class="doc-section">
-            <div class="doc-section-header">
-                <h2>Control Flow</h2>
-            </div>
-            <div class="section-divider"></div>
-            <p>Origin uses indentation to denote block scope — no braces required. Standard control structures include <code>if / elif / else</code>, <code>while</code>, and <code>for</code> range loops.</p>
-
-            <div class="doc-code-block">
-                <div class="doc-code-header">
-                    <span class="doc-code-filename">control.org</span>
-                    <span class="doc-code-lang">origin</span>
+            <!-- ── VARIABLES ── -->
+            <section id="variables" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Variables &amp; Data</h2>
                 </div>
-                <pre><code><span class="t-c"># Conditional</span>
-<span class="t-k">if</span> x &gt; <span class="t-n">100 {</span>
+                <div class="section-divider"></div>
+                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. Use
+                    <code>const</code> for values that must not change after assignment — the compiler enforces
+                    immutability at runtime.
+                </p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">declaration.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">let</span>   x: <span class="t-k">int</span>    = <span class="t-n">10</span>         <span class="t-c"># typed declaration</span>
+<span class="t-k">let</span>   name: <span class="t-k">str</span> = <span class="t-s">"Origin"</span>
+<span class="t-k">let</span>   y         = <span class="t-n">20</span>         <span class="t-c"># inferred type</span>
+<span class="t-k">const</span> pi        = <span class="t-n">3.14159</span>    <span class="t-c"># immutable — reassignment raises RuntimeError</span></code></pre>
+                </div>
+
+                <div class="callout info">
+                    <span class="callout-tag">INFO</span>
+                    <span>Attempting to reassign a <code>const</code> at runtime raises an <code>ImmutableError</code>.
+                        See the <a href="#error-handling"
+                            style="color:inherit;text-decoration:underline;opacity:0.7">Error Handling</a> section for
+                        recovery patterns.</span>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── DATA STRUCTURES ── -->
+            <section id="data-structures" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Data Structures</h2>
+                </div>
+                <div class="section-divider"></div>
+                <p>Origin supports native <code>lists</code> and <code>dictionaries</code> for complex data management.
+                    Lists are ordered sequences, while dictionaries map keys to values.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">data.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-c"># Lists</span>
+<span class="t-k">let</span> my_list = [<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>]
+<span class="t-k">print</span> my_list[<span class="t-n">0</span>]            <span class="t-c"># indexing starts at 0</span>
+
+<span class="t-c"># Dictionaries</span>
+<span class="t-k">let</span> my_dict = {<span class="t-s">"a"</span>: <span class="t-n">1</span>, <span class="t-s">"b"</span>: <span class="t-n">2</span>}
+<span class="t-k">print</span> my_dict{<span class="t-s">"a"</span>}           <span class="t-c"># dictionary access uses { }</span>
+
+<span class="t-k">print</span> <span class="t-k">len</span>(my_list)           <span class="t-c"># returns collection length</span></code></pre>
+                </div>
+            </section>
+
+            <!-- ── CONTROL FLOW ── -->
+            <section id="control-flow" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Control Flow</h2>
+                </div>
+                <div class="section-divider"></div>
+                <p>Origin uses indentation to denote block scope — no braces required. Standard control structures
+                    include <code>if / elif / else</code>, <code>while</code>, and <code>for</code> range loops.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">control.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-c"># Conditional</span>
+<span class="t-k">if</span> x &gt; <span class="t-n">100</span> {
     <span class="t-k">print</span> <span class="t-s">"high"</span>
-    <span class="t-k">}</span> 
-<span class="t-k">elif</span> x &gt; <span class="t-n">50 {</span>
+} <span class="t-k">elif</span> x &gt; <span class="t-n">50</span> {
     <span class="t-k">print</span> <span class="t-s">"mid"</span>
-    <span class="t-k">}</span>
-<span class="t-k">else {</span>
+} <span class="t-k">else</span> {
     <span class="t-k">print</span> <span class="t-s">"low"</span>
-    <span class="t-k">}</span>
+}
 
-<span class="t-c"># Range loop  (start, stop, step)</span>
-<span class="t-k">for</span> i <span class="t-k">in</span> range <span class="t-n">(0</span>, <span class="t-n">10)</span>, <span class="t-n">{</span>
+<span class="t-c"># Range loop</span>
+<span class="t-k">for</span> i <span class="t-k">in</span> range(<span class="t-n">0</span>, <span class="t-n">10</span>) {
     <span class="t-k">print</span> i
-    <span class="t-k">}</span> 
-                    
+}
+
 <span class="t-c"># While loop</span>
 <span class="t-k">let</span> count = <span class="t-n">0</span>
-<span class="t-k">while</span> count &lt; <span class="t-n">5 {</span>
-    count = count + <span class="t-n">1</span></code></pre>
-    <span class="t-k">}</span>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <!-- ── FUNCTIONS ── -->
-        <section id="functions" class="doc-section">
-            <div class="doc-section-header">
-                <h2>Functions</h2>
-            </div>
-            <div class="section-divider"></div>
-            <p>Functions are defined with the <code>fn</code> keyword. They are first-class values and can be passed as arguments. Return values are indicated with <code>return</code>.</p>
-
-            <div class="doc-code-block">
-                <div class="doc-code-header">
-                    <span class="doc-code-filename">functions.org</span>
-                    <span class="doc-code-lang">origin</span>
+<span class="t-k">while</span> count &lt; <span class="t-n">5</span> {
+    count = count + <span class="t-n">1</span>
+}</code></pre>
                 </div>
-                <pre><code><span class="t-k">fn</span> <span class="t-fn">add</span>(a, b)
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── FUNCTIONS ── -->
+            <section id="functions" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Functions</h2>
+                </div>
+                <div class="section-divider"></div>
+                <p>Functions are defined with the <code>def</code> keyword. They are first-class values and can be
+                    passed as arguments. Return values are indicated with <code>return</code>.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">functions.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">def</span> <span class="t-fn">add</span>(a, b) {
     <span class="t-k">return</span> a + b
+}
 
-<span class="t-k">fn</span> <span class="t-fn">greet</span>(name)
+<span class="t-k">def</span> <span class="t-fn">greet</span>(name) {
     <span class="t-k">print</span> <span class="t-s">"Hello, "</span> + name
+}
 
-<span class="t-k">let</span> result = <span class="t-fn">add</span> <span class="t-n">4</span>, <span class="t-n">7</span>    <span class="t-c"># → 11</span>
-<span class="t-fn">greet</span> <span class="t-s">"world"</span>              <span class="t-c"># → Hello, world</span></code></pre>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <!-- ── SERVO CONTROL ── -->
-        <section id="servo" class="doc-section">
-            <div class="doc-section-header">
-                <h2>Hardware Control</h2>
-            </div>
-            <div class="section-divider"></div>
-            <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Commands execute synchronously against the connected device and are available on all supported boards.</p>
-
-            <div class="doc-code-block">
-                <div class="doc-code-header">
-                    <span class="doc-code-filename">servo_sweep.org</span>
-                    <span class="doc-code-lang">origin</span>
+<span class="t-k">let</span> result = <span class="t-fn">add</span>(<span class="t-n">4</span>, <span class="t-n">7</span>)    <span class="t-c"># → 11</span>
+<span class="t-fn">greet</span>(<span class="t-s">"world"</span>)              <span class="t-c"># → Hello, world</span></code></pre>
                 </div>
-                <pre><code><span class="t-c"># Move servo at index 0 to 90°</span>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── SERVO CONTROL ── -->
+            <section id="servo" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Hardware Control</h2>
+                </div>
+                <div class="section-divider"></div>
+                <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Commands
+                    execute synchronously against the connected device and are available on all supported boards.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">servo_sweep.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-c"># Move servo at index 0 to 90°</span>
 <span class="t-k">set</span> servo.angle <span class="t-n">0</span>, <span class="t-n">90</span>
 
 <span class="t-c"># Sweep servo 1 from 0° → 180° in 10° steps</span>
@@ -182,87 +224,81 @@
 <span class="t-k">while</span> pos &lt;= <span class="t-n">180</span>
     <span class="t-k">set</span> servo.angle <span class="t-n">1</span>, pos
     pos = pos + <span class="t-n">10</span></code></pre>
-            </div>
-
-            <div class="doc-table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Command</th>
-                            <th>Parameters</th>
-                            <th>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>set servo.angle</code></td>
-                            <td><span class="param">(index: int, degrees: float)</span></td>
-                            <td>Moves servo at <em>index</em> to specified angle. Range: 0 – 180°.</td>
-                        </tr>
-                        <tr>
-                            <td><code>set servo.speed</code></td>
-                            <td><span class="param">(index: int, speed: float)</span></td>
-                            <td>Sets rotation speed for continuous-rotation servos. 0 = stop, ±1 = max.</td>
-                        </tr>
-                        <tr>
-                            <td><code>set pin.high</code></td>
-                            <td><span class="param">(pin: int)</span></td>
-                            <td>Drives the specified GPIO pin to high (3.3 V) state.</td>
-                        </tr>
-                        <tr>
-                            <td><code>set pin.low</code></td>
-                            <td><span class="param">(pin: int)</span></td>
-                            <td>Drives the specified GPIO pin to low (0 V) state.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="callout warn">
-                <span class="callout-tag">WARN</span>
-                <span>Sending angles outside the 0 – 180° range may damage physical servo hardware. Origin does not clamp values automatically.</span>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <!-- ── I/O ── -->
-        <section id="io" class="doc-section">
-            <div class="doc-section-header">
-                <h2>Input / Output</h2>
-            </div>
-            <div class="section-divider"></div>
-            <p>Standard output is written with <code>print</code>. User input can be read from stdin using <code>read</code>, which always returns a string — cast explicitly if a numeric value is needed.</p>
-
-            <div class="doc-code-block">
-                <div class="doc-code-header">
-                    <span class="doc-code-filename">io_example.org</span>
-                    <span class="doc-code-lang">origin</span>
                 </div>
-                <pre><code><span class="t-k">print</span> <span class="t-s">"Enter a number:"</span>
-<span class="t-k">let</span> raw   = <span class="t-fn">read</span>
-<span class="t-k">let</span> value = <span class="t-fn">int</span>(raw)     <span class="t-c"># explicit cast — raises CastError if non-numeric</span>
-<span class="t-k">print</span> <span class="t-s">"You entered: "</span> + value</code></pre>
-            </div>
-        </section>
 
-        <hr class="divider">
-
-        <!-- ── MODULES ── -->
-        <section id="v1-5-imports" class="doc-section">
-            <div class="doc-section-header">
-                <h2>Module System</h2>
-                <span class="badge">New in v1.5</span>
-            </div>
-            <div class="section-divider"></div>
-            <p>Version 1.5 introduced a first-class module system for standard library access and cross-file code reuse. Import an entire namespace or pull named exports directly.</p>
-
-            <div class="doc-code-block">
-                <div class="doc-code-header">
-                    <span class="doc-code-filename">math_example.org</span>
-                    <span class="doc-code-lang">origin</span>
+                <div class="doc-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>Parameters</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>set servo[index] = angle</code></td>
+                                <td><span class="param">(index: int, angle: int/float)</span></td>
+                                <td>Moves servo at <em>index</em> to specified angle. Range: 0 – 180°.</td>
+                            </tr>
+                            <tr>
+                                <td><code>set pin[pin] = state</code></td>
+                                <td><span class="param">(pin: int, state: int)</span></td>
+                                <td>Drives specified GPIO pin (1 for High, 0 for Low).</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <pre><code><span class="t-k">import</span> math
+
+                <div class="callout warn">
+                    <span class="callout-tag">WARN</span>
+                    <span>Sending angles outside the 0 – 180° range may damage physical servo hardware. Origin does not
+                        clamp values automatically.</span>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── I/O ── -->
+            <section id="io" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Input / Output</h2>
+                </div>
+                <div class="section-divider"></div>
+                <p>Standard output is written with <code>print</code>. User input can be read from stdin using
+                    <code>input()</code>, which always returns a string — cast explicitly if a numeric value is needed.
+                </p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">io_example.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">print</span> <span class="t-s">"Enter a number:"</span>
+<span class="t-k">let</span> val   = <span class="t-k">input</span>(<span class="t-s">"&gt; "</span>)
+<span class="t-k">let</span> x: <span class="t-k">int</span> = <span class="t-k">int</span>(val)     <span class="t-c"># explicit cast</span>
+<span class="t-k">print</span> x</code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── MODULES ── -->
+            <section id="v1-5-imports" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Module System</h2>
+                    <span class="badge">New in v1.5</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Version 1.5 introduced a first-class module system for standard library access and cross-file code
+                    reuse. Import an entire namespace or pull named exports directly.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">math_example.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">import</span> math
 
 <span class="t-k">print</span> math.sqrt <span class="t-n">16</span>           <span class="t-c"># → 4.0</span>
 <span class="t-k">print</span> math.pow  <span class="t-n">2</span>, <span class="t-n">8</span>         <span class="t-c"># → 256.0</span>
@@ -272,85 +308,91 @@
 
 <span class="t-k">print</span> sqrt  <span class="t-n">25</span>               <span class="t-c"># → 5.0</span>
 <span class="t-k">print</span> floor <span class="t-n">3.7</span>              <span class="t-c"># → 3</span></code></pre>
-            </div>
-
-            <div class="callout info">
-                <span class="callout-tag">INFO</span>
-                <span>Module resolution searches the working directory first, then the standard library path. Third-party packages are not yet supported in v1.5.</span>
-            </div>
-        </section>
-
-        <hr class="divider">
-
-        <!-- ── ERROR HANDLING ── -->
-        <section id="error-handling" class="doc-section">
-            <div class="doc-section-header">
-                <h2>Error Handling</h2>
-            </div>
-            <div class="section-divider"></div>
-            <p>Runtime errors are caught with <code>try / catch</code>. The caught object exposes a <code>.type</code> string and a <code>.message</code> string for programmatic inspection.</p>
-
-            <div class="doc-code-block">
-                <div class="doc-code-header">
-                    <span class="doc-code-filename">error_handling.org</span>
-                    <span class="doc-code-lang">origin</span>
                 </div>
-                <pre><code><span class="t-k">try</span>
-    <span class="t-k">const</span> x = <span class="t-n">1</span>
-    x = <span class="t-n">2</span>                    <span class="t-c"># raises ImmutableError</span>
-<span class="t-k">catch</span> err
-    <span class="t-k">print</span> err.type           <span class="t-c"># → "ImmutableError"</span>
-    <span class="t-k">print</span> err.message        <span class="t-c"># → "cannot reassign const 'x'"</span></code></pre>
-            </div>
 
-            <div class="doc-table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Error Type</th>
-                            <th>Trigger</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>ImmutableError</code></td>
-                            <td>Reassignment of a <code>const</code> variable.</td>
-                        </tr>
-                        <tr>
-                            <td><code>CastError</code></td>
-                            <td>Failed type conversion (e.g. <code>int("abc")</code>).</td>
-                        </tr>
-                        <tr>
-                            <td><code>ImportError</code></td>
-                            <td>Module not found during <code>import</code> resolution.</td>
-                        </tr>
-                        <tr>
-                            <td><code>HardwareError</code></td>
-                            <td>Device not connected or <code>set</code> command rejected by board.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
+                <div class="callout info">
+                    <span class="callout-tag">INFO</span>
+                    <span>Module resolution searches the working directory first, then the standard library path.
+                        Third-party packages are not yet supported in v1.5.</span>
+                </div>
+            </section>
 
-    </main>
-</div>
+            <hr class="divider">
 
-<script>
-    const sections = document.querySelectorAll('.doc-section[id]');
-    const navLinks = document.querySelectorAll('.sidebar-group a');
+            <!-- ── ERROR HANDLING ── -->
+            <section id="error-handling" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Error Handling</h2>
+                </div>
+                <div class="section-divider"></div>
+                <p>Runtime errors are caught with <code>try / catch</code>. The caught object exposes a
+                    <code>.type</code> string and a <code>.message</code> string for programmatic inspection.
+                </p>
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                navLinks.forEach(a => a.classList.remove('active'));
-                const active = document.querySelector(`.sidebar-group a[href="#${entry.target.id}"]`);
-                if (active) active.classList.add('active');
-            }
-        });
-    }, { rootMargin: '-15% 0px -75% 0px' });
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">error_handling.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">try</span> {
+    <span class="t-k">let</span> x: <span class="t-k">int</span> = <span class="t-n">1</span>
+    x = <span class="t-s">"error"</span>               <span class="t-c"># raises TypeError</span>
+} <span class="t-k">except</span> {
+    <span class="t-k">print</span> <span class="t-s">"Caught type mismatch"</span>
+} <span class="t-k">else</span> {
+    <span class="t-k">print</span> <span class="t-s">"No error"</span>
+}</code></pre>
+                </div>
 
-    sections.forEach(s => observer.observe(s));
-</script>
+                <div class="doc-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Error Type</th>
+                                <th>Trigger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>TypeError</code></td>
+                                <td>Type mismatch in variable assignment or operation.</td>
+                            </tr>
+                            <tr>
+                                <td><code>RuntimeError</code></td>
+                                <td>Generic execution error (e.g. constant re-assignment).</td>
+                            </tr>
+                            <tr>
+                                <td><code>NameError</code></td>
+                                <td>Variable or function not found in current scope.</td>
+                            </tr>
+                            <tr>
+                                <td><code>SyntaxError</code></td>
+                                <td>Illegal character or malformed code structure.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.doc-section[id]');
+        const navLinks = document.querySelectorAll('.sidebar-group a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    const active = document.querySelector(`.sidebar-group a[href="#${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-15% 0px -75% 0px' });
+
+        sections.forEach(s => observer.observe(s));
+    </script>
 </body>
+
 </html>
