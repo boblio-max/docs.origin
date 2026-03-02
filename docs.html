@@ -71,8 +71,8 @@
                 <p class="description">Complete reference for the Origin programming language — hardware-first,
                     expressive, and built for control.</p>
                 <div class="version-row">
-                    <span class="version-tag">v1.0</span>
-                    <span class="version-tag current">v1.5 — current</span>
+                    <span class="version-tag">v1.5</span>
+                    <span class="version-tag current">v1.7 — current</span>
                 </div>
             </header>
 
@@ -82,9 +82,9 @@
                     <h2>Variables &amp; Data</h2>
                 </div>
                 <div class="section-divider"></div>
-                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. Use
-                    <code>const</code> for values that must not change after assignment — the compiler enforces
-                    immutability at runtime.
+                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. All
+                    declarations must include an explicit type annotation — the compiler enforces
+                    strict typing and immutability (for <code>const</code>) at runtime.
                 </p>
 
                 <div class="doc-code-block">
@@ -94,8 +94,7 @@
                     </div>
                     <pre><code><span class="t-k">let</span>   x: <span class="t-k">int</span>    = <span class="t-n">10</span>         <span class="t-c"># typed declaration</span>
 <span class="t-k">let</span>   name: <span class="t-k">str</span> = <span class="t-s">"Origin"</span>
-<span class="t-k">let</span>   y         = <span class="t-n">20</span>         <span class="t-c"># inferred type</span>
-<span class="t-k">const</span> pi        = <span class="t-n">3.14159</span>    <span class="t-c"># immutable — reassignment raises RuntimeError</span></code></pre>
+<span class="t-k">const</span> pi: <span class="t-k">float</span> = <span class="t-n">3.14159</span>    <span class="t-c"># immutable — reassignment raises RuntimeError</span></code></pre>
                 </div>
 
                 <div class="callout info">
@@ -124,11 +123,11 @@
                         <span class="doc-code-lang">origin</span>
                     </div>
                     <pre><code><span class="t-c"># Lists</span>
-<span class="t-k">let</span> my_list = [<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>]
+<span class="t-k">let</span> my_list: <span class="t-k">list</span> = [<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>]
 <span class="t-k">print</span> my_list[<span class="t-n">0</span>]            <span class="t-c"># indexing starts at 0</span>
 
 <span class="t-c"># Dictionaries</span>
-<span class="t-k">let</span> my_dict = {<span class="t-s">"a"</span>: <span class="t-n">1</span>, <span class="t-s">"b"</span>: <span class="t-n">2</span>}
+<span class="t-k">let</span> my_dict: <span class="t-k">dict</span> = {<span class="t-s">"a"</span>: <span class="t-n">1</span>, <span class="t-s">"b"</span>: <span class="t-n">2</span>}
 <span class="t-k">print</span> my_dict{<span class="t-s">"a"</span>}           <span class="t-c"># dictionary access uses { }</span>
 
 <span class="t-k">print</span> <span class="t-k">len</span>(my_list)           <span class="t-c"># returns collection length</span></code></pre>
@@ -164,7 +163,7 @@
 }
 
 <span class="t-c"># While loop</span>
-<span class="t-k">let</span> count = <span class="t-n">0</span>
+<span class="t-k">let</span> count: <span class="t-k">int</span> = <span class="t-n">0</span>
 <span class="t-k">while</span> count &lt; <span class="t-n">5</span> {
     count = count + <span class="t-n">1</span>
 }</code></pre>
@@ -195,7 +194,7 @@
     <span class="t-k">print</span> <span class="t-s">"Hello, "</span> + name
 }
 
-<span class="t-k">let</span> result = <span class="t-fn">add</span>(<span class="t-n">4</span>, <span class="t-n">7</span>)    <span class="t-c"># → 11</span>
+<span class="t-k">let</span> result: <span class="t-k">int</span> = <span class="t-fn">add</span>(<span class="t-n">4</span>, <span class="t-n">7</span>)    <span class="t-c"># → 11</span>
 <span class="t-fn">greet</span>(<span class="t-s">"world"</span>)              <span class="t-c"># → Hello, world</span></code></pre>
                 </div>
             </section>
@@ -220,7 +219,7 @@
 <span class="t-k">set</span> servo.angle <span class="t-n">0</span>, <span class="t-n">90</span>
 
 <span class="t-c"># Sweep servo 1 from 0° → 180° in 10° steps</span>
-<span class="t-k">let</span> pos = <span class="t-n">0</span>
+<span class="t-k">let</span> pos: <span class="t-k">int</span> = <span class="t-n">0</span>
 <span class="t-k">while</span> pos &lt;= <span class="t-n">180</span>
     <span class="t-k">set</span> servo.angle <span class="t-n">1</span>, pos
     pos = pos + <span class="t-n">10</span></code></pre>
@@ -275,9 +274,10 @@
                         <span class="doc-code-lang">origin</span>
                     </div>
                     <pre><code><span class="t-k">print</span> <span class="t-s">"Enter a number:"</span>
-<span class="t-k">let</span> val   = <span class="t-k">input</span>(<span class="t-s">"&gt; "</span>)
-<span class="t-k">let</span> x: <span class="t-k">int</span> = <span class="t-k">int</span>(val)     <span class="t-c"># explicit cast</span>
-<span class="t-k">print</span> x</code></pre>
+<span class="t-k">let</span> val: <span class="t-k">str</span> = <span class="t-k">input</span>(<span class="t-s">"&gt; "</span>)
+<span class="t-k">let</span> x: <span class="t-k">int</span>   = <span class="t-k">int</span>(val)     <span class="t-c"># explicit cast</span>
+<span class="t-k">print</span> x
+</code></pre>
                 </div>
             </section>
 
