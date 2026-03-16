@@ -55,6 +55,10 @@
                 <div class="sidebar-group-label">Advanced</div>
                 <ul>
                     <li><a href="#v1-5-imports">Modules <span class="nav-badge">v1.5</span></a></li>
+                    <li><a href="#file-io">File I/O <span class="nav-badge">v1.7</span></a></li>
+                    <li><a href="#oop">Object-Oriented <span class="nav-badge">v1.7</span></a></li>
+                    <li><a href="#concurrency">Concurrency <span class="nav-badge">v1.7</span></a></li>
+                    <li><a href="#math-system">Math &amp; System <span class="nav-badge">v1.7</span></a></li>
                     <li><a href="#error-handling">Error Handling</a></li>
                 </ul>
             </div>
@@ -216,13 +220,14 @@
                         <span class="doc-code-lang">origin</span>
                     </div>
                     <pre><code><span class="t-c"># Move servo at index 0 to 90°</span>
-<span class="t-k">set</span> servo.angle <span class="t-n">0</span>, <span class="t-n">90</span>
+<span class="t-k">set</span> servo[<span class="t-n">0</span>] = angle, <span class="t-n">90</span>
 
 <span class="t-c"># Sweep servo 1 from 0° → 180° in 10° steps</span>
 <span class="t-k">let</span> pos: <span class="t-k">int</span> = <span class="t-n">0</span>
-<span class="t-k">while</span> pos &lt;= <span class="t-n">180</span>
-    <span class="t-k">set</span> servo.angle <span class="t-n">1</span>, pos
-    pos = pos + <span class="t-n">10</span></code></pre>
+<span class="t-k">while</span> pos &lt;= <span class="t-n">180</span> {
+    <span class="t-k">set</span> servo[<span class="t-n">1</span>] = angle, pos
+    pos = pos + <span class="t-n">10</span>
+}</code></pre>
                 </div>
 
                 <div class="doc-table-wrap">
@@ -236,13 +241,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>set servo[index] = angle</code></td>
-                                <td><span class="param">(index: int, angle: int/float)</span></td>
+                                <td><code>set servo[index] = angle, val</code></td>
+                                <td><span class="param">(index: int, val: int/float)</span></td>
                                 <td>Moves servo at <em>index</em> to specified angle. Range: 0 – 180°.</td>
                             </tr>
                             <tr>
-                                <td><code>set pin[pin] = state</code></td>
-                                <td><span class="param">(pin: int, state: int)</span></td>
+                                <td><code>set pin[pin] = state, val</code></td>
+                                <td><span class="param">(pin: int, val: int)</span></td>
                                 <td>Drives specified GPIO pin (1 for High, 0 for Low).</td>
                             </tr>
                         </tbody>
@@ -314,6 +319,98 @@
                     <span class="callout-tag">INFO</span>
                     <span>Module resolution searches the working directory first, then the standard library path.
                         Third-party packages are not yet supported in v1.5.</span>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── FILE I/O ── -->
+            <section id="file-io" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>File I/O</h2>
+                    <span class="badge">New in v1.7</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Read from and write to standard files directly using the <code>open</code> statement. File modes include <code>"r"</code>, <code>"w"</code>, <code>"a"</code>, etc. mapping straight to python built-ins via the compiler layer.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">files.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">open</span> <span class="t-s">"data.txt"</span> <span class="t-s">"w"</span> <span class="t-k">as</span> f
+<span class="t-c"># further write operations ...</span></code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── OOP ── -->
+            <section id="oop" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Object-Oriented Programming</h2>
+                    <span class="badge">New in v1.7</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Origin now includes a structured <code>class</code> keyword. Classes bundle fields natively, offering methods inside class blocks directly executed as blocks mapping methods internally.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">class_example.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">class</span> <span class="t-fn">Robot</span>(name, id) {
+    <span class="t-k">def</span> <span class="t-fn">identify</span>() {
+        <span class="t-k">print</span> <span class="t-s">"I am a robot"</span>
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── CONCURRENCY ── -->
+            <section id="concurrency" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Concurrency</h2>
+                    <span class="badge">New in v1.7</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Perform multi-processor parallel tasks syntactically using the <code>parallel</code> block to scale computations across system threads dynamically natively.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">parallel.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">parallel</span> (<span class="t-n">4</span>) {
+    <span class="t-c"># Task runs across 4 threads</span>
+    <span class="t-k">print</span> <span class="t-s">"Working concurrently"</span>
+}</code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── MATH & SYSTEM ── -->
+            <section id="math-system" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Math &amp; System Execution</h2>
+                    <span class="badge">New in v1.7</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>A host of new mathematical built-ins as well as inline code execution pipelines have been provided natively directly connected to the system core interpreter layer.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">math_sys.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">let</span> x: <span class="t-k">float</span> = <span class="t-k">sqrt</span>(<span class="t-n">25</span>)               <span class="t-c"># → 5.0</span>
+<span class="t-k">let</span> rnd: <span class="t-k">int</span> = <span class="t-k">rand_num</span>(<span class="t-n">1</span>, <span class="t-n">10</span>)      <span class="t-c"># → 1-10 inclusive</span>
+<span class="t-k">let</span> sz: <span class="t-k">int</span>  = <span class="t-k">len</span>([<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>])       <span class="t-c"># → 3</span>
+
+<span class="t-k">exec</span> <span class="t-s">"print('hello from subprocess')"</span></code></pre>
                 </div>
             </section>
 
