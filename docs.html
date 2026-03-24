@@ -58,6 +58,9 @@
                     <li><a href="#file-io">File I/O <span class="nav-badge">v1.7</span></a></li>
                     <li><a href="#oop">Object-Oriented <span class="nav-badge">v1.7</span></a></li>
                     <li><a href="#concurrency">Concurrency <span class="nav-badge">v1.7</span></a></li>
+                    <li><a href="#advanced-types">Advanced Types <span class="nav-badge">v1.8</span></a></li>
+                    <li><a href="#pattern-matching">Pattern Matching <span class="nav-badge">v1.8</span></a></li>
+                    <li><a href="#async-macros">Async &amp; Macros <span class="nav-badge">v1.8</span></a></li>
                     <li><a href="#math-system">Math &amp; System <span class="nav-badge">v1.7</span></a></li>
                     <li><a href="#error-handling">Error Handling</a></li>
                 </ul>
@@ -411,6 +414,97 @@
 <span class="t-k">let</span> sz: <span class="t-k">int</span>  = <span class="t-k">len</span>([<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>])       <span class="t-c"># → 3</span>
 
 <span class="t-k">exec</span> <span class="t-s">"print('hello from subprocess')"</span></code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── ADVANCED TYPES ── -->
+            <section id="advanced-types" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Advanced Types (Structs, Enums, Interfaces)</h2>
+                    <span class="badge">New in v1.8</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Origin now offers robust low-level type definitions including <code>struct</code>, <code>enum</code>, and <code>interface</code> to structure highly organized, memory-efficient data payloads natively.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">types.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">struct</span> <span class="t-fn">Vector3</span> {
+    x: <span class="t-k">float</span>
+    y: <span class="t-k">float</span>
+    z: <span class="t-k">float</span>
+}
+
+<span class="t-k">enum</span> <span class="t-fn">Direction</span> {
+    UP, DOWN, LEFT, RIGHT
+}
+
+<span class="t-k">interface</span> <span class="t-fn">Renderable</span> {
+    <span class="t-k">def</span> <span class="t-fn">draw</span>()
+}</code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── PATTERN MATCHING ── -->
+            <section id="pattern-matching" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Pattern Matching &amp; Advanced Control</h2>
+                    <span class="badge">New in v1.8</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Replace deep <code>if / elif</code> chains with expressive <code>match / case</code> blocks. We also added new control structures like <code>until</code>, <code>loop</code>, and <code>unless</code>.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">matching.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">match</span> dir {
+    <span class="t-k">case</span> Direction.UP {
+        <span class="t-k">print</span> <span class="t-s">"Moving sequence up"</span>
+    }
+    <span class="t-k">case</span> Direction.DOWN {
+        <span class="t-k">print</span> <span class="t-s">"Moving sequence down"</span>
+    }
+}
+
+<span class="t-k">unless</span> disabled {
+    <span class="t-k">print</span> <span class="t-s">"Executing because not disabled"</span>
+}</code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── ASYNC & MACROS ── -->
+            <section id="async-macros" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Async/Await &amp; Macros</h2>
+                    <span class="badge">New in v1.8</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Support for true asynchronous execution loops natively bound to the event-loop via <code>async</code> and <code>await</code> keywords, plus AST-level metaprogramming through <code>macro</code> definitions.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">async.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">async def</span> <span class="t-fn">fetch_data</span>() {
+    <span class="t-k">let</span> result = <span class="t-k">await</span> network_call()
+    <span class="t-k">return</span> result
+}
+
+<span class="t-k">macro</span> <span class="t-fn">debug_print</span>(val) {
+    <span class="t-c"># Will compile inline as heavily optimized output</span>
+    <span class="t-k">print</span> <span class="t-s">"DEBUG: "</span> + val
+}</code></pre>
                 </div>
             </section>
 
