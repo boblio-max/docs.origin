@@ -101,6 +101,7 @@
                     </div>
                     <pre><code><span class="t-k">let</span>   x: <span class="t-k">int</span>    = <span class="t-n">10</span>         <span class="t-c"># typed declaration</span>
 <span class="t-k">let</span>   name: <span class="t-k">str</span> = <span class="t-s">"Origin"</span>
+<span class="t-k">let</span>   flag: <span class="t-k">bool</span>   = <span class="t-k">True</span>       <span class="t-c"># boolean type</span>
 <span class="t-k">const</span> pi: <span class="t-k">float</span> = <span class="t-n">3.14159</span>    <span class="t-c"># immutable — reassignment raises RuntimeError</span></code></pre>
                 </div>
 
@@ -307,9 +308,11 @@
                         <span class="doc-code-lang">origin</span>
                     </div>
                     <pre><code><span class="t-k">import</span> math
+<span class="t-k">import</span> random
 
 <span class="t-k">print</span> math.sqrt <span class="t-n">16</span>           <span class="t-c"># → 4.0</span>
 <span class="t-k">print</span> math.pow  <span class="t-n">2</span>, <span class="t-n">8</span>         <span class="t-c"># → 256.0</span>
+<span class="t-k">print</span> random.randint(<span class="t-n">1</span>, <span class="t-n">10</span>)    <span class="t-c"># → random integer</span>
 
 <span class="t-c"># Named import — drops the namespace prefix</span>
 <span class="t-k">from</span> math <span class="t-k">import</span> sqrt, floor
