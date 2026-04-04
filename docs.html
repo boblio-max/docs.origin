@@ -20,8 +20,8 @@
         <div class="logo">Origin</div>
         <ul class="nav-links">
             <li><a href="index.html">Origin</a></li>
-            <li><a href="#variables">Fundamentals</a></li>
-            <li><a href="#servo">Hardware</a></li>
+            <li><a href="#variables">Basics</a></li>
+            <li><a href="#control-flow">Control</a></li>
             <li><a href="#v1-5-imports">Modules</a></li>
             <li><a href="#error-handling">Errors</a></li>
         </ul>
@@ -54,14 +54,13 @@
             <div class="sidebar-group">
                 <div class="sidebar-group-label">Advanced</div>
                 <ul>
-                    <li><a href="#v1-5-imports">Modules <span class="nav-badge">v1.5</span></a></li>
-                    <li><a href="#file-io">File I/O <span class="nav-badge">v1.7</span></a></li>
-                    <li><a href="#oop">Object-Oriented <span class="nav-badge">v1.7</span></a></li>
-                    <li><a href="#concurrency">Concurrency <span class="nav-badge">v1.7</span></a></li>
-                    <li><a href="#advanced-types">Advanced Types <span class="nav-badge">v1.8</span></a></li>
-                    <li><a href="#pattern-matching">Pattern Matching <span class="nav-badge">v1.8</span></a></li>
-                    <li><a href="#async-macros">Async &amp; Macros <span class="nav-badge">v1.8</span></a></li>
-                    <li><a href="#math-system">Math &amp; System <span class="nav-badge">v1.7</span></a></li>
+                    <li><a href="#v1-5-imports">Modules</a></li>
+                    <li><a href="#file-io">File I/O</a></li>
+                    <li><a href="#oop">Object-Oriented</a></li>
+                    <li><a href="#concurrency">Concurrency</a></li>
+                    <li><a href="#operators">Operators &amp; Logic</a></li>
+                    <li><a href="#generators">Generators</a></li>
+                    <li><a href="#math-system">Math &amp; System</a></li>
                     <li><a href="#error-handling">Error Handling</a></li>
                 </ul>
             </div>
@@ -101,16 +100,16 @@
                     </div>
                     <pre><code><span class="t-k">let</span>   x: <span class="t-k">int</span>    = <span class="t-n">10</span>         <span class="t-c"># typed declaration</span>
 <span class="t-k">let</span>   name: <span class="t-k">str</span> = <span class="t-s">"Origin"</span>
-<span class="t-k">let</span>   flag: <span class="t-k">bool</span>   = <span class="t-k">True</span>       <span class="t-c"># boolean type</span>
-<span class="t-k">const</span> pi: <span class="t-k">float</span> = <span class="t-n">3.14159</span>    <span class="t-c"># immutable — reassignment raises RuntimeError</span></code></pre>
+<span class="t-k">let</span>   flag: <span class="t-k">bool</span>   = <span class="t-k">true</span>       <span class="t-c"># boolean type (lowercase)</span>
+<span class="t-k">const</span> pi: <span class="t-k">float</span> = <span class="t-n">3.14159</span>    <span class="t-c"># immutable reference</span>
+<span class="t-k">let</span> empty = <span class="t-k">none</span>             <span class="t-c"># none literal</span></code></pre>
                 </div>
 
                 <div class="callout info">
                     <span class="callout-tag">INFO</span>
-                    <span>Attempting to reassign a <code>const</code> at runtime raises an <code>ImmutableError</code>.
-                        See the <a href="#error-handling"
-                            style="color:inherit;text-decoration:underline;opacity:0.7">Error Handling</a> section for
-                        recovery patterns.</span>
+                    <span>Origin uses lowercase <code>true</code>, <code>false</code>, and <code>none</code> to align
+                        with its hardware-first implementation.
+                        Reassigning a <code>const</code> at runtime will raise an error.</span>
                 </div>
             </section>
 
@@ -165,15 +164,15 @@
     <span class="t-k">print</span> <span class="t-s">"low"</span>
 }
 
-<span class="t-c"># Range loop</span>
+<span class="t-c"># Loops with break and continue</span>
 <span class="t-k">for</span> i <span class="t-k">in</span> range(<span class="t-n">0</span>, <span class="t-n">10</span>) {
+    <span class="t-k">if</span> i == <span class="t-n">5</span> { <span class="t-k">break</span> }
     <span class="t-k">print</span> i
 }
 
-<span class="t-c"># While loop</span>
-<span class="t-k">let</span> count: <span class="t-k">int</span> = <span class="t-n">0</span>
-<span class="t-k">while</span> count &lt; <span class="t-n">5</span> {
-    count = count + <span class="t-n">1</span>
+<span class="t-k">while</span> <span class="t-k">true</span> {
+    <span class="t-k">pass</span>        <span class="t-c"># do nothing</span>
+    <span class="t-k">break</span>
 }</code></pre>
                 </div>
             </section>
@@ -337,7 +336,9 @@
                     <span class="badge">New in v1.7</span>
                 </div>
                 <div class="section-divider"></div>
-                <p>Read from and write to standard files directly using the <code>open</code> statement. File modes include <code>"r"</code>, <code>"w"</code>, <code>"a"</code>, etc. mapping straight to python built-ins via the compiler layer.</p>
+                <p>Read from and write to standard files directly using the <code>open</code> statement. File modes
+                    include <code>"r"</code>, <code>"w"</code>, <code>"a"</code>, etc. mapping straight to python
+                    built-ins via the compiler layer.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
@@ -358,7 +359,8 @@
                     <span class="badge">New in v1.7</span>
                 </div>
                 <div class="section-divider"></div>
-                <p>Origin now includes a structured <code>class</code> keyword. Classes bundle fields natively, offering methods inside class blocks directly executed as blocks mapping methods internally.</p>
+                <p>Origin now includes a structured <code>class</code> keyword. Classes bundle fields natively, offering
+                    methods inside class blocks directly executed as blocks mapping methods internally.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
@@ -382,7 +384,8 @@
                     <span class="badge">New in v1.7</span>
                 </div>
                 <div class="section-divider"></div>
-                <p>Perform multi-processor parallel tasks syntactically using the <code>parallel</code> block to scale computations across system threads dynamically natively.</p>
+                <p>Perform multi-processor parallel tasks syntactically using the <code>parallel</code> block to scale
+                    computations across system threads dynamically natively.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
@@ -405,7 +408,8 @@
                     <span class="badge">New in v1.7</span>
                 </div>
                 <div class="section-divider"></div>
-                <p>A host of new mathematical built-ins as well as inline code execution pipelines have been provided natively directly connected to the system core interpreter layer.</p>
+                <p>A host of new mathematical built-ins as well as inline code execution pipelines have been provided
+                    natively directly connected to the system core interpreter layer.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
@@ -422,91 +426,52 @@
 
             <hr class="divider">
 
-            <!-- ── ADVANCED TYPES ── -->
-            <section id="advanced-types" class="doc-section">
+            <!-- ── OPERATORS ── -->
+            <section id="operators" class="doc-section">
                 <div class="doc-section-header">
-                    <h2>Advanced Types (Structs, Enums, Interfaces)</h2>
-                    <span class="badge">New in v1.8</span>
+                    <h2>Operators &amp; Logic</h2>
                 </div>
                 <div class="section-divider"></div>
-                <p>Origin now offers robust low-level type definitions including <code>struct</code>, <code>enum</code>, and <code>interface</code> to structure highly organized, memory-efficient data payloads natively.</p>
+                <p>Origin supports standard arithmetic, symbolic logic, bitwise operations, and compound assignments.
+                </p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
-                        <span class="doc-code-filename">types.org</span>
+                        <span class="doc-code-filename">ops.org</span>
                         <span class="doc-code-lang">origin</span>
                     </div>
-                    <pre><code><span class="t-k">struct</span> <span class="t-fn">Vector3</span> {
-    x: <span class="t-k">float</span>
-    y: <span class="t-k">float</span>
-    z: <span class="t-k">float</span>
+                    <pre><code><span class="t-c"># Compound Assignments</span>
+x += <span class="t-n">1</span>
+y *= <span class="t-n">10</span>
+
+<span class="t-c"># Symbolic Logic</span>
+<span class="t-k">if</span> (a &gt; <span class="t-n">0</span> &amp;&amp; b &lt; <span class="t-n">100</span>) || !is_locked {
+    <span class="t-k">print</span> <span class="t-s">"Success"</span>
 }
 
-<span class="t-k">enum</span> <span class="t-fn">Direction</span> {
-    UP, DOWN, LEFT, RIGHT
-}
-
-<span class="t-k">interface</span> <span class="t-fn">Renderable</span> {
-    <span class="t-k">def</span> <span class="t-fn">draw</span>()
-}</code></pre>
+<span class="t-c"># Bitwise</span>
+<span class="t-k">let</span> mask: <span class="t-k">int</span> = <span class="t-n">1</span> &lt;&lt; <span class="t-n">3</span></code></pre>
                 </div>
             </section>
 
             <hr class="divider">
 
-            <!-- ── PATTERN MATCHING ── -->
-            <section id="pattern-matching" class="doc-section">
+            <!-- ── GENERATORS ── -->
+            <section id="generators" class="doc-section">
                 <div class="doc-section-header">
-                    <h2>Pattern Matching &amp; Advanced Control</h2>
-                    <span class="badge">New in v1.8</span>
+                    <h2>Generators</h2>
                 </div>
                 <div class="section-divider"></div>
-                <p>Replace deep <code>if / elif</code> chains with expressive <code>match / case</code> blocks. We also added new control structures like <code>until</code>, <code>loop</code>, and <code>unless</code>.</p>
+                <p>Functions can yield values to create simple generators.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
-                        <span class="doc-code-filename">matching.org</span>
+                        <span class="doc-code-filename">yield.org</span>
                         <span class="doc-code-lang">origin</span>
                     </div>
-                    <pre><code><span class="t-k">match</span> dir {
-    <span class="t-k">case</span> Direction.UP {
-        <span class="t-k">print</span> <span class="t-s">"Moving sequence up"</span>
-    }
-    <span class="t-k">case</span> Direction.DOWN {
-        <span class="t-k">print</span> <span class="t-s">"Moving sequence down"</span>
-    }
-}
-
-<span class="t-k">unless</span> disabled {
-    <span class="t-k">print</span> <span class="t-s">"Executing because not disabled"</span>
-}</code></pre>
-                </div>
-            </section>
-
-            <hr class="divider">
-
-            <!-- ── ASYNC & MACROS ── -->
-            <section id="async-macros" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Async/Await &amp; Macros</h2>
-                    <span class="badge">New in v1.8</span>
-                </div>
-                <div class="section-divider"></div>
-                <p>Support for true asynchronous execution loops natively bound to the event-loop via <code>async</code> and <code>await</code> keywords, plus AST-level metaprogramming through <code>macro</code> definitions.</p>
-
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">async.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-k">async def</span> <span class="t-fn">fetch_data</span>() {
-    <span class="t-k">let</span> result = <span class="t-k">await</span> network_call()
-    <span class="t-k">return</span> result
-}
-
-<span class="t-k">macro</span> <span class="t-fn">debug_print</span>(val) {
-    <span class="t-c"># Will compile inline as heavily optimized output</span>
-    <span class="t-k">print</span> <span class="t-s">"DEBUG: "</span> + val
+                    <pre><code><span class="t-k">def</span> <span class="t-fn">counter</span>() {
+    <span class="t-k">yield</span> <span class="t-n">1</span>
+    <span class="t-k">yield</span> <span class="t-n">2</span>
 }</code></pre>
                 </div>
             </section>
