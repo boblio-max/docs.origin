@@ -61,6 +61,7 @@
                     <li><a href="#operators">Operators &amp; Logic</a></li>
                     <li><a href="#generators">Generators</a></li>
                     <li><a href="#math-system">Math &amp; System</a></li>
+                    <li><a href="#raw-python">Raw Python</a></li>
                     <li><a href="#error-handling">Error Handling</a></li>
                 </ul>
             </div>
@@ -78,7 +79,8 @@
                     expressive, and built for control.</p>
                 <div class="version-row">
                     <span class="version-tag">v1.5</span>
-                    <span class="version-tag current">v1.7 — current</span>
+                    <span class="version-tag">v1.7</span>
+                    <span class="version-tag current">v1.7.5 — Bytecode Stable</span>
                 </div>
             </header>
 
@@ -219,18 +221,17 @@
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
-                        <span class="doc-code-filename">servo_sweep.org</span>
+                        <span class="doc-code-filename">hardware_modern.org</span>
                         <span class="doc-code-lang">origin</span>
                     </div>
-                    <pre><code><span class="t-c"># Move servo at index 0 to 90°</span>
+                    <pre><code><span class="t-c"># Classic syntax (still supported)</span>
 <span class="t-k">set</span> servo[<span class="t-n">0</span>] = angle, <span class="t-n">90</span>
 
-<span class="t-c"># Sweep servo 1 from 0° → 180° in 10° steps</span>
-<span class="t-k">let</span> pos: <span class="t-k">int</span> = <span class="t-n">0</span>
-<span class="t-k">while</span> pos &lt;= <span class="t-n">180</span> {
-    <span class="t-k">set</span> servo[<span class="t-n">1</span>] = angle, pos
-    pos = pos + <span class="t-n">10</span>
-}</code></pre>
+<span class="t-c"># Modern dot-notation (recommended)</span>
+<span class="t-k">set</span> servo.angle <span class="t-n">1</span>, <span class="t-n">180</span>
+
+<span class="t-c"># Direct GPIO control</span>
+<span class="t-k">set</span> pin <span class="t-n">12</span>, <span class="t-n">1</span>               <span class="t-c"># BCM pin 12 High</span></code></pre>
                 </div>
 
                 <div class="doc-table-wrap">
@@ -244,23 +245,22 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>set servo[index] = angle, val</code></td>
+                                <td><code>set servo.angle index, val</code></td>
                                 <td><span class="param">(index: int, val: int/float)</span></td>
-                                <td>Moves servo at <em>index</em> to specified angle. Range: 0 – 180°.</td>
+                                <td>Moves servo at <em>index</em> to specified angle. <b>Auto-clamped: 0–180°.</b></td>
                             </tr>
                             <tr>
-                                <td><code>set pin[pin] = state, val</code></td>
-                                <td><span class="param">(pin: int, val: int)</span></td>
-                                <td>Drives specified GPIO pin (1 for High, 0 for Low).</td>
+                                <td><code>set pin num, val</code></td>
+                                <td><span class="param">(num: int, val: 0/1)</span></td>
+                                <td>Drives BCM <em>pin</em> to state (1: High, 0: Low).</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="callout warn">
-                    <span class="callout-tag">WARN</span>
-                    <span>Sending angles outside the 0 – 180° range may damage physical servo hardware. Origin does not
-                        clamp values automatically.</span>
+                <div class="callout info">
+                    <span class="callout-tag">SAFETY</span>
+                    <span>Origin now includes <b>automatic safety clamping</b> for servos. If a value outside the 0–180° range is sent, the interpreter will clamp it to the nearest safe bound and issue a console warning to protect your hardware.</span>
                 </div>
             </section>
 
@@ -409,7 +409,8 @@
                 </div>
                 <div class="section-divider"></div>
                 <p>A host of new mathematical built-ins as well as inline code execution pipelines have been provided
-                    natively directly connected to the system core interpreter layer.</p>
+                    natively. All expressions are now evaluated at <b>runtime</b> for dynamic behavior, powered by the
+                    new high-performance <b>Bytecode Virtual Machine</b> for stable, predictable execution.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
@@ -421,6 +422,39 @@
 <span class="t-k">let</span> sz: <span class="t-k">int</span>  = <span class="t-k">len</span>([<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>])       <span class="t-c"># → 3</span>
 
 <span class="t-k">exec</span> <span class="t-s">"print('hello from subprocess')"</span></code></pre>
+                </div>
+            </section>
+
+            <hr class="divider">
+
+            <!-- ── RAW PYTHON ── -->
+            <section id="raw-python" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Raw Python Integration</h2>
+                    <span class="badge">New in v1.7.5</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>For advanced use cases requiring features not yet native to Origin, you can embed raw Python code
+                    directly using the <code>py</code> block syntax. This code is executed natively in the underlying
+                    Python environment.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">python_interop.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">py</span> {
+    <span class="t-c"># Raw Python code block</span>
+    <span class="t-k">import</span> math
+    <span class="t-k">for</span> i <span class="t-k">in</span> range(<span class="t-n">5</span>):
+        <span class="t-k">print</span>(<span class="t-s">"Python-native sqrt:"</span>, math.sqrt(i))
+}</code></pre>
+                </div>
+
+                <div class="callout warn">
+                    <span class="callout-tag">IMPORTANT</span>
+                    <span>Variables declared inside a <code>py</code> block may not be visible to the Origin
+                        type-checker. Use this feature sparingly for library integrations only.</span>
                 </div>
             </section>
 
