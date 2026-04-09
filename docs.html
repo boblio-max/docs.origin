@@ -109,9 +109,8 @@
 
                 <div class="callout info">
                     <span class="callout-tag">INFO</span>
-                    <span>Origin uses lowercase <code>true</code>, <code>false</code>, and <code>none</code> to align
-                        with its hardware-first implementation.
-                        Reassigning a <code>const</code> at runtime will raise an error.</span>
+                    <span>Origin enforces strict typing. Use lowercase <code>true</code>, <code>false</code>, and <code>none</code> for literals. 
+                        Reassigning a <code>const</code> at runtime will raise a <code>RuntimeError</code>.</span>
                 </div>
             </section>
 
@@ -123,8 +122,7 @@
                     <h2>Data Structures</h2>
                 </div>
                 <div class="section-divider"></div>
-                <p>Origin supports native <code>lists</code> and <code>dictionaries</code> for complex data management.
-                    Lists are ordered sequences, while dictionaries map keys to values.</p>
+                <p>Origin supports native <code>lists</code>, <code>dictionaries</code>, and <code>tuples</code> for complex data management.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
@@ -138,6 +136,10 @@
 <span class="t-c"># Dictionaries</span>
 <span class="t-k">let</span> my_dict: <span class="t-k">dict</span> = {<span class="t-s">"a"</span>: <span class="t-n">1</span>, <span class="t-s">"b"</span>: <span class="t-n">2</span>}
 <span class="t-k">print</span> my_dict{<span class="t-s">"a"</span>}           <span class="t-c"># dictionary access uses { }</span>
+
+<span class="t-c"># Tuples</span>
+<span class="t-k">let</span> my_tuple: <span class="t-k">tuple</span> = (<span class="t-n">10</span>, <span class="t-n">20</span>, <span class="t-n">30</span>)
+<span class="t-k">print</span> my_tuple[<span class="t-n">1</span>]
 
 <span class="t-k">print</span> <span class="t-k">len</span>(my_list)           <span class="t-c"># returns collection length</span></code></pre>
                 </div>
@@ -175,6 +177,11 @@
 <span class="t-k">while</span> <span class="t-k">true</span> {
     <span class="t-k">pass</span>        <span class="t-c"># do nothing</span>
     <span class="t-k">break</span>
+}
+
+<span class="t-c"># Range loops</span>
+<span class="t-k">for</span> i <span class="t-k">in</span> range(<span class="t-n">0</span>, <span class="t-n">100</span>) {
+    <span class="t-k">print</span> i
 }</code></pre>
                 </div>
             </section>
@@ -216,22 +223,21 @@
                     <h2>Hardware Control</h2>
                 </div>
                 <div class="section-divider"></div>
-                <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Commands
-                    execute synchronously against the connected device and are available on all supported boards.</p>
+                <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Origin provides first-class support for Raspberry Pi GPIO and ServoKit (PCA9685) devices.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
                         <span class="doc-code-filename">hardware_modern.org</span>
                         <span class="doc-code-lang">origin</span>
                     </div>
-                    <pre><code><span class="t-c"># Classic syntax (still supported)</span>
-<span class="t-k">set</span> servo[<span class="t-n">0</span>] = angle, <span class="t-n">90</span>
-
-<span class="t-c"># Modern dot-notation (recommended)</span>
-<span class="t-k">set</span> servo.angle <span class="t-n">1</span>, <span class="t-n">180</span>
+                    <pre><code><span class="t-c"># Modern dot-notation (recommended)</span>
+<span class="t-k">set</span> servo.angle <span class="t-n">1</span>, <span class="t-n">180</span>      <span class="t-c"># Auto-clamped 0-180</span>
 
 <span class="t-c"># Direct GPIO control</span>
-<span class="t-k">set</span> pin <span class="t-n">12</span>, <span class="t-n">1</span>               <span class="t-c"># BCM pin 12 High</span></code></pre>
+<span class="t-k">set</span> pin <span class="t-n">12</span>, <span class="t-n">1</span>               <span class="t-c"># BCM pin 12 High (Output mode auto-configured)</span>
+
+<span class="t-c"># Classic syntax (still supported)</span>
+<span class="t-k">set</span> servo[<span class="t-n">0</span>] = angle, <span class="t-n">90</span></code></pre>
                 </div>
 
                 <div class="doc-table-wrap">
@@ -250,17 +256,17 @@
                                 <td>Moves servo at <em>index</em> to specified angle. <b>Auto-clamped: 0–180°.</b></td>
                             </tr>
                             <tr>
-                                <td><code>set pin num, val</code></td>
-                                <td><span class="param">(num: int, val: 0/1)</span></td>
-                                <td>Drives BCM <em>pin</em> to state (1: High, 0: Low).</td>
+                                <td><code>set pin num, state</code></td>
+                                <td><span class="param">(num: int, state: 0/1)</span></td>
+                                <td>Drives BCM <em>pin</em> to state (1: High, 0: Low). Initializes GPIO BCM mode.</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="callout info">
+                <div class="callout warn">
                     <span class="callout-tag">SAFETY</span>
-                    <span>Origin now includes <b>automatic safety clamping</b> for servos. If a value outside the 0–180° range is sent, the interpreter will clamp it to the nearest safe bound and issue a console warning to protect your hardware.</span>
+                    <span>Origin includes <b>automatic hardware safety clamping</b>. If a servo angle outside [0, 180] is sent, the interpreter clamps it to the nearest bound and issues a console warning to prevent physical gear damage.</span>
                 </div>
             </section>
 
@@ -398,6 +404,57 @@
 }</code></pre>
                 </div>
             </section>
+            <hr class="divider">
+
+            <!-- ── ERROR HANDLING ── -->
+            <section id="error-handling" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Error Handling</h2>
+                    <span class="badge">New in v1.7.5</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Origin uses <code>try / except / else</code> blocks for robust error management. Errors are mapped from the underlying environment and can be caught to prevent script termination.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">error_handling.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">try</span> {
+    <span class="t-k">const</span> x: <span class="t-k">int</span> = <span class="t-n">10</span>
+    x = <span class="t-n">20</span>                    <span class="t-c"># Raises RuntimeError</span>
+} <span class="t-k">except</span> {
+    <span class="t-k">print</span> <span class="t-s">"Caught constant re-assignment"</span>
+} <span class="t-k">else</span> {
+    <span class="t-k">print</span> <span class="t-s">"No errors occurred"</span>
+}</code></pre>
+                </div>
+
+                <div class="doc-table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Error Type</th>
+                                <th>Common Trigger</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>TypeError</code></td>
+                                <td>Type mismatch in <code>let</code> assignment or function call.</td>
+                            </tr>
+                            <tr>
+                                <td><code>RuntimeError</code></td>
+                                <td>Illegal state (e.g., constant re-assignment).</td>
+                            </tr>
+                            <tr>
+                                <td><code>ImportError</code></td>
+                                <td>Module not found or failed hardware initialization.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
 
             <hr class="divider">
 
@@ -408,18 +465,17 @@
                     <span class="badge">New in v1.7</span>
                 </div>
                 <div class="section-divider"></div>
-                <p>A host of new mathematical built-ins as well as inline code execution pipelines have been provided
-                    natively. All expressions are now evaluated at <b>runtime</b> for dynamic behavior, powered by the
-                    new high-performance <b>Bytecode Virtual Machine</b> for stable, predictable execution.</p>
+                <p>Origin provides high-performance mathematical built-ins and inline code execution pipelines. 
+                   <b>Important:</b> Built-ins like <code>sqrt</code> and <code>rand_num</code> are evaluated at <b>runtime</b>, enabling dynamic logic within loops and conditions.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
                         <span class="doc-code-filename">math_sys.org</span>
                         <span class="doc-code-lang">origin</span>
                     </div>
-                    <pre><code><span class="t-k">let</span> x: <span class="t-k">float</span> = <span class="t-k">sqrt</span>(<span class="t-n">25</span>)               <span class="t-c"># → 5.0</span>
-<span class="t-k">let</span> rnd: <span class="t-k">int</span> = <span class="t-k">rand_num</span>(<span class="t-n">1</span>, <span class="t-n">10</span>)      <span class="t-c"># → 1-10 inclusive</span>
-<span class="t-k">let</span> sz: <span class="t-k">int</span>  = <span class="t-k">len</span>([<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>])       <span class="t-c"># → 3</span>
+                    <pre><code><span class="t-k">let</span> x: <span class="t-k">float</span> = <span class="t-fn">sqrt</span>(<span class="t-n">25</span>)               <span class="t-c"># → math.sqrt(25.0) at runtime</span>
+<span class="t-k">let</span> rnd: <span class="t-k">int</span> = <span class="t-fn">rand_num</span>(<span class="t-n">1</span>, <span class="t-n">10</span>)      <span class="t-c"># → different result each call</span>
+<span class="t-k">let</span> sz: <span class="t-k">int</span>  = <span class="t-k">len</span>([<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>])       <span class="t-c"># → collection length</span>
 
 <span class="t-k">exec</span> <span class="t-s">"print('hello from subprocess')"</span></code></pre>
                 </div>
@@ -466,8 +522,7 @@
                     <h2>Operators &amp; Logic</h2>
                 </div>
                 <div class="section-divider"></div>
-                <p>Origin supports standard arithmetic, symbolic logic, bitwise operations, and compound assignments.
-                </p>
+                <p>Origin supports symbolic and word-based logic, bitwise operations, and compound assignments.</p>
 
                 <div class="doc-code-block">
                     <div class="doc-code-header">
@@ -477,20 +532,24 @@
                     <pre><code><span class="t-c"># Compound Assignments</span>
 x += <span class="t-n">1</span>
 y *= <span class="t-n">10</span>
+mask &= <span class="t-n">0b1111</span>
 
-<span class="t-c"># Symbolic Logic</span>
-<span class="t-k">if</span> (a &gt; <span class="t-n">0</span> &amp;&amp; b &lt; <span class="t-n">100</span>) || !is_locked {
-    <span class="t-k">print</span> <span class="t-s">"Success"</span>
-}
+<span class="t-c"># Unary Operators</span>
+counter++
+index--
 
-<span class="t-c"># Bitwise</span>
-<span class="t-k">let</span> mask: <span class="t-k">int</span> = <span class="t-n">1</span> &lt;&lt; <span class="t-n">3</span></code></pre>
+<span class="t-c"># Logical Operators (Symbolic or Semantic)</span>
+<span class="t-k">if</span> (a &gt; <span class="t-n">0</span> && b &lt; <span class="t-n">100</span>) || !is_locked { ... }
+<span class="t-k">if</span> (a &gt; <span class="t-n">0</span> <span class="t-k">and</span> b &lt; <span class="t-n">100</span>) <span class="t-k">or</span> <span class="t-k">not</span> is_locked { ... }
+
+<span class="t-c"># Comparison</span>
+<span class="t-k">if</span> x === y { <span class="t-c"># Exact match</span> }
+<span class="t-k">if</span> a <> b { <span class="t-c"># Legacy not-equal</span> }</code></pre>
                 </div>
             </section>
 
             <hr class="divider">
 
-            <!-- ── GENERATORS ── -->
             <section id="generators" class="doc-section">
                 <div class="doc-section-header">
                     <h2>Generators</h2>
@@ -507,63 +566,6 @@ y *= <span class="t-n">10</span>
     <span class="t-k">yield</span> <span class="t-n">1</span>
     <span class="t-k">yield</span> <span class="t-n">2</span>
 }</code></pre>
-                </div>
-            </section>
-
-            <hr class="divider">
-
-            <!-- ── ERROR HANDLING ── -->
-            <section id="error-handling" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Error Handling</h2>
-                </div>
-                <div class="section-divider"></div>
-                <p>Runtime errors are caught with <code>try / catch</code>. The caught object exposes a
-                    <code>.type</code> string and a <code>.message</code> string for programmatic inspection.
-                </p>
-
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">error_handling.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-k">try</span> {
-    <span class="t-k">let</span> x: <span class="t-k">int</span> = <span class="t-n">1</span>
-    x = <span class="t-s">"error"</span>               <span class="t-c"># raises TypeError</span>
-} <span class="t-k">except</span> {
-    <span class="t-k">print</span> <span class="t-s">"Caught type mismatch"</span>
-} <span class="t-k">else</span> {
-    <span class="t-k">print</span> <span class="t-s">"No error"</span>
-}</code></pre>
-                </div>
-
-                <div class="doc-table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Error Type</th>
-                                <th>Trigger</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>TypeError</code></td>
-                                <td>Type mismatch in variable assignment or operation.</td>
-                            </tr>
-                            <tr>
-                                <td><code>RuntimeError</code></td>
-                                <td>Generic execution error (e.g. constant re-assignment).</td>
-                            </tr>
-                            <tr>
-                                <td><code>NameError</code></td>
-                                <td>Variable or function not found in current scope.</td>
-                            </tr>
-                            <tr>
-                                <td><code>SyntaxError</code></td>
-                                <td>Illegal character or malformed code structure.</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </section>
 
