@@ -4,58 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Origin.org</title>
+    <title>Origin — Hardware-First Language</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <section>
-        <nav>
-            <div class="logo">ORIGIN.ORG</div>
-            <ul class="nav-links">
-                <li><a href="index.html" class="btn btn-primary">Origin</a></li>
-                <li><a href="osf.html">Origin SF</a></li>
-                <li><a href="docs.html">Docs</a></li>
-                <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
-                <li><a href="others.html">Other Projects</a></li>
-                <li><a href="tutorials.html">Tutorials</a></li>
-                <li><a href="community.html">Community</a></li>
-            </ul>
-        </nav>
-        <section class="hero">
-            <div class="hero-content">
-                <div class="label">Welcome to</div>
-                <h1><span class="highlight">Origin</span></h1>
-                <p class="description">Origin is a domain specific language that enables developers to build AI systems
-                    with ease.</p>
-                <div class="actions">
-                    <a href="index.html" class="btn btn-primary">Get Started</a>
-                    <a href="docs.html" class="btn btn-secondary">Read the Docs</a>
+    <nav>
+        <div class="logo">ORIGIN.ORG</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Origin</a></li>
+            <li><a href="osf.html">Origin SF</a></li>
+            <li><a href="docs.html">Docs</a></li>
+            <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+            <li><a href="tutorials.html">Tutorials</a></li>
+            <li><a href="community.html">Community</a></li>
+        </ul>
+    </nav>
 
+    <section class="hero">
+        <div class="glow-point" style="top: 20%; left: 10%;"></div>
+        <div class="glow-point" style="bottom: 10%; right: 5%; animation-delay: -2s;"></div>
+
+        <div class="hero-content">
+            <div class="label">v1.7.5 Stable Now Live</div>
+            <h1>The <span class="highlight">Origin</span> of Intelligent Control</h1>
+            <p class="description">A hardware-first, domain-specific language built for robotics, AI, and low-latency systems. Expressive syntax meets reliable control.</p>
+            
+            <div class="actions">
+                <a href="docs.html" class="btn btn-primary">Get Started</a>
+                <a href="https://github.com/boblio-max/origin" class="btn btn-secondary">GitHub</a>
+            </div>
+
+            <div class="spacer" style="height: 4rem;"></div>
+
+            <div class="features-grid" style="background: transparent; border: none;">
+                <div class="feature glass" style="border-radius: 8px;">
+                    <span class="feature-number">01</span>
+                    <h3>Hardware Safety</h3>
+                    <p>Automatic 0-180° servo clamping prevents physical gear damage natively.</p>
                 </div>
-                <div class="spacer">></div>
-                <div class="container">
-                    <div href="https://github.com/boblio-max/origin" class="box">1. Download the Repository</div>
-                    <div class="box">2. Explore the Documentation</div>
-                    <div class="box">3. Write Your First Program</div>
-                    <div class="box">4. Join the Community</div>
+                <div class="feature glass" style="border-radius: 8px;">
+                    <span class="feature-number">02</span>
+                    <h3>Python Interpreter</h3>
+                    <p>Robust translation to Python for maximum library compatibility and ease of use.</p>
                 </div>
-                <div class="spacer">></div>
-                <div>
-                    <div class="box1">Latest News:
-                        <ul>
-                            <p> - Origin v1.7.5 Stable Update!</p>
-                            <p> - New: **Hardware Safety** (Auto-clamping 0-180° for servos).</p>
-                            <p> - New: **GPIO BCM Support** (Automatic output mode configuration).</p>
-                            <p> - Expanded Logic: Symbolic and Word-based operators (<code>and</code>, <code>or</code>, <code>not</code>).</p>
-                            <p> - Robust Error Handling with <code>try / except / else</code> blocks.</p>
-                            <p> - Enhanced Performance via the new Bytecode Virtual Machine.</p>
-                            <p> - Support for native **Tuples** and Tuple literals.</p>
-                        </ul>
-                    </div>
+                <div class="feature glass" style="border-radius: 8px;">
+                    <span class="feature-number">03</span>
+                    <h3>Structured Logic</h3>
+                    <p>Formal error handling with try-except blocks ensures system stability during tasks.</p>
                 </div>
             </div>
-        </section>
+
+            <div class="spacer" style="height: 4rem;"></div>
+
+            <div class="glass" style="padding: 2.5rem; border-radius: 12px; position: relative; overflow: hidden;">
+                <div class="codename" style="margin-bottom: 1rem;">Changelog / v1.7.5</div>
+                <h3 style="margin-bottom: 1.5rem;">What's New in This Release</h3>
+                <ul style="list-style: none; color: var(--text-muted); font-weight: 300; font-size: 0.95rem; line-height: 2;">
+                    <li><span style="color: var(--accent-secondary);">•</span> <strong>Hardware Syntax:</strong> Dot-notation support (<code>set servo.angle 1, 90</code>).</li>
+                    <li><span style="color: var(--accent-secondary);">•</span> <strong>BCM GPIO:</strong> Automatic Raspberry Pi pin initialization and output setup.</li>
+                    <li><span style="color: var(--accent-secondary);">•</span> <strong>Module System:</strong> Header-style inclusion (<code>import</code>) for script prepending.</li>
+                    <li><span style="color: var(--accent-secondary);">•</span> <strong>Runtime Math:</strong> <code>sqrt</code> and <code>rand_num</code> now evaluated at execution time.</li>
+                    <li><span style="color: var(--accent-secondary);">•</span> <strong>Syntax Clean:</strong> Enforced lowercase <code>true</code>, <code>false</code>, and <code>none</code> literals.</li>
+                    <li><span style="color: var(--accent-secondary);">•</span> <strong>Stable Interpreter:</strong> Refined Python-translation engine for robust hardware control.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
 </body>
 
 </html>
