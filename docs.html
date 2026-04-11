@@ -202,6 +202,36 @@
                 </div>
             </section>
 
+            <!-- ── ERROR HANDLING ── -->
+            <section id="error-handling" class="doc-section">
+                <div class="doc-section-header">
+                    <h2>Error Handling</h2>
+                    <span class="badge">Stable</span>
+                </div>
+                <div class="section-divider"></div>
+                <p>Origin provides a robust mechanism for catching and handling runtime exceptions using <code>try</code>, <code>except</code>, and <code>else</code> blocks. This ensures hardware controller logic can fail gracefully without crashing the entire system.</p>
+
+                <div class="doc-code-block">
+                    <div class="doc-code-header">
+                        <span class="doc-code-filename">safety.org</span>
+                        <span class="doc-code-lang">origin</span>
+                    </div>
+                    <pre><code><span class="t-k">try</span> {
+    <span class="t-c"># Attempt a hardware command</span>
+    <span class="t-k">set</span> servo.angle <span class="t-n">15</span>, <span class="t-n">45</span>
+} <span class="t-k">except</span> {
+    <span class="t-k">print</span> <span class="t-s">"Hardware error caught!"</span>
+} <span class="t-k">else</span> {
+    <span class="t-k">print</span> <span class="t-s">"Command successful."</span>
+}</code></pre>
+                </div>
+
+                <div class="callout info">
+                    <span class="callout-tag">INFO</span>
+                    <span>The <code>except</code> block catches all standard runtime exceptions. The <code>else</code> block is optional and executes only if no exception was raised in the <code>try</code> block.</span>
+                </div>
+            </section>
+
             <hr class="divider">
 
             <!-- ── ROADMAP ── -->
