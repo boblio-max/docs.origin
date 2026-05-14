@@ -15,12 +15,10 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="docs.html" class="active">Docs</a></li>
                 <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="download.html">Download</a></li>
                 <li><a href="osf.html">Origin SF</a></li>
                 <li><a href="community.html">Community</a></li>
             </ul>
-            <div class="nav-search">
-                <input type="text" placeholder="Search Docs...">
-            </div>
         </div>
     </nav>
 
@@ -29,7 +27,8 @@
             <div class="sidebar-group">
                 <span class="sidebar-label">Fundamentals</span>
                 <ul>
-                    <li><a href="#variables">Variables & Data</a></li>
+                    <li><a href="#variables">Variables & Constants</a></li>
+                    <li><a href="#scopes">Scope Management</a></li>
                     <li><a href="#data-structures">Data Structures</a></li>
                     <li><a href="#control-flow">Control Flow</a></li>
                     <li><a href="#functions">Functions</a></li>
@@ -39,7 +38,7 @@
             <div class="sidebar-group">
                 <span class="sidebar-label">Hardware & I/O</span>
                 <ul>
-                    <li><a href="#servo">Hardware Control</a></li>
+                    <li><a href="#hardware">Hardware Control</a></li>
                     <li><a href="#io">Input / Output</a></li>
                 </ul>
             </div>
@@ -48,9 +47,9 @@
                 <span class="sidebar-label">Advanced</span>
                 <ul>
                     <li><a href="#modules">Module System</a></li>
+                    <li><a href="#binary">Binary Builder</a></li>
                     <li><a href="#raw-python">Raw Python</a></li>
                     <li><a href="#error-handling">Error Handling</a></li>
-                    <li><a href="#roadmap">Roadmap</a></li>
                 </ul>
             </div>
         </aside>
@@ -58,96 +57,80 @@
         <main class="docs-content">
             <header class="docs-header">
                 <h1>Documentation</h1>
-                <p class="subtitle">Complete reference for the Origin programming language.</p>
+                <p class="subtitle">Complete reference for the Origin programming language v1.7.5.</p>
             </header>
 
             <section id="variables">
-                <h2>Variables & Data</h2>
-                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. All declarations must include an explicit type annotation.</p>
+                <h2>Variables & Constants</h2>
+                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. All declarations must include an explicit type annotation. Constants use the <code>const</code> keyword and cannot be reassigned.</p>
                 <pre><code>let   x: int    = 10         # typed declaration
 let   name: str = "Origin"
-let   flag: bool   = true       # boolean type (lowercase)
+let   flag: bool   = true       # boolean type
 const pi: float = 3.14159    # immutable reference</code></pre>
             </section>
 
-            <section id="data-structures" style="margin-top: 4rem;">
-                <h2>Data Structures</h2>
-                <p>Origin supports native <code>lists</code>, <code>dictionaries</code>, and <code>tuples</code> for complex data management.</p>
-                <pre><code># Lists
-let my_list: list = [1, 2, 3]
-print my_list[0]            # indexing starts at 0
+            <section id="scopes" style="margin-top: 4rem;">
+                <h2>Scope Management</h2>
+                <p>Origin uses robust lexical scoping. Variables declared inside a function are local to that function. To modify a global variable, use the <code>global</code> keyword.</p>
+                <pre><code>let x = 10
 
-# Dictionaries
-let my_dict: dict = {"a": 1, "b": 2}
-print my_dict{"a"}           # dictionary access uses { }</code></pre>
+def update() {
+    global x
+    x = 20  # Modifies global x
+}
+
+def local_test() {
+    let x = 30 # Local x, doesn't affect global
+}</code></pre>
             </section>
 
-            <section id="servo" style="margin-top: 4rem;">
+            <section id="hardware" style="margin-top: 4rem;">
                 <h2>Hardware Control</h2>
-                <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Origin provides first-class support for Raspberry Pi GPIO and ServoKit (PCA9685).</p>
-                <pre><code># Modern dot-notation
-set servo.angle 1, 90       # Set servo 1 to 90 degrees
+                <p>Origin provides first-class support for robotics hardware. The <code>set</code> namespace handles pins and servos with native safety clamping (0-180°).</p>
+                <pre><code>set servo.angle 1, 90       # Set servo 1 to 90°
 set pin 12, 1               # BCM pin 12 Output High
 
 # Clamping example
-set servo.angle 0, 250      # Automatically clamped to 180</code></pre>
+set servo.angle 0, 250      # Automatically clamped to 180°</code></pre>
             </section>
 
             <section id="modules" style="margin-top: 4rem;">
                 <h2>Module System</h2>
-                <p>The <code>import</code> statement in Origin currently functions as a Header Inclusion mechanism.</p>
-                <pre><code>import more_logic           # Prepends more_logic.or to this file
-from math import sqrt       # Direct inclusion from standard libraries
+                <p>Origin features a formal module system with clean namespacing. You can import other <code>.or</code> files using <code>import</code> and <code>as</code>.</p>
+                <pre><code>import math_utils as mu
+from hardware import read_sensor
 
-let x: float = sqrt(16)</code></pre>
+print mu.square(16)
+let val = read_sensor(1)</code></pre>
+            </section>
+
+            <section id="binary" style="margin-top: 4rem;">
+                <h2>Binary Builder</h2>
+                <p>Origin can compile your scripts into standalone executables that run without needing Python or Origin installed.</p>
+                <pre><code># In your terminal:
+origin build my_robot.or
+
+# This produces:
+my_robot.exe</code></pre>
             </section>
 
             <section id="raw-python" style="margin-top: 4rem;">
                 <h2>Raw Python Blocks</h2>
-                <p>Embed raw Python code directly into Origin scripts using the <code>py { ... }</code> syntax.</p>
+                <p>Embed raw Python code directly into Origin scripts using the <code>py { ... }</code> syntax for maximum library compatibility.</p>
                 <pre><code>py {
     import math
-    for i in range(5):
-        print("Python depth:", math.sin(i))
+    print("Direct math access:", math.cos(0))
 }</code></pre>
             </section>
 
             <section id="error-handling" style="margin-top: 4rem;">
                 <h2>Error Handling</h2>
-                <p>Origin provides a robust mechanism for catching and handling runtime exceptions using <code>try</code>, <code>except</code>, and <code>else</code> blocks.</p>
+                <p>Use <code>try</code>, <code>except</code>, and <code>else</code> blocks to manage runtime hardware errors gracefully.</p>
                 <pre><code>try {
-    # Attempt a hardware command
-    set servo.angle 15, 45
+    set servo.angle 5, 45
 } except {
-    print "Hardware error caught!"
-} else {
-    print "Command successful."
+    print "Servo connection failed"
 }</code></pre>
-            </section>
-
-            <section id="roadmap" style="margin-top: 4rem;">
-                <h2>Language Roadmap</h2>
-                <p>The following constructs are currently reserved and scheduled for implementation.</p>
-                <div class="feature-card" style="padding: 1.5rem; margin-top: 1rem;">
-                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <th style="text-align: left; padding: 0.5rem;">Construct</th>
-                            <th style="text-align: left; padding: 0.5rem;">Status</th>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.5rem;">Pattern Matching</td>
-                            <td style="padding: 0.5rem; color: var(--text-muted);">In Development</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border);">
-                            <td style="padding: 0.5rem;">Data Structures (Struct/Enum)</td>
-                            <td style="padding: 0.5rem; color: var(--text-muted);">In Development</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 0.5rem;">Async I/O</td>
-                            <td style="padding: 0.5rem; color: var(--text-muted);">Planned</td>
-                        </tr>
-                    </table>
-                </div>
             </section>
         </main>
     </div>

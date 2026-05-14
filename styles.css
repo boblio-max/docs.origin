@@ -210,6 +210,82 @@ code {
     font-size: 0.9em;
 }
 
+/* --- Docs Layout --- */
+.docs-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    gap: 4rem;
+}
+
+.docs-sidebar {
+    position: sticky;
+    top: 2rem;
+    height: fit-content;
+}
+
+.sidebar-group {
+    margin-bottom: 2.5rem;
+}
+
+.sidebar-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.docs-sidebar ul {
+    list-style: none;
+}
+
+.docs-sidebar li {
+    margin-bottom: 0.5rem;
+}
+
+.docs-sidebar a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.docs-sidebar a:hover {
+    color: var(--text);
+}
+
+.docs-content {
+    min-width: 0;
+}
+
+.docs-header {
+    margin-bottom: 4rem;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+}
+
+section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+section p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
 /* --- Footer --- */
 footer {
     padding: 4rem 0;
