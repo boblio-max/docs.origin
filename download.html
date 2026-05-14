@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Origin</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="download.html">Download</a></li>
+                <li><a href="osf.html">Origin SF</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero container">
+        <h1>Install Origin.</h1>
+        <p>Start building intelligent systems today. Origin is available as a standalone toolchain for Windows. Linux and macOS support coming soon.</p>
+        
+        <div class="hero-actions">
+            <a href="assets/OriginInstaller.zip" class="btn btn-primary">Download for Windows (x64)</a>
+            <a href="https://github.com/boblio-max/origin" class="btn btn-secondary">Source Code</a>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: -2rem;">v1.7.5 Stable • Includes compiler, runner, and installer script.</p>
+    </header>
+
+    <section class="section container">
+        <h2 class="section-title">Quick Start</h2>
+        <div class="content-grid">
+            <div class="content-block">
+                <h3>1. Download and Extract</h3>
+                <p>Download the <code>OriginInstaller.zip</code> and extract all files to a folder on your computer.</p>
+            </div>
+            <div class="content-block">
+                <h3>2. Run the Installer</h3>
+                <p>Right-click <code>install_origin.ps1</code> and select <strong>"Run with PowerShell"</strong>. This will move Origin to your user profile and add it to your system PATH.</p>
+            </div>
+            <div class="content-block">
+                <h3>3. Verify Installation</h3>
+                <p>Open a new terminal (Command Prompt or PowerShell) and type:</p>
+                <div class="terminal-window" style="margin-top: 1rem; padding: 1rem;">
+                    <div class="terminal-line"><span class="prompt">$</span> origin --version</div>
+                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.5</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">What's included?</h2>
+        <div class="content-grid">
+            <div class="content-block">
+                <p>The installer package provides everything you need to start building hardware-native applications:</p>
+                <ul style="margin-top: 1.5rem; list-style: none; color: var(--text-muted);">
+                    <li style="margin-bottom: 0.5rem;">• <strong>origin.exe:</strong> The core compiler and runtime engine.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Origin Builder:</strong> Tooling to compile your scripts into standalone executables.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Module System:</strong> Full support for multi-file projects and namespacing.</li>
+                    <li>• <strong>Hardware Drivers:</strong> Pre-bundled support for common robotics components.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="logo">Origin</div>
+            <ul class="footer-links">
+                <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+            <div class="copyright">© 2026 Origin Organization</div>
+        </div>
+    </footer>
+
+</body>
+</html>

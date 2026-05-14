@@ -3,115 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origin Systems Foundation</title>
+    <title>Origin Systems Foundation — The Core of Autonomy</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .layer-stack {
+            margin: 6rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .layer {
+            padding: 2.5rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg);
+            transition: all 0.3s;
+        }
+        .layer:hover {
+            transform: scale(1.01);
+            border-color: var(--text);
+        }
+        .layer-info h3 { margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 700; }
+        .layer-info p { color: var(--text-muted); font-size: 1rem; }
+        .layer-badge {
+            background: var(--bg-secondary);
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid var(--border);
+        }
+    </style>
 </head>
-
 <body>
+
     <nav>
-        <div class="logo">ORIGIN.ORG</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Origin</a></li>
-            <li><a href="osf.html">Origin SF</a></li>
-            <li><a href="docs.html">Docs</a></li>
-            <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
-            <li><a href="tutorials.html">Tutorials</a></li>
-            <li><a href="community.html">Community</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="osf.html" class="active">Origin SF</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section class="hero">
-        <div class="glow-point" style="top: 20%; left: 10%;"></div>
-        
-        <div class="hero-content">
-            <div class="label">Non-Profit Organization</div>
-            <h1>The <span class="highlight">Foundation</span></h1>
-            <p class="description">The Origin Systems Foundation is the non-profit organization dedicated to the development, safety, and democratization of hardware-control languages.</p>
-            <div class="actions">
-                <a href="#mission" class="btn btn-primary">Our Mission</a>
-                <a href="support.html" class="btn btn-secondary">Support Us</a>
+    <header class="hero">
+        <div class="container">
+            <h1 style="font-size: 4.5rem; margin-bottom: 2rem;">Foundation</h1>
+            <p style="font-size: 1.5rem; max-width: 700px; margin: 0 auto;">The architectural framework for high-performance hardware control and autonomous systems.</p>
+        </div>
+    </header>
+
+    <section class="features" style="background: var(--bg);">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; margin-bottom: 8rem;">
+                <h2 class="section-title">Core Abstraction</h2>
+                <p style="font-size: 1.1rem; line-height: 1.8;">Origin SF provides the glue between low-level hardware drivers and high-level autonomous logic. It's designed to be lightweight, modular, and extremely fast, ensuring that your system remains responsive under any load.</p>
             </div>
-        </div>
-    </section>
 
-    <div class="divider"></div>
-
-    <section id="mission" class="code-section">
-        <div class="section-label">THE FOUNDATION MANIFESTO</div>
-        <div class="code-display glass">
-            <span class="code-line">
-                <span class="syntax-fn">class</span>
-                <span class="syntax-name"> OriginFoundation</span> {
-            </span>
-            <span class="code-line">
-                <span class="syntax-string">  // Empowering hardware hackers worldwide</span>
-            </span>
-            <span class="code-line">
-                <span class="syntax-string">  // Enforcing safety at the bytecode layer</span>
-            </span>
-            <span class="code-line">
-                <span class="syntax-string">  // Keeping robotics open and accessible</span>
-            </span>
-            <span class="code-line">}</span>
-        </div>
-    </section>
-
-    <section class="council-section">
-        <div class="section-label">CORE PILLARS</div>
-        <div class="council-grid">
-            <div class="council-card glass" data-number="01">
-                <span class="card-icon">🔧</span>
-                <span class="codename">Core Engineering</span>
-                <h3>Language Safety</h3>
-                <p>Developing native clamping and hardware protection layers to prevent physical damage during prototyping.</p>
-                <div class="abilities">
-                    <span class="ability-tag">Bytecode VM</span>
-                    <span class="ability-tag">Safety Layers</span>
+            <div class="layer-stack">
+                <div class="layer">
+                    <div class="layer-info">
+                        <h3>Autonomous Intelligence</h3>
+                        <p>Mission planning, pathfinding, and high-level decision trees.</p>
+                    </div>
+                    <div class="layer-badge">Level 4</div>
+                </div>
+                <div class="layer" style="background: var(--bg-secondary);">
+                    <div class="layer-info">
+                        <h3>Perception & Fusion</h3>
+                        <p>Combining LIDAR, IMU, and Camera data into a unified world model.</p>
+                    </div>
+                    <div class="layer-badge">Level 3</div>
+                </div>
+                <div class="layer">
+                    <div class="layer-info">
+                        <h3>Motion Control</h3>
+                        <p>PID loops, inverse kinematics, and trajectory smoothing.</p>
+                    </div>
+                    <div class="layer-badge">Level 2</div>
+                </div>
+                <div class="layer" style="background: var(--bg-secondary);">
+                    <div class="layer-info">
+                        <h3>Origin Core</h3>
+                        <p>The language runtime, hardware safety clamping, and memory management.</p>
+                    </div>
+                    <div class="layer-badge">Level 1</div>
                 </div>
             </div>
 
-            <div class="council-card glass" data-number="02">
-                <span class="card-icon">📚</span>
-                <span class="codename">Open Access</span>
-                <h3>Education</h3>
-                <p>Providing free, high-quality documentation and kits for students and researchers globally.</p>
-                <div class="abilities">
-                    <span class="ability-tag">Curriculum</span>
-                    <span class="ability-tag">Kits</span>
+            <div class="features-grid" style="margin-top: 6rem;">
+                <div class="feature-card">
+                    <h3>Zero Overhead</h3>
+                    <p>Designed with a "pay only for what you use" philosophy. No unnecessary background tasks or heavy runtimes.</p>
                 </div>
-            </div>
-
-            <div class="council-card glass" data-number="03">
-                <span class="card-icon">🌍</span>
-                <span class="codename">Ecosystem</span>
-                <h3>Community</h3>
-                <p>Fostering a collaborative space for builders to share modules, drivers, and robotics knowledge.</p>
-                <div class="abilities">
-                    <span class="ability-tag">Open Standards</span>
-                    <span class="ability-tag">Forums</span>
+                <div class="feature-card">
+                    <h3>Modular Design</h3>
+                    <p>Swap out motion controllers or perception engines without rewriting your core logic.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Fail-Safe</h3>
+                    <p>Built-in watchdogs and error propagation ensure that a sensor failure doesn't lead to a total system crash.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <section class="features">
-        <div class="section-label">GET INVOLVED</div>
-        <div class="features-grid" style="background: transparent; border: none;">
-            <div class="feature glass" style="border-radius: 8px;">
-                <h3>Contribute Code</h3>
-                <p>Directly influence the evolution of the Origin compiler and VM architecture.</p>
-                <a href="https://github.com/boblio-max/origin" class="btn btn-secondary" style="margin-top: 1rem; display: inline-block;">View Repository</a>
-            </div>
-            <div class="feature glass" style="border-radius: 8px;">
-                <h3>Financial Support</h3>
-                <p>Your contributions fund hardware testing and dedicated maintainers.</p>
-                <a href="support.html" class="btn btn-secondary" style="margin-top: 1rem; display: inline-block;">Support OSF</a>
-            </div>
+    <footer>
+        <div class="container footer-container">
+            <div class="logo">Origin</div>
+            <div class="copyright">© 2026 Origin Organization</div>
         </div>
-    </section>
+    </footer>
 
-    <div class="spacer" style="height: 6rem;"></div>
+    <script src="main.js"></script>
 </body>
 </html>

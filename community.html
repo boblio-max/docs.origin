@@ -1,100 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origin Community — Build the Future</title>
+    <title>Origin Community — Join the Discussion</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+
     <nav>
-        <div class="logo">ORIGIN.ORG</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Origin</a></li>
-            <li><a href="osf.html">Origin SF</a></li>
-            <li><a href="docs.html">Docs</a></li>
-            <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
-            <li><a href="others.html">Other Projects</a></li>
-            <li><a href="tutorials.html">Tutorials</a></li>
-            <li><a href="community.html">Community</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="osf.html">Origin SF</a></li>
+                <li><a href="community.html" class="active">Community</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section class="hero">
-        <div class="glow-point" style="top: 20%; right: 10%;"></div>
-        
-        <div class="hero-content">
-            <div class="label">Connect & Contribute</div>
-            <h1>The <span class="highlight">Origin Community</span></h1>
-            <p class="description">
-                Building a modern ecosystem for robotics and intelligent systems. Join thousands of developers shaping the future of open-source control.
-            </p>
-            <div class="actions">
-                <a href="#join" class="btn btn-primary">Join Discord</a>
-                <a href="https://github.com/boblio-max/origin" class="btn btn-secondary">GitHub</a>
-            </div>
+    <header class="hero" style="padding-bottom: 4rem;">
+        <div class="container">
+            <h1>Join the Origin community.</h1>
+            <p>Connect with other developers, share your robotics projects, and help shape the future of the language.</p>
         </div>
-    </section>
-
-    <section class="code-section">
-        <div class="section-label">ORIGIN ECOSYSTEM</div>
-        <div class="code-display glass" style="border-radius: 12px;">
-            <span class="code-line">
-                <span class="t-k">import</span> community
-            </span>
-            <span class="code-line">
-                <span class="t-k">def</span> <span class="t-fn">build_future</span>() {
-            </span>
-            <span class="code-line">
-                <span class="t-c">  # Collective innovation</span>
-            </span>
-            <span class="code-line">
-                <span class="t-k">  while</span> <span class="t-k">true</span> { <span class="t-fn">contribute</span>() }
-            </span>
-            <span class="code-line">}</span>
-        </div>
-    </section>
+    </header>
 
     <section class="features">
-        <div class="section-label">WHY JOIN US</div>
-        <div class="features-grid" style="background: transparent; border: none; margin-top: 2rem;">
-            <div class="feature glass" style="border-radius: 8px;">
-                <span class="feature-number">01</span>
-                <h3>Learn Hardware</h3>
-                <p>Master PCA9685 servos and GPIO BCM logic with hands-on community projects.</p>
-            </div>
-            <div class="feature glass" style="border-radius: 8px;">
-                <span class="feature-number">02</span>
-                <h3>Open Source</h3>
-                <p>Contribute to core compiler and VM optimizations to impact the robotics industry.</p>
-            </div>
-            <div class="feature glass" style="border-radius: 8px;">
-                <span class="feature-number">03</span>
-                <h3>Network</h3>
-                <p>Connect with engineers at the forefront of AI and robotics integration globally.</p>
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">💬</span>
+                    <h3>Discord</h3>
+                    <p>Join our Discord server for real-time support and discussion with the core team and community.</p>
+                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Join Discord</a>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📂</span>
+                    <h3>GitHub</h3>
+                    <p>Contribute to the language, report bugs, and suggest new features on our GitHub repository.</p>
+                    <a href="https://github.com/boblio-max/origin" class="btn btn-secondary" style="margin-top: 1.5rem;">Visit GitHub</a>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🤖</span>
+                    <h3>Showcase</h3>
+                    <p>Share your robotics projects built with Origin and get featured on our website.</p>
+                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Submit Project</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="divider"></div>
-
-    <section class="code-section" id="join" style="padding-bottom: 8rem;">
-        <div class="glass" style="padding: 4rem; border-radius: 12px; text-align: center;">
-            <h2 style="margin-bottom: 1.5rem;">Join the Global Collective</h2>
-            <p style="color: var(--text-muted); margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                Whether you're a student building your first robot or an engineer optimizing complex swarms, there's a place for you in Origin.
-            </p>
-            <div class="actions" style="justify-content: center;">
-                <a href="https://discord.gg/origin" class="btn btn-primary">Join Our Discord</a>
-                <a href="https://github.com/boblio-max/origin" class="btn btn-secondary">View Repo</a>
-            </div>
-            <p class="description2" style="margin-top: 4rem; font-size: 0.75rem;">
-                © 2026 Origin Community • Engineered by Nikhil Mahankali
-            </p>
+    <footer>
+        <div class="container footer-container">
+            <div class="logo" style="font-size: 1rem;">Origin</div>
+            <div class="copyright">© 2026 Origin Organization</div>
         </div>
-    </section>
+    </footer>
 
+    <script src="main.js"></script>
 </body>
 </html>

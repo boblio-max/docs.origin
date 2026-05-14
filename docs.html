@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origin Language — Reference</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Origin Documentation — Reference</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
 
     <nav>
-        <div class="logo">Origin</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Origin</a></li>
-            <li><a href="#variables">Basics</a></li>
-            <li><a href="#control-flow">Control</a></li>
-            <li><a href="#v1-5-imports">Modules</a></li>
-            <li><a href="#roadmap">Roadmap</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="docs.html" class="active">Docs</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="osf.html">Origin SF</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+            <div class="nav-search">
+                <input type="text" placeholder="Search Docs...">
+            </div>
+        </div>
     </nav>
 
     <div class="docs-layout">
-
         <aside class="docs-sidebar">
             <div class="sidebar-group">
-                <div class="sidebar-group-label">Fundamentals</div>
+                <span class="sidebar-label">Fundamentals</span>
                 <ul>
-                    <li><a href="#variables">Variables &amp; Constants</a></li>
+                    <li><a href="#variables">Variables & Data</a></li>
                     <li><a href="#data-structures">Data Structures</a></li>
                     <li><a href="#control-flow">Control Flow</a></li>
                     <li><a href="#functions">Functions</a></li>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="sidebar-group">
-                <div class="sidebar-group-label">Hardware &amp; I/O</div>
+                <span class="sidebar-label">Hardware & I/O</span>
                 <ul>
                     <li><a href="#servo">Hardware Control</a></li>
                     <li><a href="#io">Input / Output</a></li>
@@ -45,14 +45,9 @@
             </div>
 
             <div class="sidebar-group">
-                <div class="sidebar-group-label">Advanced</div>
+                <span class="sidebar-label">Advanced</span>
                 <ul>
-                    <li><a href="#v1-5-imports">Module System</a></li>
-                    <li><a href="#file-io">File I/O</a></li>
-                    <li><a href="#oop">Object-Oriented</a></li>
-                    <li><a href="#concurrency">Concurrency</a></li>
-                    <li><a href="#operators">Operators &amp; Logic</a></li>
-                    <li><a href="#math-system">Math &amp; System</a></li>
+                    <li><a href="#modules">Module System</a></li>
                     <li><a href="#raw-python">Raw Python</a></li>
                     <li><a href="#error-handling">Error Handling</a></li>
                     <li><a href="#roadmap">Roadmap</a></li>
@@ -60,248 +55,110 @@
             </div>
         </aside>
 
-        <main class="docs-main">
+        <main class="docs-content">
             <header class="docs-header">
-                <div class="label">Language Reference</div>
-                <h1>Origin <span class="highlight">Documentation</span></h1>
-                <p class="description">Complete reference for the Origin programming language — hardware-first, expressive, and built for control.</p>
-                <div class="version-row">
-                    <span class="version-tag">v1.5</span>
-                    <span class="version-tag">v1.7</span>
-                    <span class="version-tag current">v1.7.5 — Interpreter Stable</span>
-                </div>
+                <h1>Documentation</h1>
+                <p class="subtitle">Complete reference for the Origin programming language.</p>
             </header>
 
-            <!-- ── VARIABLES ── -->
-            <section id="variables" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Variables &amp; Data</h2>
-                </div>
-                <div class="section-divider"></div>
-                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. All declarations must include an explicit type annotation — the compiler enforces strict typing at runtime.</p>
-
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">declaration.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-k">let</span>   x: <span class="t-k">int</span>    = <span class="t-n">10</span>         <span class="t-c"># typed declaration</span>
-<span class="t-k">let</span>   name: <span class="t-k">str</span> = <span class="t-s">"Origin"</span>
-<span class="t-k">let</span>   flag: <span class="t-k">bool</span>   = <span class="t-k">true</span>       <span class="t-c"># boolean type (lowercase)</span>
-<span class="t-k">const</span> pi: <span class="t-k">float</span> = <span class="t-n">3.14159</span>    <span class="t-c"># immutable reference</span>
-<span class="t-k">let</span>   empty = <span class="t-k">none</span>           <span class="t-c"># none literal</span></code></pre>
-                </div>
-
-                <div class="callout info">
-                    <span class="callout-tag">INFO</span>
-                    <span>Origin enforces strict typing. Use lowercase <code>true</code>, <code>false</code>, and <code>none</code> for literals. Reassigning a <code>const</code> at runtime will raise a <code>RuntimeError</code>.</span>
-                </div>
+            <section id="variables">
+                <h2>Variables & Data</h2>
+                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. All declarations must include an explicit type annotation.</p>
+                <pre><code>let   x: int    = 10         # typed declaration
+let   name: str = "Origin"
+let   flag: bool   = true       # boolean type (lowercase)
+const pi: float = 3.14159    # immutable reference</code></pre>
             </section>
 
-            <hr class="divider">
-
-            <!-- ── DATA STRUCTURES ── -->
-            <section id="data-structures" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Data Structures</h2>
-                </div>
-                <div class="section-divider"></div>
+            <section id="data-structures" style="margin-top: 4rem;">
+                <h2>Data Structures</h2>
                 <p>Origin supports native <code>lists</code>, <code>dictionaries</code>, and <code>tuples</code> for complex data management.</p>
+                <pre><code># Lists
+let my_list: list = [1, 2, 3]
+print my_list[0]            # indexing starts at 0
 
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">data.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-c"># Lists</span>
-<span class="t-k">let</span> my_list: <span class="t-k">list</span> = [<span class="t-n">1</span>, <span class="t-n">2</span>, <span class="t-n">3</span>]
-<span class="t-k">print</span> my_list[<span class="t-n">0</span>]            <span class="t-c"># indexing starts at 0</span>
-
-<span class="t-c"># Dictionaries</span>
-<span class="t-k">let</span> my_dict: <span class="t-k">dict</span> = {<span class="t-s">"a"</span>: <span class="t-n">1</span>, <span class="t-s">"b"</span>: <span class="t-n">2</span>}
-<span class="t-k">print</span> my_dict{<span class="t-s">"a"</span>}           <span class="t-c"># dictionary access uses { }</span>
-
-<span class="t-c"># Tuples</span>
-<span class="t-k">let</span> my_tuple: <span class="t-k">tuple</span> = (<span class="t-n">10</span>, <span class="t-n">20</span>, <span class="t-n">30</span>)
-<span class="t-k">print</span> my_tuple[<span class="t-n">1</span>]</code></pre>
-                </div>
+# Dictionaries
+let my_dict: dict = {"a": 1, "b": 2}
+print my_dict{"a"}           # dictionary access uses { }</code></pre>
             </section>
 
-            <!-- ── HARDWARE CONTROL ── -->
-            <section id="servo" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Hardware Control</h2>
-                    <span class="badge">Safety Updated</span>
-                </div>
-                <div class="section-divider"></div>
-                <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Origin provides first-class support for Raspberry Pi GPIO and ServoKit (PCA9685) devices.</p>
+            <section id="servo" style="margin-top: 4rem;">
+                <h2>Hardware Control</h2>
+                <p>Low-level hardware interaction is handled through the global <code>set</code> namespace. Origin provides first-class support for Raspberry Pi GPIO and ServoKit (PCA9685).</p>
+                <pre><code># Modern dot-notation
+set servo.angle 1, 90       # Set servo 1 to 90 degrees
+set pin 12, 1               # BCM pin 12 Output High
 
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">hardware.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-c"># Modern dot-notation</span>
-<span class="t-k">set</span> servo.angle <span class="t-n">1</span>, <span class="t-n">90</span>       <span class="t-c"># Set servo 1 to 90 degrees</span>
-<span class="t-k">set</span> pin <span class="t-n">12</span>, <span class="t-n">1</span>               <span class="t-c"># BCM pin 12 Output High</span>
-
-<span class="t-c"># Clamping example</span>
-<span class="t-k">set</span> servo.angle <span class="t-n">0</span>, <span class="t-n">250</span>      <span class="t-c"># Automatically clamped to 180</span></code></pre>
-                </div>
-
-                <div class="callout warn">
-                    <span class="callout-tag">HARDWARE SAFETY</span>
-                    <span>Servos now automatically clamp angles to the <b>[0, 180]</b> range to prevent physical damage. A console warning is issued if a value is clamped at runtime.</span>
-                </div>
+# Clamping example
+set servo.angle 0, 250      # Automatically clamped to 180</code></pre>
             </section>
 
-            <hr class="divider">
+            <section id="modules" style="margin-top: 4rem;">
+                <h2>Module System</h2>
+                <p>The <code>import</code> statement in Origin currently functions as a Header Inclusion mechanism.</p>
+                <pre><code>import more_logic           # Prepends more_logic.or to this file
+from math import sqrt       # Direct inclusion from standard libraries
 
-            <!-- ── MODULES ── -->
-            <section id="v1-5-imports" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Module System</h2>
-                    <span class="badge">v1.7 Logic</span>
-                </div>
-                <div class="section-divider"></div>
-                <p>The <code>import</code> statement in Origin currently functions as a <b>Header Inclusion</b> mechanism. Importing a file effectively prepends its entire content to the beginning of the current script during processing.</p>
-
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">main.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-k">import</span> more_logic           <span class="t-c"># Prepends more_logic.or to this file</span>
-<span class="t-k">from</span> math <span class="t-k">import</span> sqrt       <span class="t-c"># Direct inclusion from standard libraries</span>
-
-<span class="t-k">let</span> x: <span class="t-k">float</span> = <span class="t-fn">sqrt</span>(<span class="t-n">16</span>)</code></pre>
-                </div>
+let x: float = sqrt(16)</code></pre>
             </section>
 
-            <hr class="divider">
-
-            <!-- ── RAW PYTHON ── -->
-            <section id="raw-python" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Raw Python Blocks</h2>
-                    <span class="badge">New in v1.7.5</span>
-                </div>
-                <div class="section-divider"></div>
-                <p>Embed raw Python code directly into Origin scripts using the <code>py { ... }</code> syntax. This allows for seamless integration with existing Python libraries.</p>
-
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">interop.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-k">py</span> {
-    <span class="t-k">import</span> math
-    <span class="t-k">for</span> i <span class="t-k">in</span> range(<span class="t-n">5</span>):
-        <span class="t-k">print</span>(<span class="t-s">"Python depth:"</span>, math.sin(i))
+            <section id="raw-python" style="margin-top: 4rem;">
+                <h2>Raw Python Blocks</h2>
+                <p>Embed raw Python code directly into Origin scripts using the <code>py { ... }</code> syntax.</p>
+                <pre><code>py {
+    import math
+    for i in range(5):
+        print("Python depth:", math.sin(i))
 }</code></pre>
-                </div>
             </section>
 
-            <!-- ── ERROR HANDLING ── -->
-            <section id="error-handling" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Error Handling</h2>
-                    <span class="badge">Stable</span>
-                </div>
-                <div class="section-divider"></div>
-                <p>Origin provides a robust mechanism for catching and handling runtime exceptions using <code>try</code>, <code>except</code>, and <code>else</code> blocks. This ensures hardware controller logic can fail gracefully without crashing the entire system.</p>
-
-                <div class="doc-code-block">
-                    <div class="doc-code-header">
-                        <span class="doc-code-filename">safety.org</span>
-                        <span class="doc-code-lang">origin</span>
-                    </div>
-                    <pre><code><span class="t-k">try</span> {
-    <span class="t-c"># Attempt a hardware command</span>
-    <span class="t-k">set</span> servo.angle <span class="t-n">15</span>, <span class="t-n">45</span>
-} <span class="t-k">except</span> {
-    <span class="t-k">print</span> <span class="t-s">"Hardware error caught!"</span>
-} <span class="t-k">else</span> {
-    <span class="t-k">print</span> <span class="t-s">"Command successful."</span>
+            <section id="error-handling" style="margin-top: 4rem;">
+                <h2>Error Handling</h2>
+                <p>Origin provides a robust mechanism for catching and handling runtime exceptions using <code>try</code>, <code>except</code>, and <code>else</code> blocks.</p>
+                <pre><code>try {
+    # Attempt a hardware command
+    set servo.angle 15, 45
+} except {
+    print "Hardware error caught!"
+} else {
+    print "Command successful."
 }</code></pre>
-                </div>
-
-                <div class="callout info">
-                    <span class="callout-tag">INFO</span>
-                    <span>The <code>except</code> block catches all standard runtime exceptions. The <code>else</code> block is optional and executes only if no exception was raised in the <code>try</code> block.</span>
-                </div>
             </section>
 
-            <hr class="divider">
-
-            <!-- ── ROADMAP ── -->
-            <section id="roadmap" class="doc-section">
-                <div class="doc-section-header">
-                    <h2>Language Roadmap</h2>
-                    <span class="badge">Coming Soon</span>
-                </div>
-                <div class="section-divider"></div>
-                <p>The following keywords and constructs are currently reserved in the lexer and are scheduled for implementation in upcoming releases.</p>
-
-                <div class="doc-table-wrap">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Construct</th>
-                                <th>Keywords</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pattern Matching</td>
-                                <td><code>match</code>, <code>case</code></td>
-                                <td style="color: var(--accent-secondary);">In Development</td>
-                            </tr>
-                            <tr>
-                                <td>Data Structures</td>
-                                <td><code>struct</code>, <code>enum</code></td>
-                                <td style="color: var(--accent-secondary);">In Development</td>
-                            </tr>
-                            <tr>
-                                <td>Async I/O</td>
-                                <td><code>async</code>, <code>await</code></td>
-                                <td style="color: var(--accent-secondary);">Planned</td>
-                            </tr>
-                            <tr>
-                                <td>Metaprogramming</td>
-                                <td><code>macro</code>, <code>inline</code></td>
-                                <td style="color: var(--accent-secondary);">Planned</td>
-                            </tr>
-                            <tr>
-                                <td>Extended Loops</td>
-                                <td><code>until</code>, <code>loop</code>, <code>do</code></td>
-                                <td style="color: var(--accent-secondary);">Planned</td>
-                            </tr>
-                        </tbody>
+            <section id="roadmap" style="margin-top: 4rem;">
+                <h2>Language Roadmap</h2>
+                <p>The following constructs are currently reserved and scheduled for implementation.</p>
+                <div class="feature-card" style="padding: 1.5rem; margin-top: 1rem;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <th style="text-align: left; padding: 0.5rem;">Construct</th>
+                            <th style="text-align: left; padding: 0.5rem;">Status</th>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.5rem;">Pattern Matching</td>
+                            <td style="padding: 0.5rem; color: var(--text-muted);">In Development</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid var(--border);">
+                            <td style="padding: 0.5rem;">Data Structures (Struct/Enum)</td>
+                            <td style="padding: 0.5rem; color: var(--text-muted);">In Development</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 0.5rem;">Async I/O</td>
+                            <td style="padding: 0.5rem; color: var(--text-muted);">Planned</td>
+                        </tr>
                     </table>
                 </div>
             </section>
-
         </main>
     </div>
 
-    <script>
-        const sections = document.querySelectorAll('.doc-section[id]');
-        const navLinks = document.querySelectorAll('.docs-sidebar a');
+    <footer>
+        <div class="container footer-container">
+            <div class="logo" style="font-size: 1rem;">Origin</div>
+            <div class="copyright">© 2026 Origin Organization</div>
+        </div>
+    </footer>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(a => a.classList.remove('active'));
-                    const active = document.querySelector(`.docs-sidebar a[href="#${entry.target.id}"]`);
-                    if (active) active.classList.add('active');
-                }
-            });
-        }, { rootMargin: '-15% 0px -75% 0px' });
-
-        sections.forEach(s => observer.observe(s));
-    </script>
+    <script src="main.js"></script>
 </body>
-
 </html>

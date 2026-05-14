@@ -1,104 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origin — Tutorials</title>
+    <title>Origin Tutorials — Learn by Building</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+
     <nav>
-        <div class="logo">ORIGIN.ORG</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Origin</a></li>
-            <li><a href="osf.html">Origin SF</a></li>
-            <li><a href="docs.html">Docs</a></li>
-            <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
-            <li><a href="tutorials.html">Tutorials</a></li>
-            <li><a href="community.html">Community</a></li>
-        </ul>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="tutorials.html" class="active">Tutorials</a></li>
+                <li><a href="osf.html">Origin SF</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <section class="hero">
-        <div class="glow-point" style="top: 10%; right: 20%;"></div>
-        
-        <div class="hero-content">
-            <div class="label">Step-by-Step Guides</div>
-            <h1>Learning <span class="highlight">Origin</span></h1>
-            <p class="description">Master the fundamentals and advanced hardware control techniques with our curated tutorials.</p>
+    <header class="hero" style="padding-bottom: 4rem;">
+        <div class="container">
+            <h1>Tutorials</h1>
+            <p>Step-by-step guides to help you master hardware control with Origin.</p>
+        </div>
+    </header>
 
-            <div class="actions">
-                <a href="docs.html" class="btn btn-primary">Reference Manual</a>
-            </div>
-
-            <div class="spacer" style="height: 4rem;"></div>
-
-            <!-- GETTING STARTED -->
-            <div class="glass" style="padding: 3rem; border-radius: 12px; margin-bottom: 2rem;">
-                <h2 style="margin-bottom: 1.5rem;">01. Getting Started</h2>
-                <div class="doc-code-block">
-                    <pre><code><span class="t-c"># Your first Origin program</span>
-<span class="t-k">let</span> greeting: <span class="t-k">str</span> = <span class="t-s">"Hello, Origin!"</span>
-<span class="t-k">print</span> greeting</code></pre>
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h3>Quick Start</h3>
+                    <p>Get up and running with your first Origin script in under 5 minutes.</p>
+                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Guide</a>
                 </div>
-                <ul style="list-style: none; color: var(--text-muted); line-height: 2.2; font-size: 0.95rem;">
-                    <li><span style="color: var(--accent-secondary);">•</span> Clone the repository from GitHub.</li>
-                    <li><span style="color: var(--accent-secondary);">•</span> Set up <strong>Python 3.x</strong> on your Raspberry Pi or PC.</li>
-                    <li><span style="color: var(--accent-secondary);">•</span> Save your script with a <code>.or</code> extension.</li>
-                    <li><span style="color: var(--accent-secondary);">•</span> Run via: <code>python ORIGIN_CODE/runner.py your_script.or</code></li>
-                </ul>
-            </div>
-
-            <!-- HARDWARE CONTROL -->
-            <div class="glass" style="padding: 3rem; border-radius: 12px; margin-bottom: 2rem;">
-                <h2 style="margin-bottom: 1.5rem;">02. Fast Hardware Control</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Origin is optimized for PCA9685 ServoKit and GPIO management.</p>
-                <div class="doc-code-block">
-                    <pre><code><span class="t-c"># Sweep servo 0 from 0 to 180</span>
-<span class="t-k">for</span> angle <span class="t-k">in</span> range(<span class="t-n">0</span>, <span class="t-n">181</span>) {
-    <span class="t-k">set</span> servo.angle <span class="t-n">0</span>, angle
-}
-
-<span class="t-c"># Safety: 250 will be clamped to 180 automatically</span>
-<span class="t-k">set</span> servo.angle <span class="t-n">0</span>, <span class="t-n">250</span></code></pre>
+                <div class="feature-card">
+                    <span class="feature-icon">🦾</span>
+                    <h3>Servo Control</h3>
+                    <p>Learn how to precisely control servos using Origin's safety features.</p>
+                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Guide</a>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">💻</span>
+                    <h3>Python Interop</h3>
+                    <p>Master the <code>py</code> block to use advanced Python libraries in Origin.</p>
+                    <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Guide</a>
                 </div>
             </div>
-
-            <!-- ERROR HANDLING -->
-            <div class="glass" style="padding: 3rem; border-radius: 12px; margin-bottom: 2rem;">
-                <h2 style="margin-bottom: 1.5rem;">03. Robust Error Handling</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Use try-except blocks to catch runtime interruptions.</p>
-                <div class="doc-code-block">
-                    <pre><code><span class="t-k">try</span> {
-    <span class="t-k">import</span> imaginary_module
-} <span class="t-k">except</span> {
-    <span class="t-k">print</span> <span class="t-s">"Warning: Module not found, using fallback."</span>
-} <span class="t-k">else</span> {
-    <span class="t-k">print</span> <span class="t-s">"Initalized successfully!"</span>
-}</code></pre>
-                </div>
-            </div>
-
-            <!-- ADVANCED TOPICS -->
-            <div class="features-grid" style="background: transparent; border: none; margin-top: 2rem;">
-                <div class="feature glass" style="border-radius: 8px;">
-                    <h3>Parallelism</h3>
-                    <p><code>parallel (4) { ... }</code> runs logic across multiple CPU threads natively.</p>
-                </div>
-                <div class="feature glass" style="border-radius: 8px;">
-                    <h3>Python Blocks</h3>
-                    <p><code>py { ... }</code> lets you drop into raw Python for specific library access.</p>
-                </div>
-                <div class="feature glass" style="border-radius: 8px;">
-                    <h3>Typed Classes</h3>
-                    <p><code>class Robot(name) { ... }</code> for structured, object-oriented logic.</p>
-                </div>
-            </div>
-
         </div>
     </section>
-</body>
 
+    <footer>
+        <div class="container footer-container">
+            <div class="logo" style="font-size: 1rem;">Origin</div>
+            <div class="copyright">© 2026 Origin Organization</div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
 </html>
