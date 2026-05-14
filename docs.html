@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Origin Documentation — Reference</title>
+    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.5. Covers syntax, data types, control flow, functions, classes, hardware control, and more.">
+    <title>Origin Documentation — Complete Reference</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">Origin</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="docs.html" class="active">Docs</a></li>
+                <li><a href="docs.html">Docs</a></li>
                 <li><a href="tutorials.html">Tutorials</a></li>
                 <li><a href="download.html">Download</a></li>
                 <li><a href="osf.html">Origin SF</a></li>
@@ -25,123 +25,682 @@
     <div class="docs-layout">
         <aside class="docs-sidebar">
             <div class="sidebar-group">
-                <span class="sidebar-label">Fundamentals</span>
+                <span class="sidebar-label">Basics</span>
                 <ul>
-                    <li><a href="#variables">Variables & Constants</a></li>
-                    <li><a href="#scopes">Scope Management</a></li>
-                    <li><a href="#data-structures">Data Structures</a></li>
+                    <li><a href="#comments">Comments</a></li>
+                    <li><a href="#data-types">Data Types</a></li>
+                    <li><a href="#variables">Variables &amp; Constants</a></li>
+                    <li><a href="#operators">Operators</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-group">
+                <span class="sidebar-label">Structures</span>
+                <ul>
+                    <li><a href="#data-structures">Lists, Tuples &amp; Dicts</a></li>
                     <li><a href="#control-flow">Control Flow</a></li>
                     <li><a href="#functions">Functions</a></li>
+                    <li><a href="#classes">Classes</a></li>
                 </ul>
             </div>
-
             <div class="sidebar-group">
-                <span class="sidebar-label">Hardware & I/O</span>
+                <span class="sidebar-label">Runtime</span>
                 <ul>
-                    <li><a href="#hardware">Hardware Control</a></li>
+                    <li><a href="#scopes">Scope Management</a></li>
                     <li><a href="#io">Input / Output</a></li>
+                    <li><a href="#builtins">Built-in Functions</a></li>
+                    <li><a href="#range">Range</a></li>
                 </ul>
             </div>
-
             <div class="sidebar-group">
                 <span class="sidebar-label">Advanced</span>
                 <ul>
+                    <li><a href="#parallel">Parallel Execution</a></li>
                     <li><a href="#modules">Module System</a></li>
-                    <li><a href="#binary">Binary Builder</a></li>
+                    <li><a href="#hardware">Hardware Control</a></li>
+                    <li><a href="#protocols">Hardware Protocols</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-group">
+                <span class="sidebar-label">Tooling</span>
+                <ul>
                     <li><a href="#raw-python">Raw Python</a></li>
+                    <li><a href="#binary">Binary Builder</a></li>
                     <li><a href="#error-handling">Error Handling</a></li>
+                    <li><a href="#exec">Exec</a></li>
                 </ul>
             </div>
         </aside>
 
         <main class="docs-content">
-            <header class="docs-header">
+            <div class="docs-header">
                 <h1>Documentation</h1>
                 <p class="subtitle">Complete reference for the Origin programming language v1.7.5.</p>
-            </header>
+            </div>
 
-            <section id="variables">
-                <h2>Variables & Constants</h2>
-                <p>Variables in Origin are block-scoped and declared with the <code>let</code> keyword. All declarations must include an explicit type annotation. Constants use the <code>const</code> keyword and cannot be reassigned.</p>
-                <pre><code>let   x: int    = 10         # typed declaration
-let   name: str = "Origin"
-let   flag: bool   = true       # boolean type
-const pi: float = 3.14159    # immutable reference</code></pre>
+            <!-- ============================================================ -->
+            <!-- COMMENTS                                                      -->
+            <!-- ============================================================ -->
+            <section id="comments">
+                <h2>Comments</h2>
+                <p>Origin uses <code>#</code> for single-line comments. Everything after the <code>#</code> on that line is ignored by the lexer.</p>
+<pre><code># This is a comment
+let x: int = 10  # inline comment
+
+# Multi-line comments are just
+# multiple single-line comments</code></pre>
             </section>
 
-            <section id="scopes" style="margin-top: 4rem;">
-                <h2>Scope Management</h2>
-                <p>Origin uses robust lexical scoping. Variables declared inside a function are local to that function. To modify a global variable, use the <code>global</code> keyword.</p>
-                <pre><code>let x = 10
+            <!-- ============================================================ -->
+            <!-- DATA TYPES                                                    -->
+            <!-- ============================================================ -->
+            <section id="data-types">
+                <h2>Data Types</h2>
+                <p>Origin supports the following primitive data types. Type annotations are used with <code>let</code> and <code>const</code> declarations.</p>
 
-def update() {
-    global x
-    x = 20  # Modifies global x
+                <h3>Integers</h3>
+                <p>Whole numbers. Origin also supports hexadecimal literals with the <code>0x</code> prefix.</p>
+<pre><code>let x: int = 42
+let addr: int = 0x48      # hex literal → 72
+let negative: int = -10</code></pre>
+
+                <h3>Floats</h3>
+                <p>Decimal numbers.</p>
+<pre><code>let pi: float = 3.14159
+let temp: float = 98.6</code></pre>
+
+                <h3>Strings</h3>
+                <p>Text values wrapped in double or single quotes. Escape sequences like <code>\"</code>, <code>\'</code>, and <code>\n</code> are supported.</p>
+<pre><code>let name: str = "Origin"
+let msg: str = 'Hello World'
+let escaped: str = "He said \"hi\""</code></pre>
+
+                <h3>Booleans</h3>
+                <p>Logical true/false values using the keywords <code>true</code> and <code>false</code>.</p>
+<pre><code>let active: bool = true
+let done: bool = false</code></pre>
+
+                <h3>None</h3>
+                <p>Represents the absence of a value.</p>
+<pre><code>let empty = none</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- VARIABLES & CONSTANTS                                         -->
+            <!-- ============================================================ -->
+            <section id="variables">
+                <h2>Variables &amp; Constants</h2>
+                <p>Variables are declared with <code>let</code> and can include an optional type annotation. Constants use <code>const</code> and cannot be reassigned after declaration.</p>
+<pre><code># Variable with type annotation
+let x: int = 10
+let name: str = "Origin"
+let flag: bool = true
+
+# Variable without type (inferred)
+let count = 0
+
+# Constants — immutable after assignment
+const PI: float = 3.14159
+const VERSION: str = "1.7.5"
+const MAX_SERVOS: int = 6
+
+# Reassignment
+x = 20          # OK
+# PI = 3.0      # ERROR: Cannot reassign constant</code></pre>
+
+                <h3>Compound Assignment</h3>
+                <p>Origin supports shorthand assignment operators for arithmetic updates.</p>
+<pre><code>let score: int = 100
+score += 10    # score is now 110
+score -= 5     # score is now 105
+score *= 2     # score is now 210
+score /= 7     # score is now 30
+score %= 4     # score is now 2</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- OPERATORS                                                     -->
+            <!-- ============================================================ -->
+            <section id="operators">
+                <h2>Operators</h2>
+
+                <h3>Arithmetic</h3>
+<pre><code>let a = 10 + 3     # 13  (addition)
+let b = 10 - 3     # 7   (subtraction)
+let c = 10 * 3     # 30  (multiplication)
+let d = 10 / 3     # 3.33 (division)
+let e = 10 // 3    # 3   (floor division)
+let f = 10 % 3     # 1   (modulo)
+let g = 2 ** 8     # 256 (exponentiation)</code></pre>
+
+                <h3>Comparison</h3>
+<pre><code>x == y     # equal
+x != y     # not equal
+x &lt; y      # less than
+x &gt; y      # greater than
+x &lt;= y     # less or equal
+x &gt;= y     # greater or equal</code></pre>
+
+                <h3>Logical</h3>
+<pre><code># Word-style
+if x &gt; 0 and y &gt; 0 { ... }
+if x &gt; 0 or y &gt; 0 { ... }
+if not done { ... }
+
+# Symbol-style (also valid)
+if x &gt; 0 &amp;&amp; y &gt; 0 { ... }
+if x &gt; 0 || y &gt; 0 { ... }
+if !done { ... }</code></pre>
+
+                <h3>Unary</h3>
+<pre><code>let neg = -x       # negation
+x++                # increment
+x--                # decrement</code></pre>
+
+                <h3>Smart String Concatenation</h3>
+                <p>The <code>+</code> operator automatically converts to strings when either side is a string. No manual casting required.</p>
+<pre><code>let age: int = 17
+print "I am " + age + " years old"
+# Output: I am 17 years old</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- DATA STRUCTURES                                               -->
+            <!-- ============================================================ -->
+            <section id="data-structures">
+                <h2>Lists, Tuples &amp; Dictionaries</h2>
+
+                <h3>Lists</h3>
+                <p>Ordered, mutable collections. Supports indexing and index assignment.</p>
+<pre><code>let numbers: list = [1, 2, 3, 4, 5]
+let mixed = ["hello", 42, true]
+
+# Access by index
+print numbers[0]       # 1
+
+# Assign by index
+numbers[2] = 99
+
+# Multi-line declaration
+let servo_names: list = [
+    "left_shoulder",
+    "left_elbow",
+    "right_shoulder",
+    "right_elbow"
+]
+
+# call syntax for list access
+let val = call[numbers, 0]</code></pre>
+
+                <h3>Tuples</h3>
+                <p>Ordered, immutable collections created with parentheses and commas.</p>
+<pre><code>let point = (10, 20)
+let rgb = (255, 128, 0)</code></pre>
+
+                <h3>Dictionaries</h3>
+                <p>Key-value stores using curly braces.</p>
+<pre><code>let config: dict = {
+    "speed": 100,
+    "direction": "forward",
+    "active": true
 }
 
-def local_test() {
-    let x = 30 # Local x, doesn't affect global
+# Access
+print config["speed"]
+
+# Nested structures
+let agents: list = [
+    {"id": 0, "status": "active"},
+    {"id": 1, "status": "idle"}
+]</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- CONTROL FLOW                                                  -->
+            <!-- ============================================================ -->
+            <section id="control-flow">
+                <h2>Control Flow</h2>
+
+                <h3>If / Elif / Else</h3>
+                <p>Conditional branching. Bodies use curly braces <code>{ }</code>.</p>
+<pre><code>let temp: int = 75
+
+if temp &gt; 100 {
+    print "Too hot!"
+} elif temp &gt; 50 {
+    print "Just right"
+} else {
+    print "Too cold"
+}</code></pre>
+
+                <h3>While Loops</h3>
+                <p>Repeat a block while a condition is true.</p>
+<pre><code>let count: int = 0
+while count &lt; 5 {
+    print "Count: " + count
+    count = count + 1
+}</code></pre>
+
+                <h3>For Loops</h3>
+                <p>Iterate over a range or any iterable.</p>
+<pre><code># Iterate over a range
+for i in range(0, 10) {
+    print i
+}
+
+# Iterate over a list
+let colors: list = ["red", "green", "blue"]
+for color in colors {
+    print color
+}</code></pre>
+
+                <h3>Break &amp; Continue</h3>
+                <p>Control loop execution flow.</p>
+<pre><code>let i: int = 0
+while i &lt; 100 {
+    if i == 10 {
+        break          # exit the loop entirely
+    }
+    if i % 2 == 0 {
+        i = i + 1
+        continue       # skip to next iteration
+    }
+    print i
+    i = i + 1
+}</code></pre>
+
+                <h3>Pass</h3>
+                <p>A no-op placeholder for empty blocks.</p>
+<pre><code>def placeholder() {
+    pass
 }</code></pre>
             </section>
 
-            <section id="hardware" style="margin-top: 4rem;">
-                <h2>Hardware Control</h2>
-                <p>Origin provides first-class support for robotics hardware. The <code>set</code> namespace handles pins and servos with native safety clamping (0-180°).</p>
-                <pre><code>set servo.angle 1, 90       # Set servo 1 to 90°
-set pin 12, 1               # BCM pin 12 Output High
+            <!-- ============================================================ -->
+            <!-- FUNCTIONS                                                     -->
+            <!-- ============================================================ -->
+            <section id="functions">
+                <h2>Functions</h2>
+                <p>Define reusable blocks of code with <code>def</code>. Functions use curly-brace blocks and support parameters and return values.</p>
+<pre><code>def greet(name) {
+    print "Hello, " + name + "!"
+}
 
-# Clamping example
-set servo.angle 0, 250      # Automatically clamped to 180°</code></pre>
+greet("Origin")
+# Output: Hello, Origin!</code></pre>
+
+                <h3>Return Values</h3>
+<pre><code>def add(a, b) {
+    return a + b
+}
+
+let result = add(10, 20)
+print result    # 30</code></pre>
+
+                <h3>Recursion</h3>
+<pre><code>def factorial(n) {
+    if n &lt;= 1 {
+        return 1
+    }
+    return n * factorial(n - 1)
+}
+
+print factorial(5)    # 120</code></pre>
+
+                <h3>Multi-line Parameters</h3>
+                <p>Function definitions and calls support flexible newlines.</p>
+<pre><code>def calculate(
+    x,
+    y,
+    z
+) {
+    return x + y + z
+}
+
+let val = calculate(
+    10,
+    20,
+    30
+)</code></pre>
             </section>
 
-            <section id="modules" style="margin-top: 4rem;">
+            <!-- ============================================================ -->
+            <!-- CLASSES                                                       -->
+            <!-- ============================================================ -->
+            <section id="classes">
+                <h2>Classes</h2>
+                <p>Origin supports class definitions with constructor fields, methods with <code>self</code>, and attribute access via dot notation.</p>
+<pre><code>class Drone(x, y) {
+    def setPos(self, nx, ny) {
+        self.x = nx
+        self.y = ny
+    }
+
+    def show(self, label) {
+        print label
+        print self.x
+        print self.y
+    }
+}
+
+# Create instance
+let d = Drone()
+d.x = 100
+d.y = 200
+d.show("Position:")
+
+# Update via method
+d.setPos(500, 600)
+d.show("Updated:")</code></pre>
+
+                <h3>Attribute Access</h3>
+                <p>Read and write object attributes with dot notation.</p>
+<pre><code># Read
+print d.x
+
+# Write
+d.x = 999
+
+# Chained access
+print obj.nested.value</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- SCOPE MANAGEMENT                                              -->
+            <!-- ============================================================ -->
+            <section id="scopes">
+                <h2>Scope Management</h2>
+                <p>Origin uses lexical scoping. Variables declared with <code>let</code> inside a function are local. To modify a variable from an outer scope, use <code>global</code>.</p>
+<pre><code>let x = 10
+
+def local_test() {
+    let x = 20          # local x — doesn't touch global
+    print x             # 20
+}
+
+def global_test() {
+    global x            # declares intent to modify global x
+    x = 30
+}
+
+local_test()
+print x                 # still 10
+
+global_test()
+print x                 # now 30</code></pre>
+
+                <h3>Constant Isolation</h3>
+                <p>Constants declared inside a function do not leak to the outer scope.</p>
+<pre><code>const y = "Global Constant"
+
+def test_const() {
+    const y = 100       # local constant
+    print y             # 100
+}
+
+test_const()
+print y                 # "Global Constant"</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- INPUT / OUTPUT                                                -->
+            <!-- ============================================================ -->
+            <section id="io">
+                <h2>Input / Output</h2>
+
+                <h3>Print</h3>
+                <p><code>print</code> is a statement in Origin — no parentheses needed. It takes a single expression.</p>
+<pre><code>print "Hello, World!"
+print 42
+print "Result: " + result</code></pre>
+
+                <h3>Input</h3>
+                <p><code>input</code> reads a line from the user. Provide an optional prompt string (no parentheses needed).</p>
+<pre><code>let name: str = input "What is your name? "
+print "Hello, " + name
+
+# Cast to number
+let age: int = int(input "Enter your age: ")</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- BUILT-IN FUNCTIONS                                            -->
+            <!-- ============================================================ -->
+            <section id="builtins">
+                <h2>Built-in Functions</h2>
+                <p>Origin provides several built-in functions available without imports.</p>
+
+                <h3>Math</h3>
+<pre><code>let root = sqrt(16.0)          # 4.0
+let r = rand_num(1, 100)       # random int between 1 and 100</code></pre>
+
+                <h3>Collections</h3>
+<pre><code>let items = [1, 2, 3, 4, 5]
+print len(items)               # 5</code></pre>
+
+                <h3>Type Casting</h3>
+                <p>Convert between types using the type name as a function.</p>
+<pre><code>let s: str = "123"
+let n: int = int(s)            # 123
+
+let x: int = 42
+let text: str = str(x)         # "42"
+
+let f: float = float("3.14")  # 3.14
+let b: bool = bool(1)          # true</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- RANGE                                                         -->
+            <!-- ============================================================ -->
+            <section id="range">
+                <h2>Range</h2>
+                <p>Generate a sequence of integers from <code>start</code> (inclusive) to <code>end</code> (exclusive). Commonly used with <code>for</code> loops.</p>
+<pre><code># range(start, end)
+for i in range(0, 5) {
+    print i
+}
+# Output: 0 1 2 3 4
+
+# Use with variables
+let count: int = 10
+for i in range(0, count) {
+    print "Step " + i
+}</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- PARALLEL EXECUTION                                            -->
+            <!-- ============================================================ -->
+            <section id="parallel">
+                <h2>Parallel Execution</h2>
+                <p>Origin has native threading support with the <code>parallel</code> keyword. Each statement in the block runs on its own thread.</p>
+
+                <h3>Auto-parallel</h3>
+                <p>Without a thread count, each statement in the block gets its own thread.</p>
+<pre><code>parallel {
+    step(0)    # runs on thread 1
+    step(1)    # runs on thread 2
+}
+# Both threads are joined before continuing</code></pre>
+
+                <h3>Fixed Thread Count</h3>
+                <p>Specify the number of threads to spawn. The entire block runs on each thread.</p>
+<pre><code>parallel (4) {
+    print "Worker running"
+    process_data()
+}
+# Spawns 4 threads, each running the full block</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- MODULE SYSTEM                                                 -->
+            <!-- ============================================================ -->
+            <section id="modules">
                 <h2>Module System</h2>
-                <p>Origin features a formal module system with clean namespacing. You can import other <code>.or</code> files using <code>import</code> and <code>as</code>.</p>
-                <pre><code>import math_utils as mu
-from hardware import read_sensor
+                <p>Origin supports importing other <code>.or</code> files as modules. Imported modules are automatically transpiled and cached in <code>__origin_cache__/</code>.</p>
 
-print mu.square(16)
-let val = read_sensor(1)</code></pre>
+                <h3>Basic Import</h3>
+<pre><code>import math_utils
+print math_utils.square(4)     # 16</code></pre>
+
+                <h3>Import with Alias</h3>
+<pre><code>import math_utils as mu
+print mu.square(4)             # 16
+print mu.cube(3)               # 27</code></pre>
+
+                <h3>From Import</h3>
+<pre><code>from math_utils import square
+print square(5)                # 25</code></pre>
+
+                <h3>Python Library Imports</h3>
+                <p>You can also import standard Python libraries directly.</p>
+<pre><code>import math
+let val = math.cos(0)          # 1.0</code></pre>
             </section>
 
-            <section id="binary" style="margin-top: 4rem;">
+            <!-- ============================================================ -->
+            <!-- HARDWARE CONTROL                                              -->
+            <!-- ============================================================ -->
+            <section id="hardware">
+                <h2>Hardware Control</h2>
+                <p>Origin provides first-class support for robotics hardware. The <code>set</code> namespace handles servos and GPIO pins with native safety clamping (0–180°).</p>
+
+                <h3>Servo Control</h3>
+<pre><code># Set servo 1 to 90 degrees
+set servo.angle 1, 90
+
+# Safety clamping — values outside 0-180 are clamped automatically
+set servo.angle 0, 250    # clamped to 180°
+set servo.angle 2, -10    # clamped to 0°</code></pre>
+
+                <h3>GPIO Pin Control</h3>
+<pre><code># Set BCM pin 12 to HIGH
+set pin 12, 1
+
+# Set BCM pin 12 to LOW
+set pin 12, 0</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- HARDWARE PROTOCOLS                                            -->
+            <!-- ============================================================ -->
+            <section id="protocols">
+                <h2>Hardware Protocols</h2>
+                <p>Origin has built-in protocol primitives for I2C, SPI, and UART communication. These use dot-notation syntax and work natively on Raspberry Pi. On non-Pi systems, they simulate or fail gracefully.</p>
+
+                <h3>I2C</h3>
+<pre><code>let addr: int = 0x48
+let reg: int = 0x01
+
+# Read a byte
+let val: int = i2c.read(addr, reg)
+
+# Write a byte
+i2c.write(0x48, 0x01, 0xFF)</code></pre>
+
+                <h3>SPI</h3>
+<pre><code># Transfer data over SPI
+spi.transfer([0x01, 0x02, 0x03])</code></pre>
+
+                <h3>UART</h3>
+<pre><code># Write a string over UART
+uart.write("Hello UART")</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- RAW PYTHON                                                    -->
+            <!-- ============================================================ -->
+            <section id="raw-python">
+                <h2>Raw Python Blocks</h2>
+                <p>Embed raw Python code directly into Origin scripts using <code>py { }</code>. The code inside is passed through to the Python runtime verbatim. This gives you full access to Python's ecosystem.</p>
+<pre><code>py {
+    import math
+    print("Direct Python:", math.cos(0))
+
+    # Any valid Python works here
+    for i in range(3):
+        print(f"Python loop: {i}")
+}</code></pre>
+                <p>Variables defined in <code>py</code> blocks share the same runtime scope, so Origin variables are accessible inside and vice versa.</p>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- BINARY BUILDER                                                -->
+            <!-- ============================================================ -->
+            <section id="binary">
                 <h2>Binary Builder</h2>
-                <p>Origin can compile your scripts into standalone executables that run without needing Python or Origin installed.</p>
-                <pre><code># In your terminal:
+                <p>Origin can compile your scripts into standalone executables using PyInstaller. The resulting binary runs without needing Python or Origin installed on the target machine.</p>
+<pre><code># From your terminal:
 origin build my_robot.or
 
 # This produces:
-my_robot.exe</code></pre>
+# my_robot.exe (Windows)
+# my_robot     (Linux/Mac)</code></pre>
+                <p>The builder transpiles your Origin code to Python, bundles it with all dependencies, and creates a single-file executable. Imported <code>.or</code> modules are automatically included.</p>
             </section>
 
-            <section id="raw-python" style="margin-top: 4rem;">
-                <h2>Raw Python Blocks</h2>
-                <p>Embed raw Python code directly into Origin scripts using the <code>py { ... }</code> syntax for maximum library compatibility.</p>
-                <pre><code>py {
-    import math
-    print("Direct math access:", math.cos(0))
-}</code></pre>
-            </section>
-
-            <section id="error-handling" style="margin-top: 4rem;">
+            <!-- ============================================================ -->
+            <!-- ERROR HANDLING                                                -->
+            <!-- ============================================================ -->
+            <section id="error-handling">
                 <h2>Error Handling</h2>
-                <p>Use <code>try</code>, <code>except</code>, and <code>else</code> blocks to manage runtime hardware errors gracefully.</p>
-                <pre><code>try {
+                <p>Use <code>try</code>, <code>except</code>, and <code>else</code> blocks to catch and recover from runtime errors. Origin translates Python exceptions into friendly, human-readable messages.</p>
+
+                <h3>Basic Try/Except</h3>
+<pre><code>try {
     set servo.angle 5, 45
 } except {
     print "Servo connection failed"
 }</code></pre>
+
+                <h3>Try/Except/Else</h3>
+                <p>The <code>else</code> block runs only when no exception was raised.</p>
+<pre><code>try {
+    let val = i2c.read(0x48, 0x01)
+    print "Read: " + val
+} except {
+    print "Hardware read failed"
+} else {
+    print "Read completed successfully"
+}</code></pre>
+
+                <h3>Friendly Error Messages</h3>
+                <p>Origin automatically converts Python errors into clear messages:</p>
+<pre><code># NameError → "Unknown Variable: I don't recognize 'x'.
+#              Did you forget to define it with 'let'?"
+
+# ZeroDivisionError → "Math Error: You tried to divide
+#                       by zero! Math doesn't like that."
+
+# IndexError → "Range Error: You tried to access an item
+#               that doesn't exist in that List."
+
+# TypeError → "Type Mismatch: You're trying to add a
+#              Number to a Piece of Text."</code></pre>
             </section>
+
+            <!-- ============================================================ -->
+            <!-- EXEC                                                          -->
+            <!-- ============================================================ -->
+            <section id="exec">
+                <h2>Exec</h2>
+                <p>Run an external Origin file as a subprocess using the <code>exec</code> keyword.</p>
+<pre><code>exec "other_script.or"</code></pre>
+                <p>This spawns a separate process to run the target file. Useful for orchestrating multi-file workflows.</p>
+            </section>
+
         </main>
     </div>
 
     <footer>
         <div class="container footer-container">
-            <div class="logo" style="font-size: 1rem;">Origin</div>
-            <div class="copyright">© 2026 Origin Organization</div>
+            <ul class="footer-links">
+                <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
         </div>
     </footer>
-
-    <script src="main.js"></script>
 </body>
 </html>

@@ -203,11 +203,21 @@ pre {
     overflow-x: auto;
     font-family: var(--font-code);
     font-size: 0.9rem;
+    line-height: 1.7;
 }
 
 code {
     font-family: var(--font-code);
     font-size: 0.9em;
+}
+
+/* Inline code */
+p code, li code, h3 code {
+    background: var(--terminal-bg);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.15em 0.4em;
+    font-size: 0.85em;
 }
 
 /* --- Docs Layout --- */
@@ -273,17 +283,38 @@ code {
     margin-top: 0.5rem;
 }
 
+/* --- Docs Sections --- */
+section {
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
 section h2 {
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     letter-spacing: -0.02em;
+}
+
+section h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
 }
 
 section p {
     color: var(--text-muted);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-size: 1.05rem;
+    line-height: 1.7;
 }
 
 /* --- Footer --- */
@@ -326,4 +357,13 @@ footer {
     .hero { padding: 4rem 0; }
     .hero-actions { flex-direction: column; }
     .btn { width: 100%; justify-content: center; }
+    .docs-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    .docs-sidebar {
+        position: static;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 2rem;
+    }
 }
