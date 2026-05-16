@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin | Archives</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --card-bg: #ffffff;
+            --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --card-hover-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .archive-hero {
+            padding: 8rem 0 4rem;
+            background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+            text-align: center;
+        }
+
+        .archive-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+        }
+
+        .archive-hero p {
+            margin: 0 auto 3rem;
+        }
+
+        .version-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .version-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .version-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-hover-shadow);
+            border-color: var(--text);
+        }
+
+        .version-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .version-info h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .version-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            background: #f0f0f0;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        .version-date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .version-content {
+            display: grid;
+            grid-template-columns: 1fr 200px;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .version-description {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .version-description strong {
+            color: var(--text);
+        }
+
+        .version-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            background: var(--text);
+            color: var(--bg);
+            transition: opacity 0.2s;
+        }
+
+        .download-btn:hover {
+            opacity: 0.9;
+        }
+
+        .source-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            transition: all 0.2s;
+        }
+
+        .source-btn:hover {
+            border-color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .version-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .version-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .archive-hero {
+                padding: 6rem 0 3rem;
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="docs.html">Docs</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="download.html">Download</a></li>
+                <li><a href="osf.html">Origin SF</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <header class="archive-hero">
+            <div class="container">
+                <h1>Legacy Versions</h1>
+                <p class="subtitle">Access previous stable releases of the Origin toolchain. We recommend using the
+                    latest version for the best experience.</p>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="version-grid">
+                <!-- v1.7.6 -->
+                <div class="version-card">
+                    <div class="version-header">
+                        <div class="version-info">
+                            <h2>v1.7.6 <span class="version-tag">Stable</span></h2>
+                        </div>
+                        <span class="version-date">Released May 16, 2026</span>
+                    </div>
+                    <div class="version-content">
+                        <div class="version-description">
+                            The <strong>Origin v1.7.6 Release</strong> brings improved scope management, an integrated bytecode compiler, and bug fixes to the standard library.
+                        </div>
+                        <div class="version-actions">
+                            <a href="assets/OriginInstallerV1.7.6.zip" class="download-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Download .zip
+                            </a>
+                            <a href="https://github.com/boblio-max/origin/tree/v1.7.6" class="source-btn">Source
+                                Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- v1.7.5 -->
+                <div class="version-card">
+                    <div class="version-header">
+                        <div class="version-info">
+                            <h2>v1.7.5 <span class="version-tag">Stable</span></h2>
+                        </div>
+                        <span class="version-date">Released May 16, 2026</span>
+                    </div>
+                    <div class="version-content">
+                        <div class="version-description">
+                            The <strong>Stable Release</strong> of the <strong>Origin Programming Language</strong>.
+                            This release marks the start of the language, with the documentation and the compiler being
+                            released for the first time.
+                        </div>
+                        <div class="version-actions">
+                            <a href="assets/OriginInstallerV1.7.5.zip" class="download-btn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Download .zip
+                            </a>
+                            <a href="https://github.com/boblio-max/origin/tree/v1.7.5" class="source-btn">Source
+                                Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more versions here as they become legacy -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="logo">Origin</div>
+            <ul class="footer-links">
+                <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+            <div class="copyright">© 2026 Origin Organization</div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
