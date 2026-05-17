@@ -320,9 +320,14 @@ while i &lt; 100 {
             <!-- ============================================================ -->
             <section id="functions">
                 <h2>Functions</h2>
-                <p>Define reusable blocks of code with <code>def</code>. Functions use curly-brace blocks and support parameters and return values.</p>
+                <p>Define reusable blocks of code with <code>def</code> (or <code>func</code> as an alias). Functions use curly-brace blocks and support parameters and return values.</p>
 <pre><code>def greet(name) {
     print "Hello, " + name + "!"
+}
+
+# 'func' is also supported
+func welcome(name) {
+    print "Welcome, " + name
 }
 
 greet("Origin")
@@ -368,7 +373,7 @@ let val = calculate(
             <!-- ============================================================ -->
             <section id="classes">
                 <h2>Classes</h2>
-                <p>Origin supports class definitions with constructor fields, methods with <code>self</code>, and attribute access via dot notation.</p>
+                <p>Origin supports class definitions with constructor fields defined in parentheses, methods with <code>self</code>, and attribute access via dot notation.</p>
 <pre><code>class Drone(x, y) {
     def setPos(self, nx, ny) {
         self.x = nx
@@ -382,10 +387,8 @@ let val = calculate(
     }
 }
 
-# Create instance
-let d = Drone()
-d.x = 100
-d.y = 200
+# Create instance with initial values
+let d = Drone(100, 200)
 d.show("Position:")
 
 # Update via method
