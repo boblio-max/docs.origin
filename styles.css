@@ -367,3 +367,26 @@ footer {
         padding-bottom: 2rem;
     }
 }
+
+.hero-title {
+    display: flex;
+    font-size: 2.5rem;
+    align-items: center;
+}
+
+#typing-text {
+    white-space: nowrap;
+}
+
+/* Blinking cursor effect */
+.cursor {
+    font-weight: bold;
+    color: var(--accent-color, #fff); /* Change to your theme color */
+    animation: blink 0.75s step-end infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    from, to { color: transparent; }
+    50% { color: inherit; }
+}
