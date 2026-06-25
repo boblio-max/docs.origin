@@ -24,3 +24,17 @@ It contains:
 Open `index.html` to view the site locally.
 
 ### Current Version: v1.7.9
+
+The site tracks the latest stable Origin release. Download bundles live under `assets/`:
+
+- `OriginInstallerV1.7.9.zip` -- current stable (re-issued June 2026)
+- `OriginInstallerV1.7.8.zip`, `V1.7.7`, `V1.7.6`, `V1.7.5` -- legacy archives
+
+### Page map
+
+- `index.html` -- landing page (current version + terminal preview)
+- `docs.html` -- full language reference
+- `tutorials.html` -- guided learning cards
+- `download.html` -- installer quick-start
+- `archives.html` -- legacy version directory
+- `community.html`, `support.html`, `osf.html`, `others.html`, `logOr.html` -- supporting pages
