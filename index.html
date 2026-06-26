@@ -30,7 +30,7 @@
         <h1 align="left" class="hero-title">
             <span id="typing-text"></span><span class="cursor">|</span>
         </h1>
-        <p align="left">A hardware-first, domain-specific language built for robotics, AI, and low-latency systems. Expressive syntax meets reliable control.</p>
+        <p align="left">A hardware-first, domain-specific language built for robotics, AI, and low-latency systems. Expressive syntax meets reliable control. Now shipping standalone installers for Windows, macOS, and Linux.</p>
 
         <div class="hero-actions">
             <a href="download.html" class="btn btn-primary" align="left">Download v1.7.9</a>
@@ -73,6 +73,7 @@
                     <p style="margin-bottom: 0.5rem;"><strong>• Module System:</strong> Header-style inclusion (<code>import</code>) for script prepending.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Runtime Math:</strong> <code>sqrt</code> and <code>rand_num</code> now evaluated at execution time.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Rebuilt Installer (June 2026):</strong> The Windows binary has been recompiled against the v1.7.5 reference sources with the flat-layout imports normalized, so the released <code>origin.exe</code> no longer depends on the in-progress bytecode VM packages.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Cross-Platform Builds:</strong> Native installers are now produced for Windows (x64), macOS (universal: Apple Silicon + Intel), and Linux (x64 + Raspberry Pi). A new GitHub Actions matrix builds each platform's bundle with per-binary <code>SHA256SUMS</code> verification.</p>
                     <p><strong>• Coming Next (v1.8):</strong> A dedicated bytecode compiler and VM (<code>runnerByte.py</code>) is in active development on the <code>origin-dev</code> branch — it will replace the AST-to-Python interpreter behind the scenes while keeping the Origin surface stable.</p>
                 </div>
             </div>

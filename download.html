@@ -6,6 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Origin</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .platform-card {
+            background: var(--card-bg, #14161c);
+            border: 1px solid var(--border, #1f2128);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .platform-card h3 { margin-top: 0; }
+        .platform-card .btn { width: 100%; text-align: center; margin-top: 1rem; }
+        .platform-card pre {
+            background: #0d0f13;
+            border: 1px solid var(--border, #1f2128);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0 0;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
+        .platform-card code { color: var(--accent, #6ee7ff); }
+    </style>
 </head>
 
 <body>
@@ -25,39 +51,107 @@
 
     <header class="hero container">
         <h1>Install Origin.</h1>
-        <p>Start building intelligent systems today. Origin is available as a standalone toolchain for Windows. Linux
-            and macOS support coming soon.</p>
+        <p>Start building intelligent systems today. Origin ships as a standalone toolchain for Windows, macOS, and
+            Linux — pick your platform below.</p>
 
         <div class="hero-actions">
-            <a href="assets/OriginInstallerV1.7.9.zip" class="btn btn-primary">Download for Windows (x64)</a>
+            <a href="download.html" class="btn btn-primary">Download v1.7.9</a>
             <a href="https://github.com/boblio-max/origin" class="btn btn-secondary">Source Code</a>
         </div>
-        <p style="font-size: 0.9rem; margin-top: -2rem;">v1.7.9 Stable • Includes compiler, runner, and installer
-            script.</p>
+        <p style="font-size: 0.9rem; margin-top: -2rem;">v1.7.9 Stable • Includes compiler, runner, and platform
+            installer.</p>
         <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-muted);">Looking for an older version? <a
                 href="archives.html" style="color: var(--text); text-decoration: underline;">View Archives</a></p>
     </header>
 
     <section class="section container">
-        <h2 class="section-title">Quick Start</h2>
+        <h2 class="section-title">Choose your platform</h2>
+        <div class="platform-grid">
+
+            <div class="platform-card">
+                <h3>Windows (x64)</h3>
+                <p>Native <code>origin.exe</code> bundled with the PowerShell secure installer.</p>
+                <a href="assets/OriginInstallerV1.7.9.zip" class="btn btn-primary">Download .zip</a>
+                <pre><code>Expand-Archive .\OriginInstallerV1.7.9.zip
+cd OriginInstallerV1.7.9
+.\secure_install.ps1
+origin --version</code></pre>
+            </div>
+
+            <div class="platform-card">
+                <h3>macOS (Universal)</h3>
+                <p>Universal Mach-O binary (Apple Silicon + Intel) bundled as <code>Origin.app</code>
+                   with the bash secure installer. No Gatekeeper prompts; the script verifies SHA-256
+                   before copying into <code>~/.origin/bin</code>.</p>
+                <a href="assets/OriginInstaller-macos-universal.zip" class="btn btn-primary">Download .zip</a>
+                <pre><code>unzip OriginInstaller-macos-universal.zip
+cd OriginInstaller-macos-universal
+chmod +x secure_install.sh
+./secure_install.sh
+origin --version</code></pre>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                    First-run macOS note: if Gatekeeper blocks the binary, right-click
+                    <code>origin</code> in Finder and choose Open once.
+                </p>
+            </div>
+
+            <div class="platform-card">
+                <h3>Linux (x64)</h3>
+                <p>Standalone ELF binary that works on Ubuntu, Debian, Fedora, Arch, and Raspberry Pi OS.
+                   The installer script uses XDG paths on Linux and falls back to <code>~/.origin/bin</code>.</p>
+                <a href="assets/OriginInstaller-linux-x64.zip" class="btn btn-primary">Download .zip</a>
+                <pre><code>unzip OriginInstaller-linux-x64.zip
+cd OriginInstaller-linux-x64
+chmod +x secure_install.sh
+./secure_install.sh
+origin --version</code></pre>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
+                    On Raspberry Pi, build with <code>RPi.GPIO</code> included for real GPIO access;
+                    otherwise the interpreter falls back to <code>[SIM]</code> stubs automatically.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">How the secure installer works</h2>
         <div class="content-grid">
             <div class="content-block">
-                <h3>1. Download and Extract</h3>
-                <p>Download the <code>OriginInstallerV1.7.9.zip</code> and extract all files to a folder on your computer.</p>
+                <h3>1. Integrity check</h3>
+                <p>The installer recomputes the SHA-256 of the binary and compares it to the
+                   <code>SHA256SUMS</code> file shipped in the bundle. A tampered or corrupted
+                   binary is rejected before anything is written to disk.</p>
             </div>
             <div class="content-block">
-                <h3>2. Run the Installer</h3>
-                <p>Right-click <code>secure_install.ps1</code> and select <strong>"Run with PowerShell"</strong>. This
-                    verifies the binary's SHA-256 checksum, moves Origin to your user profile, and prepends it to your system PATH.</p>
+                <h3>2. Per-user install</h3>
+                <p>Origin installs into your user profile (Windows: <code>%USERPROFILE%\.origin\bin</code>;
+                   macOS / Linux: <code>~/.origin/bin</code> or <code>$XDG_DATA_HOME/origin/bin</code>).
+                   No admin elevation required.</p>
             </div>
             <div class="content-block">
-                <h3>3. Verify Installation</h3>
-                <p>Open a new terminal (Command Prompt or PowerShell) and type:</p>
+                <h3>3. PATH prepend</h3>
+                <p>The install directory is <em>prepended</em> to your <code>PATH</code> so the real
+                   Origin binary resolves before anything in <code>/usr/bin</code>, <code>/usr/local/bin</code>,
+                   or <code>C:\Windows</code>. This guards against PATH-hijacking attacks.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Verify your installation</h2>
+        <div class="content-grid">
+            <div class="content-block">
+                <p>Open a new terminal session so the updated <code>PATH</code> takes effect, then run:</p>
                 <div class="terminal-window" style="margin-top: 1rem; padding: 1rem;">
                     <div class="terminal-line"><span class="prompt">$</span> origin --version</div>
                     <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.9
                     </div>
                 </div>
+                <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
+                    From there, run any <code>.or</code> script: <code>origin hello.or</code>, or compile one
+                    to a fresh standalone binary with <code>origin build my_app.or</code>.
+                </p>
             </div>
         </div>
     </section>
@@ -66,16 +160,16 @@
         <h2 class="section-title">What's included?</h2>
         <div class="content-grid">
             <div class="content-block">
-                <p>The installer package provides everything you need to start building hardware-native applications:
-                </p>
+                <p>Every installer bundle provides the same toolchain regardless of platform:</p>
                 <ul style="margin-top: 1.5rem; list-style: none; color: var(--text-muted);">
-                    <li style="margin-bottom: 0.5rem;">• <strong>origin.exe:</strong> The core compiler and runtime
-                        engine.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>origin binary:</strong> The core compiler and
+                        runtime engine.</li>
                     <li style="margin-bottom: 0.5rem;">• <strong>Origin Builder:</strong> Tooling to compile your
                         scripts into standalone executables.</li>
                     <li style="margin-bottom: 0.5rem;">• <strong>Module System:</strong> Full support for multi-file
-                        projects and namespacing.</li>
-                    <li>• <strong>Hardware Drivers:</strong> Pre-bundled support for common robotics components.</li>
+                        projects and namespacing (<code>calc.or</code>, <code>graph.or</code>).</li>
+                    <li>• <strong>Hardware Drivers:</strong> Pre-bundled, gracefully degrading to <code>[SIM]</code>
+                        stubs when real hardware is unavailable.</li>
                 </ul>
             </div>
         </div>
