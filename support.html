@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Origin Support — We're Here to Help</title>
+    <link rel="icon" href="images/Origin_tiger.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Get help with the Origin programming language. FAQ, documentation, GitHub issues, and community support.">
 </head>
 <body>
 
@@ -15,6 +17,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="https://mintlify.wiki/boblio-max/origin">Docs</a></li>
                 <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="download.html">Download</a></li>
                 <li><a href="osf.html">Origin SF</a></li>
                 <li><a href="community.html">Community</a></li>
             </ul>
@@ -39,7 +42,19 @@
                     </div>
                     <div>
                         <h4 style="margin-bottom: 0.5rem;">Is Origin open source?</h4>
-                        <p style="color: var(--text-muted); font-size: 0.9rem;">Yes! Origin is open source and available on GitHub under the MIT license.</p>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Yes! Origin is open source and available on <a href="https://github.com/boblio-max/origin">GitHub</a> under the MIT license.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">How do I report a bug?</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Open an issue on the <a href="https://github.com/boblio-max/origin/issues">GitHub issue tracker</a> with a minimal reproduction and your platform details.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">Does Origin work on Raspberry Pi?</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Yes — install with <code>pip install origin-or</code>. Hardware drivers for GPIO, servo, I2C, and SPI are available via <code>pip install origin-or[pi]</code>.</p>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem;">How do I build a standalone binary?</h4>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">Run <code>origin build my_app.or</code> to compile your script into a standalone executable via PyInstaller.</p>
                     </div>
                 </div>
             </div>

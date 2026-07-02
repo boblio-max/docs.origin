@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Download Origin</title>
+    <link rel="icon" href="images/Origin_tiger.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Download the Origin programming language. One-command pip install for Raspberry Pi, Windows installer, and cross-platform support.">
     <style>
         .platform-grid {
             display: grid;
@@ -14,23 +16,83 @@
             margin-top: 1.5rem;
         }
         .platform-card {
-            background: var(--card-bg, #14161c);
-            border: 1px solid var(--border, #1f2128);
+            background: var(--card-bg, #f8f9fa);
+            border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.5rem;
         }
         .platform-card h3 { margin-top: 0; }
         .platform-card .btn { width: 100%; text-align: center; margin-top: 1rem; }
         .platform-card pre {
-            background: #0d0f13;
-            border: 1px solid var(--border, #1f2128);
+            background: #fff;
+            border: 1px solid var(--border);
             border-radius: 8px;
             padding: 0.75rem 1rem;
             margin: 0.5rem 0 0;
             overflow-x: auto;
             font-size: 0.85rem;
         }
-        .platform-card code { color: var(--accent, #6ee7ff); }
+        .platform-card code { color: var(--text); }
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+        .badge-new {
+            background: #000;
+            color: #fff;
+        }
+        .badge-pi {
+            background: #c7053d;
+            color: #fff;
+        }
+        .badge-fast {
+            background: #2ea44f;
+            color: #fff;
+        }
+        .one-liner {
+            background: #f8f9fa;
+            border: 2px solid #000;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .one-liner code {
+            display: block;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .one-liner .btn { margin-top: 0.5rem; }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+        .compare-table th, .compare-table td {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .compare-table th {
+            font-weight: 600;
+        }
+        .compare-table tr:last-child td {
+            border-bottom: none;
+        }
+        @media (max-width: 768px) {
+            .npm-card { order: -1; }
+        }
     </style>
 </head>
 
@@ -52,21 +114,36 @@
     <header class="hero container">
         <h1>Install Origin.</h1>
         <p>Start building intelligent systems today. Origin ships as a standalone toolchain for Windows, macOS, and
-            Linux — pick your platform below.</p>
+            Linux — and as a one-command pip install for Raspberry Pi.</p>
 
         <div class="hero-actions">
-            <a href="download.html" class="btn btn-primary">Download v1.7.9</a>
-            <a href="https://github.com/boblio-max/origin" class="btn btn-secondary">Source Code</a>
+            <a href="#quick-install" class="btn btn-primary">Quick Install</a>
+            <a href="#platforms" class="btn btn-secondary">All Platforms</a>
         </div>
-        <p style="font-size: 0.9rem; margin-top: -2rem;">v1.7.9 Stable • Includes compiler, runner, and platform
-            installer.</p>
-        <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--text-muted);">Looking for an older version? <a
-                href="archives.html" style="color: var(--text); text-decoration: underline;">View Archives</a></p>
+
+        <div class="one-liner" id="quick-install">
+            <h3 style="margin: 0 0 0.5rem; font-size: 1.25rem;">One-command install</h3>
+            <p style="color: var(--text-muted); margin: 0;">Works on Raspberry Pi, Linux x64, macOS, and Windows (with Python 3.10+)</p>
+            <code>pip install origin-or</code>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0.5rem 0 0;">
+                Then run: <code style="font-size: 0.9rem;">origin hello.or</code>
+                &nbsp;&middot;&nbsp;
+                <a href="#bytecode-vm" style="color: var(--text);">Bytecode VM</a>
+            </p>
+        </div>
     </header>
 
-    <section class="section container">
+    <section class="section container" id="platforms">
         <h2 class="section-title">Choose your platform</h2>
         <div class="platform-grid">
+
+            <div class="platform-card npm-card">
+                <h3>Raspberry Pi / ARM Linux <span class="badge badge-new">NEW</span></h3>
+                <p>Native ARM support via <code>pip install</code>. Includes the bytecode VM for faster execution and optional hardware drivers for GPIO, servo, I2C, and SPI.</p>
+                <pre><code>pip install origin-or</code></pre>
+                <pre><code>origin hello.or</code></pre>
+                <a href="#pi-hardware" class="btn btn-secondary">Pi Hardware Guide</a>
+            </div>
 
             <div class="platform-card">
                 <h3>Windows (x64)</h3>
@@ -79,39 +156,104 @@ origin --version</code></pre>
             </div>
 
             <div class="platform-card">
-                <h3>macOS (Universal)</h3>
-                <p>Universal Mach-O binary (Apple Silicon + Intel) bundled as <code>Origin.app</code>
-                   with the bash secure installer. No Gatekeeper prompts; the script verifies SHA-256
-                   before copying into <code>~/.origin/bin</code>.</p>
-                <a href="assets/OriginInstaller-macos-universal.zip" class="btn btn-primary">Download .zip</a>
-                <pre><code>unzip OriginInstaller-macos-universal.zip
-cd OriginInstaller-macos-universal
-chmod +x secure_install.sh
-./secure_install.sh
-origin --version</code></pre>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
-                    First-run macOS note: if Gatekeeper blocks the binary, right-click
-                    <code>origin</code> in Finder and choose Open once.
-                </p>
+                <h3>macOS (Universal) <span class="badge badge-new">pip</span></h3>
+                <p>Install via <code>pip install origin-or</code>. The standalone macOS bundle is in development — use the one-command pip install for now.</p>
+                <pre><code>pip install origin-or
+origin hello.or</code></pre>
             </div>
 
             <div class="platform-card">
                 <h3>Linux (x64)</h3>
-                <p>Standalone ELF binary that works on Ubuntu, Debian, Fedora, Arch, and Raspberry Pi OS.
-                   The installer script uses XDG paths on Linux and falls back to <code>~/.origin/bin</code>.</p>
-                <a href="assets/OriginInstaller-linux-x64.zip" class="btn btn-primary">Download .zip</a>
-                <pre><code>unzip OriginInstaller-linux-x64.zip
-cd OriginInstaller-linux-x64
-chmod +x secure_install.sh
-./secure_install.sh
-origin --version</code></pre>
-                <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 1rem;">
-                    On Raspberry Pi, build with <code>RPi.GPIO</code> included for real GPIO access;
-                    otherwise the interpreter falls back to <code>[SIM]</code> stubs automatically.
-                </p>
+                <p>Install via pip on any Linux distro. The standalone ELF binary is in development — use the one-command pip install for now.</p>
+                <pre><code>pip install origin-or
+origin hello.or</code></pre>
             </div>
 
         </div>
+    </section>
+
+    <section class="section container" id="bytecode-vm">
+        <h2 class="section-title">Bytecode VM & Native Performance</h2>
+        <p>Origin v1.8 introduces a bytecode compiler and stack-based virtual machine that replaces the
+           AST-to-Python code generator. The VM is available in three backends, each with a different
+           speed profile:</p>
+
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Backend</th>
+                    <th>Speed (vs Python interpreter)</th>
+                    <th>Setup</th>
+                    <th>Best for</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Python bytecode VM</strong></td>
+                    <td>~3-5x faster</td>
+                    <td>Included in <code>pip install</code></td>
+                    <td>General use, Raspberry Pi</td>
+                </tr>
+                <tr>
+                    <td><strong>Java VM</strong> <span class="badge badge-fast">10-50x</span></td>
+                    <td>~10-50x faster</td>
+                    <td><code>apt install openjdk-17-jdk</code></td>
+                    <td>Performance-critical workloads</td>
+                </tr>
+                <tr>
+                    <td><strong>GraalVM native</strong> <span class="badge badge-fast">20-80x</span></td>
+                    <td>~20-80x faster</td>
+                    <td>Build once with native-image</td>
+                    <td>Embedded systems, production</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Run with the bytecode VM</h3>
+        <p>The bytecode VM is available in the <code>origin-or</code> pip package. Use it programmatically:</p>
+        <pre><code>from origin.lexer import lex
+from origin.parser import Parser
+from origin.bc.to_byte import Compiler
+from origin.bc.svm import VM
+
+code = ['print "hello from bytecode VM"']
+tokens = lex(code)
+ast = Parser(tokens).program()
+compiler = Compiler()
+compiler.compile(ast)
+VM(compiler.bytecode, compiler.constants).run()</code></pre>
+
+        <h3>Java VM on Raspberry Pi</h3>
+        <p>The Java VM is a 1:1 port of the Python bytecode VM, with JIT compilation via the HotSpot
+           JVM for 10-50x speed over the Python interpreter. Source is bundled in the pip package:</p>
+        <pre><code># On your Pi:
+sudo apt install openjdk-17-jdk
+cd ~/.local/lib/python3.11/site-packages/origin/bc/JavaImplement
+javac *.java
+
+# Compile .or → .obc on any machine:
+python -m origin.bc.dump_obc hello.or hello.obc
+
+# Copy hello.obc to Pi and run:
+java Main hello.obc</code></pre>
+    </section>
+
+    <section class="section container" id="pi-hardware">
+        <h2 class="section-title">Raspberry Pi hardware support</h2>
+        <p>On Raspberry Pi OS, install the hardware drivers for GPIO, servo, I2C, and SPI:</p>
+        <pre><code>pip install origin-or[pi]</code></pre>
+        <p>This installs <code>RPi.GPIO</code>, <code>adafruit-circuitpython-servokit</code>, and
+           <code>smbus2</code>. When hardware is absent, Origin gracefully falls back to <code>[SIM]</code>
+           stubs — the same code runs on any platform without modification.</p>
+        <p>Example — blink an LED:</p>
+        <pre><code># blink.or
+let pin: int = 17
+loop 10:
+    set pin 17 to true
+    wait 0.5
+    set pin 17 to false
+    wait 0.5</code></pre>
+        <pre><code>origin blink.or</code></pre>
     </section>
 
     <section class="section container">
@@ -145,7 +287,7 @@ origin --version</code></pre>
                 <p>Open a new terminal session so the updated <code>PATH</code> takes effect, then run:</p>
                 <div class="terminal-window" style="margin-top: 1rem; padding: 1rem;">
                     <div class="terminal-line"><span class="prompt">$</span> origin --version</div>
-                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.9
+                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.10
                     </div>
                 </div>
                 <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
@@ -168,8 +310,10 @@ origin --version</code></pre>
                         scripts into standalone executables.</li>
                     <li style="margin-bottom: 0.5rem;">• <strong>Module System:</strong> Full support for multi-file
                         projects and namespacing (<code>calc.or</code>, <code>graph.or</code>).</li>
-                    <li>• <strong>Hardware Drivers:</strong> Pre-bundled, gracefully degrading to <code>[SIM]</code>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Hardware Drivers:</strong> Pre-bundled, gracefully degrading to <code>[SIM]</code>
                         stubs when real hardware is unavailable.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Bytecode VM:</strong> Stack-based virtual machine with 74 opcodes, included in the pip package.</li>
+                    <li>• <strong>Java VM source:</strong> Full 1:1 port of the bytecode VM in Java for native JIT performance on ARM/x64.</li>
                 </ul>
             </div>
         </div>
