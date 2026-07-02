@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin REPL — Try It in Your Browser</title>
+    <link rel="icon" href="images/Origin_tiger.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Try the Origin programming language in your browser. Run real Origin code with the interactive REPL powered by Pyodide.">
+    <style>
+        .repl-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            min-height: 500px;
+            margin-top: 2rem;
+        }
+
+        .editor-pane {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-pane label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        #origin-code {
+            flex: 1;
+            min-height: 400px;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--terminal-bg);
+            color: var(--text);
+            resize: vertical;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        #origin-code:focus {
+            outline: none;
+            border-color: var(--text);
+        }
+
+        .output-pane {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .output-pane label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+        }
+
+        #repl-output {
+            flex: 1;
+            min-height: 400px;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--terminal-bg);
+            color: var(--text);
+            overflow: auto;
+            white-space: pre-wrap;
+            margin-bottom: 0;
+        }
+
+        .repl-actions {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        #run-btn {
+            padding: 0.6rem 1.5rem;
+        }
+
+        #clear-btn {
+            padding: 0.6rem 1.5rem;
+        }
+
+        #loading-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid var(--border);
+            border-top-color: var(--text);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        #boot-status {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .repl-error {
+            color: #d32f2f;
+        }
+
+        .repl-prompt {
+            color: var(--text-muted);
+        }
+
+        .sample-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .sample-btn {
+            font-size: 0.8rem;
+            padding: 0.3rem 0.7rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-family: var(--font-ui);
+            transition: all 0.15s;
+        }
+
+        .sample-btn:hover {
+            border-color: var(--text);
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .repl-layout {
+                grid-template-columns: 1fr;
+            }
+            #origin-code { min-height: 250px; }
+            #repl-output { min-height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="https://mintlify.wiki/boblio-max/origin">Docs</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="download.html">Download</a></li>
+                <li><a href="repl.html" class="active">REPL</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="padding-bottom: 2rem;">
+        <div class="container">
+            <h1>Try Origin in your browser.</h1>
+            <p>Write Origin code on the left, run it on the right. Powered by Pyodide — everything stays on your machine.</p>
+        </div>
+    </header>
+
+    <section class="section container">
+        <div class="sample-selector">
+            <button class="sample-btn" data-sample="hello">Hello, World</button>
+            <button class="sample-btn" data-sample="calc">Calculator</button>
+            <button class="sample-btn" data-sample="types">Variables</button>
+            <button class="sample-btn" data-sample="control">Control Flow</button>
+            <button class="sample-btn" data-sample="func">Functions</button>
+            <button class="sample-btn" data-sample="hardware">Hardware (SIM)</button>
+        </div>
+
+        <div id="boot-status"><span class="spinner"></span> Loading Origin interpreter...</div>
+
+        <div class="repl-actions">
+            <button id="run-btn" class="btn btn-primary" disabled>Run</button>
+            <button id="clear-btn" class="btn btn-secondary">Clear</button>
+        </div>
+
+        <div class="repl-layout">
+            <div class="editor-pane">
+                <label for="origin-code">origin/repl.or</label>
+                <textarea id="origin-code" spellcheck="false">print "Hello, World!"</textarea>
+            </div>
+            <div class="output-pane">
+                <label>Output</label>
+                <div id="repl-output"><span class="repl-prompt">Ready once the interpreter loads...</span></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="logo" style="font-size: 1rem;">Origin</div>
+            <ul class="footer-links">
+                <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+            <div class="copyright">© 2026 Origin Organization</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.25.0/full/pyodide.js"></script>
+    <script>
+        const samples = {
+            hello: `print "Hello, World!"`,
+            calc: [
+                'print "WELCOME TO THE CALCULATOR"',
+                'let x: float = float(input "Enter a number: ")',
+                'let y: float = float(input "Enter another number: ")',
+                'let op: str = input "Enter the operation (+, -, *, /): "',
+                '',
+                'print "Your result is..."',
+                'if op == "+" {',
+                '    print x + y',
+                '} elif op == "-" {',
+                '    print x - y',
+                '} elif op == "*" {',
+                '    print x * y',
+                '} elif op == "/" {',
+                '    print x / y',
+                '}',
+            ].join('\n'),
+            types: [
+                'let name: str  = "Origin"',
+                'let year: int  = 2026',
+                'let pi:  float = 3.14159',
+                'let ok:  bool  = true',
+                '',
+                'print name',
+                'print year',
+                'print pi',
+                'print ok',
+            ].join('\n'),
+            control: [
+                'let temp: int = 75',
+                '',
+                'if temp > 80 {',
+                '    print "Too hot"',
+                '} elif temp > 60 {',
+                '    print "Just right"',
+                '} else {',
+                '    print "Too cold"',
+                '}',
+                '',
+                'print "---"',
+                '',
+                'loop 3:',
+                '    print "Loop iteration"',
+            ].join('\n'),
+            func: [
+                'def add(a: int, b: int) -> int {',
+                '    return a + b',
+                '}',
+                '',
+                'def greet(name: str) -> none {',
+                '    print "Hello, " + name',
+                '}',
+                '',
+                'let result: int = add(5, 3)',
+                'print result',
+                'greet("Origin")',
+            ].join('\n'),
+            hardware: [
+                '# Hardware simulation mode',
+                '# (no Pi needed — Origin falls back to [SIM])',
+                '',
+                'set servo.angle 0, 90',
+                'wait 0.5',
+                'set servo.angle 0, 180',
+                'wait 0.5',
+                'set servo.angle 0, 0',
+                '',
+                'set pin 17, 1',
+                'wait 0.5',
+                'set pin 17, 0',
+            ].join('\n'),
+        };
+
+        const editor = document.getElementById('origin-code');
+        const output = document.getElementById('repl-output');
+        const runBtn = document.getElementById('run-btn');
+        const clearBtn = document.getElementById('clear-btn');
+        const bootStatus = document.getElementById('boot-status');
+        let pyodideReady = false;
+
+        async function bootPyodide() {
+            try {
+                bootStatus.innerHTML = '<span class="spinner"></span> Loading Python runtime...';
+                let pyodide = await loadPyodide();
+
+                bootStatus.innerHTML = '<span class="spinner"></span> Installing origin-or from PyPI...';
+                await pyodide.loadPackage('micropip');
+                const micropip = pyodide.pyimport('micropip');
+                await micropip.install('origin-or');
+
+                // Inject the browser-compatible runner
+                pyodide.runPython(`
+import sys, io, random, math
+from origin.lexer import lex
+from origin.parser import Parser
+from origin.interpreter import Interpreter
+
+def run_origin_source(source):
+    """Run Origin source code and return (output, error)."""
+    old_stdout = sys.stdout
+    sys.stdout = io.StringIO()
+
+    try:
+        code_lines = source.splitlines(keepends=False) if source else []
+
+        # Stub subprocess/multiprocess for browser
+        import builtins
+        _orig_import = builtins.__import__
+
+        def _safe_import(name, *args, **kwargs):
+            if name in ('subprocess', 'multiprocessing'):
+                raise ImportError(f"{name} not available in browser REPL")
+            return _orig_import(name, *args, **kwargs)
+
+        builtins.__import__ = _safe_import
+
+        tokens = lex(code_lines)
+        parser = Parser(tokens)
+        ast = parser.program()
+
+        interp = Interpreter()
+        generated_python = interp.generate(ast)
+
+        runtime_globals = {
+            "random": random,
+            "math": math,
+            "__name__": "__main__",
+            "_origin_runtime_line": 0,
+        }
+
+        exec(generated_python, runtime_globals)
+        output_text = sys.stdout.getvalue()
+        error_text = None
+    except SyntaxError as e:
+        output_text = sys.stdout.getvalue()
+        error_text = f"[Syntax Error] {e}"
+    except Exception as e:
+        output_text = sys.stdout.getvalue()
+        error_text = f"[Error] {type(e).__name__}: {e}"
+    finally:
+        sys.stdout = old_stdout
+
+    return output_text, error_text
+`);
+
+                pyodideReady = true;
+                runBtn.disabled = false;
+                bootStatus.innerHTML = '&#10003; Interpreter ready';
+                output.innerHTML = 'Ready. Write some Origin code and click Run.';
+            } catch (e) {
+                bootStatus.innerHTML = 'Failed to load interpreter: ' + e.message;
+                output.innerHTML = 'Error: ' + e.message;
+            }
+        }
+
+        async function runCode() {
+            if (!pyodideReady) {
+                output.innerHTML = 'Interpreter is still loading. Please wait.';
+                return;
+            }
+
+            const code = editor.value;
+            output.innerHTML = '<span class="spinner"></span> Running...';
+
+            try {
+                const pyodide = await loadPyodide(); // cached after first call
+                const result = pyodide.runPython('run_origin_source(' + JSON.stringify(code) + ')');
+
+                const out = result.get('output_text');
+                const err = result.get('error_text');
+
+                let html = '';
+                if (out) {
+                    html += out.replace(/</g, '&lt;');
+                }
+                if (err) {
+                    html += '<span class="repl-error">' + err.replace(/</g, '&lt;') + '</span>';
+                }
+                if (!html) {
+                    html = '<span class="repl-prompt">(no output)</span>';
+                }
+                output.innerHTML = html;
+            } catch (e) {
+                output.innerHTML = '<span class="repl-error">Runtime error: ' + e.message + '</span>';
+            }
+        }
+
+        function loadSample(name) {
+            if (samples[name]) {
+                editor.value = samples[name];
+            }
+        }
+
+        // Event listeners
+        runBtn.addEventListener('click', runCode);
+
+        clearBtn.addEventListener('click', function () {
+            editor.value = '';
+            output.innerHTML = '<span class="repl-prompt">Output cleared.</span>';
+        });
+
+        document.querySelectorAll('.sample-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                loadSample(this.dataset.sample);
+            });
+        });
+
+        // Ctrl+Enter to run
+        editor.addEventListener('keydown', function (e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                runCode();
+            }
+        });
+
+        // Boot
+        bootPyodide();
+    </script>
+</body>
+</html>

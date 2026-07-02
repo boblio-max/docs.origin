@@ -18,6 +18,7 @@
                 <li><a href="https://mintlify.wiki/boblio-max/origin">Docs</a></li>
                 <li><a href="tutorials.html" class="active">Tutorials</a></li>
                 <li><a href="download.html">Download</a></li>
+                <li><a href="repl.html">REPL</a></li>
                 <li><a href="osf.html">Origin SF</a></li>
                 <li><a href="community.html">Community</a></li>
             </ul>
@@ -27,44 +28,173 @@
     <header class="hero" style="padding-bottom: 4rem;">
         <div class="container">
             <h1>Tutorials</h1>
-            <p>Step-by-step guides to help you master hardware control with Origin.</p>
+            <p>Walk through real Origin programs — from hello world to hardware control.</p>
         </div>
     </header>
 
-    <section class="features">
-        <div class="container">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">🚀</span>
-                    <h3>Quick Start</h3>
-                    <p>Get up and running with your first Origin script in under 5 minutes.</p>
-                    <a href="docs.html#comments" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Guide</a>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🦾</span>
-                    <h3>Servo Control</h3>
-                    <p>Learn how to precisely control servos using Origin's safety features.</p>
-                    <a href="docs.html#hardware" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Guide</a>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">💻</span>
-                    <h3>Python Interop</h3>
-                    <p>Master the <code>py</code> block to use advanced Python libraries in Origin.</p>
-                    <a href="docs.html#raw-python" class="btn btn-secondary" style="margin-top: 1.5rem;">Read Guide</a>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🧠</span>
-                    <h3>AI Code Generation</h3>
-                    <p>Use Origin's strict types and English-like syntax to get reliable code out of LLMs — guided by the PEG grammar spec.</p>
-                    <a href="https://github.com/boblio-max/origin-dev/blob/main/ORIGIN_CODE/grammar/origin.peg.md" class="btn btn-secondary" style="margin-top: 1.5rem;">View Grammar</a>
-                </div>
-            </div>
+    <section class="section container">
+        <h2 class="section-title">Hello, World</h2>
+        <p>Origin scripts use the <code>.or</code> extension. Save this as <code>hello.or</code>:</p>
+        <pre><code>print "Hello, World!"</code></pre>
+        <p>Run it:</p>
+        <div class="terminal-window" style="margin: 1rem 0; padding: 1rem;">
+            <div class="terminal-line"><span class="prompt">$</span> origin hello.or</div>
+            <div class="terminal-line" style="color: var(--text-muted); margin-top: 0.25rem;">Hello, World!</div>
         </div>
+        <p><code>print</code> is a statement in Origin, not a function — no parentheses needed. Strings can use double or single quotes.</p>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Variables and types</h2>
+        <p>Every variable needs a type annotation. Origin checks types at compile time and won't let you assign mismatched values:</p>
+        <pre><code>let name: str  = "Origin"
+let year: int  = 2026
+let pi:  float = 3.14159
+let ok:  bool  = true</code></pre>
+        <p>Constants use <code>const</code> and can't be reassigned:</p>
+        <pre><code>const app_name: str = "Origin"
+# app_name = "Something else"  ← compile error</code></pre>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">A simple calculator</h2>
+        <p>Origin supports standard arithmetic. Here's a calculator that reads user input:</p>
+        <pre><code>print "WELCOME TO THE CALCULATOR"
+
+let x: float = float(input "Enter a number: ")
+let y: float = float(input "Enter another number: ")
+let op: str = input "Enter the operation (+, -, *, /): "
+
+print "Your result is..."
+if op == "+" {
+    print x + y
+} elif op == "-" {
+    print x - y
+} elif op == "*" {
+    print x * y
+} elif op == "/" {
+    print x / y
+}</code></pre>
+        <div class="terminal-window" style="margin: 1rem 0; padding: 1rem;">
+            <div class="terminal-line"><span class="prompt">$</span> origin calc.or</div>
+            <div class="terminal-line" style="color: var(--text-muted); margin-top: 0.25rem;">WELCOME TO THE CALCULATOR</div>
+            <div class="terminal-line" style="color: var(--text-muted);">Enter a number: 10</div>
+            <div class="terminal-line" style="color: var(--text-muted);">Enter another number: 3</div>
+            <div class="terminal-line" style="color: var(--text-muted);">Enter the operation (+, -, *, /): *</div>
+            <div class="terminal-line" style="color: var(--text-muted);">Your result is...</div>
+            <div class="terminal-line" style="color: var(--text-muted);">30.0</div>
+        </div>
+        <p><code>input</code> reads a line of text. <code>float()</code> casts the string to a number. Type casting uses postfix syntax — <code>float(input "...")</code> chains naturally left to right.</p>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Control flow</h2>
+        <p>Origin's <code>if</code> / <code>elif</code> / <code>else</code> works like you'd expect. Conditions don't need parentheses:</p>
+        <pre><code>let temp: int = 75
+
+if temp > 80 {
+    print "Too hot"
+} elif temp > 60 {
+    print "Just right"
+} else {
+    print "Too cold"
+}</code></pre>
+
+        <h3>Loops</h3>
+        <p>Use <code>loop</code> for counted iteration and <code>while</code> for condition-based:</p>
+        <pre><code>loop 5:
+    print "Iteration"
+
+let count: int = 0
+while count < 3 {
+    print count
+    count = count + 1
+}</code></pre>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Functions</h2>
+        <p>Functions are defined with <code>def</code> and must declare their return type after <code>-&gt;</code>:</p>
+        <pre><code>def add(a: int, b: int) -> int {
+    return a + b
+}
+
+def greet(name: str) -> none {
+    print "Hello, " + name
+}
+
+let result: int = add(5, 3)
+print result
+greet("Origin")</code></pre>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Controlling a servo (Raspberry Pi)</h2>
+        <p>Origin's hardware syntax is the main reason it exists. On a Raspberry Pi with a servo on channel 0 of a PCA9685 driver:</p>
+        <pre><code>set servo.angle 0, 90
+wait 1
+set servo.angle 0, 180
+wait 1
+set servo.angle 0, 0</code></pre>
+        <p>The servo angle is automatically clamped to 0-180&deg; — if you try to set 200, Origin silently caps it to 180. This prevents physical gear damage.</p>
+        <p><code>wait</code> pauses execution in seconds (accepts floats like <code>0.5</code>).</p>
+
+        <h3>GPIO output</h3>
+        <p>Drive a BCM pin high or low:</p>
+        <pre><code>set pin 17, 1    # HIGH
+wait 0.5
+set pin 17, 0    # LOW</code></pre>
+        <p>When hardware isn't available (e.g., on a laptop), Origin falls back to <code>[SIM]</code> stubs — the same code runs without modification.</p>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Calling Python libraries</h2>
+        <p>Use <code>py {}</code> blocks to drop into Python for anything Origin doesn't handle natively:</p>
+        <pre><code>py {
+    import math
+    import os
+    print("Python process ID:", os.getpid())
+    print("Sine of 90 degrees:", math.sin(math.pi / 2))
+}</code></pre>
+        <p>Variables defined in <code>py {}</code> blocks are accessible from Origin code after the block exits, so you can use Python libraries and pass results back to Origin.</p>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Using the standard library</h2>
+        <p>Origin ships with <code>calc.or</code> and <code>graph.or</code> in <code>lib/</code>. Import them by name:</p>
+        <pre><code>import calc
+import graph
+
+calc = calc()
+print calc.sqrt(25)
+print calc.pi
+
+graph "Sine Wave" with {
+    X: color(0, 0, 1) as "Line 1",
+}</code></pre>
+        <p>Libraries are just <code>.or</code> files. You can write your own and put them next to your script — <code>import mylib</code> will pick them up automatically.</p>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Building a standalone binary</h2>
+        <p>Compile any <code>.or</code> script into a standalone executable with <code>build</code>:</p>
+        <div class="terminal-window" style="margin: 1rem 0; padding: 1rem;">
+            <div class="terminal-line"><span class="prompt">$</span> origin build my_app.or</div>
+            <div class="terminal-line" style="color: var(--text-muted); margin-top: 0.25rem;">Building standalone binary...</div>
+            <div class="terminal-line" style="color: var(--text-muted);">Output: dist/my_app.exe</div>
+        </div>
+        <p>The output is a zero-dependency executable — no Python or Origin install needed on the target machine.</p>
     </section>
 
     <footer>
         <div class="container footer-container">
             <div class="logo" style="font-size: 1rem;">Origin</div>
+            <ul class="footer-links">
+                <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
             <div class="copyright">© 2026 Origin Organization</div>
         </div>
     </footer>
