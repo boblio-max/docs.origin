@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.10. Covers syntax, data types, control flow, functions, classes, hardware control, and more.">
+    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.11. Covers syntax, data types, control flow, functions, classes, IMU sensors, hardware control, and more.">
     <title>Origin Documentation — Complete Reference</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -58,6 +58,7 @@
                     <li><a href="#parallel">Parallel Execution</a></li>
                     <li><a href="#modules">Module System</a></li>
                     <li><a href="#hardware">Hardware Control</a></li>
+                    <li><a href="#imu">IMU Sensors</a></li>
                     <li><a href="#protocols">Hardware Protocols</a></li>
                 </ul>
             </div>
@@ -75,9 +76,9 @@
         <main class="docs-content">
             <div class="docs-header">
                 <h1>Documentation</h1>
-                <p class="subtitle">Complete reference for the Origin programming language v1.7.9.</p>
+                <p class="subtitle">Complete reference for the Origin programming language v1.7.11.</p>
                 <div class="callout" style="margin-top: 1.5rem; padding: 1rem 1.25rem; border-left: 4px solid var(--text); background: rgba(0,0,0,0.03); border-radius: 6px;">
-                    <strong>v1.7.9 update (June 2026):</strong> the standalone <code>origin.exe</code> has been rebuilt against the flat-layout reference sources, and <code>secure_install.ps1</code> now hard-codes the new SHA-256. The language surface is unchanged. A bytecode VM (<code>runnerByte.py</code>) is in active development on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
+                    <strong>v1.7.11 update (July 2026):</strong> adds native IMU sensor support — declare sensors with <code>mpu6050 address 0x68</code> and read <code>accel</code>, <code>gyro</code>, and <code>temp</code> data directly. A bytecode VM is in active development on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
                 </div>
             </div>
 
@@ -144,7 +145,7 @@ let count = 0
 
 # Constants — immutable after assignment
 const PI: float = 3.14159
-const VERSION: str = "1.7.9"
+const VERSION: str = "1.7.11"
 const MAX_SERVOS: int = 6
 
 # Reassignment
@@ -586,6 +587,33 @@ set pin 12, 1
 
 # Set BCM pin 12 to LOW
 set pin 12, 0</code></pre>
+            </section>
+
+            <!-- ============================================================ -->
+            <!-- IMU SENSORS                                                   -->
+            <!-- ============================================================ -->
+            <section id="imu">
+                <h2>IMU Sensors</h2>
+                <p>Origin natively supports MEMS IMU sensors (accelerometer + gyroscope + temperature). Declare a sensor with its I²C address, then read acceleration, angular velocity, or temperature.</p>
+
+                <h3>Declare an IMU</h3>
+<pre><code>let imu: mpu6050 = mpu6050 address 0x68
+#                    ^^^^^^^ sensor chip
+#                             ^^^^^^^  keyword
+#                                       ^^^^^ I²C address</code></pre>
+
+                <h3>Read sensor data</h3>
+<pre><code>let ax: float = accel from imu
+let ay: float = accel from imu
+let az: float = accel from imu
+
+let gx: float = gyro from imu
+let gy: float = gyro from imu
+let gz: float = gyro from imu
+
+let temp: float = temp from imu</code></pre>
+
+                <p>Each call reads the latest value from the sensor. Supported IMU chips: <code>mpu6050</code>, <code>mpu9250</code>, <code>mpu6500</code>, <code>mpu9255</code>, <code>mpu6000</code>, <code>mpu9150</code>, <code>mpu9256</code>, <code>mpu9257</code>, <code>mpu9258</code>, <code>mpu9259</code>.</p>
             </section>
 
             <!-- ============================================================ -->

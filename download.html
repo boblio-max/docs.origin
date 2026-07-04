@@ -155,9 +155,9 @@
             <div class="platform-card">
                 <h3>Windows (x64)</h3>
                 <p>Native <code>origin.exe</code> bundled with the PowerShell secure installer.</p>
-                <a href="assets/OriginInstallerV1.7.9.zip" class="btn btn-primary">Download .zip</a>
-                <pre><code>Expand-Archive .\OriginInstallerV1.7.9.zip
-cd OriginInstallerV1.7.9
+                <a href="assets/OriginInstallerV1.7.11.zip" class="btn btn-primary">Download .zip</a>
+                <pre><code>Expand-Archive .\OriginInstallerV1.7.11.zip
+cd OriginInstallerV1.7.11
 .\secure_install.ps1
 origin --version</code></pre>
             </div>
@@ -294,7 +294,7 @@ loop 10:
                 <p>Open a new terminal session so the updated <code>PATH</code> takes effect, then run:</p>
                 <div class="terminal-window" style="margin-top: 1rem; padding: 1rem;">
                     <div class="terminal-line"><span class="prompt">$</span> origin --version</div>
-                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.10
+                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.11
                     </div>
                 </div>
                 <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
@@ -320,7 +320,7 @@ loop 10:
                     <li style="margin-bottom: 0.5rem;">• <strong>Hardware Drivers:</strong> Pre-bundled, gracefully degrading to <code>[SIM]</code>
                         stubs when real hardware is unavailable.</li>
                     <li style="margin-bottom: 0.5rem;">• <strong>Bytecode VM:</strong> Stack-based virtual machine with 74 opcodes, included in the pip package.</li>
-                    <li>• <strong>Java VM source:</strong> Full 1:1 port of the bytecode VM in Java for native JIT performance on ARM/x64.</li>
+                    <li>• <strong>IMU Sensor Support:</strong> Native driver for <code>mpu6050</code> and compatible MEMS IMU chips — read <code>accel</code>, <code>gyro</code>, and <code>temp</code> with a single line of Origin.</li>
                 </ul>
             </div>
         </div>
