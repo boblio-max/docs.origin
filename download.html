@@ -147,8 +147,12 @@
 
             <div class="platform-card" style="border-color: #000; border-width: 2px;">
                 <h3>Origin CLI <span class="badge badge-new">NEW</span></h3>
-                <p>Install with one command. No Python required. Works on macOS, Linux, and Windows (WSL).</p>
-                <pre><code>curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | bash</code></pre>
+                <p>Install with one command. No Python required. Works on macOS, Linux, and Windows.</p>
+                <pre><code># macOS / Linux
+curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | sh
+
+# Windows (PowerShell)
+irm https://docs-origin.onrender.com/cliinstall.ps1 | iex</code></pre>
                 <a href="cli.html" class="btn btn-primary">CLI Docs</a>
             </div>
 
