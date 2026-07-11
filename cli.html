@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin CLI</title>
+    <link rel="icon" href="images/Origin_tiger.png" type="image/png">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Origin CLI - The modern command-line interface for the Origin programming language. Install with one command.">
+    <style>
+        .cli-hero {
+            text-align: center;
+            padding: 6rem 0 4rem;
+        }
+        .cli-hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #000 0%, #333 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .cli-hero .tagline {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        .install-box {
+            background: #000;
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .install-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #fff 0%, #666 100%);
+        }
+        .install-box .label {
+            color: #888;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        .install-command {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #111;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .install-command code {
+            flex: 1;
+            font-family: var(--font-code);
+            font-size: 1rem;
+            color: #fff;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .copy-btn {
+            background: #333;
+            border: none;
+            border-radius: 6px;
+            padding: 0.5rem 1rem;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .copy-btn:hover {
+            background: #444;
+        }
+        .copy-btn.copied {
+            background: #22c55e;
+        }
+        .install-note {
+            color: #666;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        .install-note code {
+            background: #222;
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .feature-card {
+            background: var(--terminal-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.2s;
+        }
+        .feature-card:hover {
+            border-color: #000;
+            transform: translateY(-2px);
+        }
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+        .terminal-demo {
+            background: #000;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            font-family: var(--font-code);
+            font-size: 0.95rem;
+            color: #fff;
+        }
+        .terminal-demo .line {
+            margin-bottom: 0.5rem;
+            display: flex;
+            gap: 0.75rem;
+        }
+        .terminal-demo .prompt {
+            color: #22c55e;
+            user-select: none;
+        }
+        .terminal-demo .output {
+            color: #888;
+        }
+        .terminal-demo .highlight {
+            color: #fff;
+            font-weight: 500;
+        }
+        .compare-section {
+            margin-top: 4rem;
+        }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        .compare-table th,
+        .compare-table td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .compare-table th {
+            font-weight: 600;
+            color: var(--text);
+        }
+        .compare-table td {
+            color: var(--text-muted);
+        }
+        .compare-table tr:last-child td {
+            border-bottom: none;
+        }
+        .check {
+            color: #22c55e;
+        }
+        .cross {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="https://mintlify.wiki/boblio-max/origin">Docs</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+                <li><a href="download.html">Download</a></li>
+                <li><a href="cli.html">CLI</a></li>
+                <li><a href="repl.html">REPL</a></li>
+                <li><a href="osf.html">Origin Systems</a></li>
+                <li><a href="community.html">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="cli-hero container">
+        <h1>Origin CLI</h1>
+        <p class="tagline">The modern command-line interface for Origin.<br>Install in one command. Start building in seconds.</p>
+
+        <div class="install-box">
+            <div class="label">Install Origin CLI</div>
+            <div class="install-command">
+                <code id="install-code">curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | bash</code>
+                <button class="copy-btn" onclick="copyInstall()">Copy</button>
+            </div>
+            <p class="install-note">Works on macOS, Linux, and Windows (WSL). Requires <code>bash</code>.</p>
+        </div>
+
+        <div class="hero-actions" style="justify-content: center;">
+            <a href="#features" class="btn btn-primary">Features</a>
+            <a href="#compare" class="btn btn-secondary">Why CLI?</a>
+        </div>
+    </header>
+
+    <section class="section container" id="features">
+        <h2 class="section-title">Everything you need</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Instant Install</h3>
+                <p>One command. No Python, no pip, no package managers. Just curl and go.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Project Scaffolding</h3>
+                <p>Create new Origin projects with <code>origin create</code>. Folder structure generated instantly.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">▶️</div>
+                <h3>Run Anything</h3>
+                <p>Execute <code>.or</code>, <code>.py</code>, and <code>.java</code> files from one interface.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Auto-Update</h3>
+                <p>Keep your CLI current with <code>origin update cli</code>. Always on the latest version.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>REPL Mode</h3>
+                <p>Interactive session for testing code snippets. Just type <code>origin</code> to start.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🩺</div>
+                <h3>Doctor Checks</h3>
+                <p>Diagnose issues with <code>origin doctor</code>. Verifies dependencies and environment.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">See it in action</h2>
+        <div class="terminal-demo">
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="highlight">curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | bash</span>
+            </div>
+            <div class="line">
+                <span class="output">Installing Origin CLI...</span>
+            </div>
+            <div class="line">
+                <span class="output">Detected: linux x86_64</span>
+            </div>
+            <div class="line">
+                <span class="output">Downloaded origin to /usr/local/bin</span>
+            </div>
+            <div class="line">
+                <span class="output" style="color: #22c55e;">Installation complete! Run 'origin' to get started.</span>
+            </div>
+            <div class="line" style="margin-top: 1rem;">
+                <span class="prompt">$</span>
+                <span class="highlight">origin</span>
+            </div>
+            <div class="line">
+                <span class="output">========================================================</span>
+            </div>
+            <div class="line">
+                <span class="output"> ▄██████▄     ▄████████  ▄█    ▄██████▄    ▄█   ███▄▄▄▄</span>
+            </div>
+            <div class="line">
+                <span class="output">Welcome to the Origin Interactive CLI!</span>
+            </div>
+            <div class="line">
+                <span class="output">Type 'origin help' for a list of commands.</span>
+            </div>
+            <div class="line">
+                <span class="prompt" style="color: #22c55e;">&gt;</span>
+                <span class="output" style="color: #888;">_</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container" id="compare">
+        <h2 class="section-title">Why use the CLI?</h2>
+        <table class="compare-table">
+            <thead>
+                <tr>
+                    <th>Method</th>
+                    <th>Requires Python</th>
+                    <th>Cross-Platform</th>
+                    <th>Standalone</th>
+                    <th>Best For</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>CLI (curl install)</strong></td>
+                    <td><span class="cross">No</span></td>
+                    <td><span class="check">Yes</span></td>
+                    <td><span class="check">Yes</span></td>
+                    <td>Quick setup, any machine</td>
+                </tr>
+                <tr>
+                    <td><strong>pip install</strong></td>
+                    <td><span class="check">Yes (3.10+)</span></td>
+                    <td><span class="check">Yes</span></td>
+                    <td><span class="cross">No</span></td>
+                    <td>Python projects, Raspberry Pi</td>
+                </tr>
+                <tr>
+                    <td><strong>Standalone binary</strong></td>
+                    <td><span class="cross">No</span></td>
+                    <td><span class="check">Yes</span></td>
+                    <td><span class="check">Yes</span></td>
+                    <td>Manual download, air-gapped</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Commands</h2>
+        <div class="terminal-demo">
+            <div class="line">
+                <span class="prompt">$</span>
+                <span class="highlight">origin help</span>
+            </div>
+            <div class="line"><span class="output">Available commands:</span></div>
+            <div class="line"><span class="output">  origin help                                    - Show this help message</span></div>
+            <div class="line"><span class="output">  origin clear                                   - Clear the console</span></div>
+            <div class="line"><span class="output">  origin exit                                    - Exit the CLI</span></div>
+            <div class="line"><span class="output">  origin &lt;file&gt;.or                               - Run an Origin file</span></div>
+            <div class="line"><span class="output">  origin &lt;file&gt;.py                               - Run a Python file</span></div>
+            <div class="line"><span class="output">  origin &lt;file&gt;.java                             - Compile and run a Java file</span></div>
+            <div class="line"><span class="output">  origin c &lt;file&gt;.java                           - Compile a Java file</span></div>
+            <div class="line"><span class="output">  origin create &lt;structure&gt;.otxt &lt;location&gt;       - Generate folder structure</span></div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Get started</h2>
+        <div class="install-box" style="margin: 0 auto;">
+            <div class="label">Install now</div>
+            <div class="install-command">
+                <code>curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | bash</code>
+                <button class="copy-btn" onclick="copyInstall()">Copy</button>
+            </div>
+            <p class="install-note">Then run <code>origin</code> to start the interactive CLI.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="logo">Origin</div>
+            <ul class="footer-links">
+                <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
+                <li><a href="docs.html">Documentation</a></li>
+                <li><a href="cli.html">CLI</a></li>
+                <li><a href="community.html">Community</a></li>
+                <li><a href="support.html">Support</a></li>
+            </ul>
+            <div class="copyright">&copy; 2026 Origin Organization</div>
+        </div>
+    </footer>
+
+    <script>
+        function copyInstall() {
+            const code = document.getElementById('install-code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                document.querySelectorAll('.copy-btn').forEach(btn => {
+                    btn.textContent = 'Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+        }
+    </script>
+
+</body>
+</html>
