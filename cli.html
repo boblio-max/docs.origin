@@ -10,168 +10,277 @@
     <style>
         .cli-hero {
             text-align: center;
-            padding: 6rem 0 4rem;
+            padding: 7rem 0 5rem;
         }
         .cli-hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(3.5rem, 7vw, 5.5rem);
             font-weight: 800;
             letter-spacing: -0.05em;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #000 0%, #333 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            line-height: 1.05;
+            margin-bottom: 1.5rem;
         }
         .cli-hero .tagline {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            max-width: 560px;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
         }
+
+        /* OS Tabs */
+        .os-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 0;
+        }
+        .os-tab {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: var(--font-ui);
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .os-tab:first-child { border-radius: 8px 0 0 8px; }
+        .os-tab:last-child { border-radius: 0 8px 8px 0; }
+        .os-tab:not(:last-child) { border-right: none; }
+        .os-tab.active {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        /* Install box */
         .install-box {
             background: #000;
-            border-radius: 16px;
-            padding: 2.5rem;
-            max-width: 700px;
-            margin: 0 auto 3rem;
+            border-radius: 0 0 16px 16px;
+            padding: 2rem 2.5rem 2.5rem;
+            max-width: 680px;
+            margin: 0 auto 2rem;
             position: relative;
-            overflow: hidden;
+            border: 1px solid #000;
+            border-top: none;
         }
-        .install-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #fff 0%, #666 100%);
-        }
-        .install-box .label {
-            color: #888;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1rem;
-            text-align: left;
-        }
-        .install-command {
+        .install-row {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.75rem;
             background: #111;
             border-radius: 8px;
-            padding: 1rem 1.5rem;
+            padding: 1rem 1.25rem;
             margin-bottom: 1rem;
         }
-        .install-command code {
-            flex: 1;
+        .install-row .dollar {
+            color: #555;
             font-family: var(--font-code);
             font-size: 1rem;
+            user-select: none;
+            flex-shrink: 0;
+        }
+        .install-row code {
+            flex: 1;
+            font-family: var(--font-code);
+            font-size: 0.95rem;
             color: #fff;
             overflow-x: auto;
             white-space: nowrap;
+            min-width: 0;
         }
         .copy-btn {
-            background: #333;
-            border: none;
+            background: #222;
+            border: 1px solid #333;
             border-radius: 6px;
-            padding: 0.5rem 1rem;
-            color: #fff;
-            font-size: 0.85rem;
+            padding: 0.45rem 0.9rem;
+            color: #999;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.15s;
             white-space: nowrap;
+            flex-shrink: 0;
         }
         .copy-btn:hover {
-            background: #444;
+            background: #333;
+            color: #fff;
+            border-color: #444;
         }
         .copy-btn.copied {
-            background: #22c55e;
+            background: #166534;
+            color: #fff;
+            border-color: #166534;
         }
         .install-note {
-            color: #666;
-            font-size: 0.9rem;
+            color: #555;
+            font-size: 0.85rem;
             text-align: center;
+            margin: 0;
         }
-        .install-note code {
-            background: #222;
-            padding: 0.2em 0.5em;
-            border-radius: 4px;
-            font-size: 0.85em;
-        }
+
+        /* OS panels */
+        .os-panel { display: none; }
+        .os-panel.active { display: block; }
+
+        /* Features */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
             margin-top: 2rem;
         }
         .feature-card {
-            background: var(--terminal-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            transition: all 0.2s;
+            background: var(--bg);
+            padding: 2.5rem 2rem;
+            transition: background 0.15s;
         }
         .feature-card:hover {
-            border-color: #000;
-            transform: translateY(-2px);
+            background: var(--terminal-bg);
         }
         .feature-icon {
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
+            display: block;
         }
         .feature-card h3 {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
         }
         .feature-card p {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin: 0;
+            line-height: 1.5;
         }
-        .terminal-demo {
-            background: #000;
+        .feature-card code {
+            background: var(--terminal-bg);
+            border: 1px solid var(--border);
+            padding: 0.1em 0.35em;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        /* Terminal */
+        .terminal {
+            background: #0a0a0a;
             border-radius: 12px;
-            padding: 2rem;
+            overflow: hidden;
             margin: 3rem 0;
-            font-family: var(--font-code);
-            font-size: 0.95rem;
-            color: #fff;
+            border: 1px solid #222;
         }
-        .terminal-demo .line {
-            margin-bottom: 0.5rem;
+        .terminal-chrome {
             display: flex;
-            gap: 0.75rem;
+            align-items: center;
+            gap: 8px;
+            padding: 0.85rem 1.25rem;
+            background: #111;
+            border-bottom: 1px solid #222;
         }
-        .terminal-demo .prompt {
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+        }
+        .terminal-dot:first-child { background: #ef4444; }
+        .terminal-dot:nth-child(2) { background: #eab308; }
+        .terminal-dot:nth-child(3) { background: #22c55e; }
+        .terminal-title {
+            flex: 1;
+            text-align: center;
+            font-family: var(--font-ui);
+            font-size: 0.8rem;
+            color: #555;
+            margin-right: 36px;
+        }
+        .terminal-body {
+            padding: 1.5rem;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #ccc;
+            overflow-x: auto;
+        }
+        .terminal-body .prompt {
             color: #22c55e;
             user-select: none;
         }
-        .terminal-demo .output {
-            color: #888;
-        }
-        .terminal-demo .highlight {
+        .terminal-body .cmd {
             color: #fff;
-            font-weight: 500;
         }
-        .compare-section {
-            margin-top: 4rem;
+        .terminal-body .dim {
+            color: #555;
         }
+        .terminal-body .green {
+            color: #22c55e;
+        }
+        .terminal-body .cyan {
+            color: #67e8f9;
+        }
+        .terminal-body .yellow {
+            color: #eab308;
+        }
+        .terminal-body .line {
+            display: block;
+        }
+
+        /* Command list */
+        .cmd-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .cmd-item {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .cmd-item code {
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            color: var(--text);
+            background: var(--terminal-bg);
+            border: 1px solid var(--border);
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .cmd-item span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Compare table */
         .compare-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
+            font-size: 0.95rem;
         }
         .compare-table th,
         .compare-table td {
             text-align: left;
-            padding: 1rem;
+            padding: 1rem 1.25rem;
             border-bottom: 1px solid var(--border);
         }
         .compare-table th {
             font-weight: 600;
             color: var(--text);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
         .compare-table td {
             color: var(--text-muted);
@@ -179,11 +288,40 @@
         .compare-table tr:last-child td {
             border-bottom: none;
         }
-        .check {
-            color: #22c55e;
+        .compare-table .badge-inline {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.15em 0.5em;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
         }
-        .cross {
-            color: #ef4444;
+        .badge-recommended {
+            background: #000;
+            color: #fff;
+        }
+        .check { color: #22c55e; font-weight: 600; }
+        .cross { color: #ccc; }
+
+        /* CTA */
+        .cli-cta {
+            text-align: center;
+            padding: 5rem 0;
+        }
+        .cli-cta h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .cmd-grid { grid-template-columns: 1fr; }
+            .install-row { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+            .install-row .dollar { display: none; }
+            .copy-btn { align-self: flex-end; }
         }
     </style>
 </head>
@@ -207,54 +345,61 @@
 
     <header class="cli-hero container">
         <h1>Origin CLI</h1>
-        <p class="tagline">The modern command-line interface for Origin.<br>Install in one command. Start building in seconds.</p>
+        <p class="tagline">The fastest way to run Origin. One command to install, zero dependencies, works everywhere.</p>
 
-        <div class="install-box">
-            <div class="label">Install Origin CLI</div>
-            <div class="install-command">
-                <code id="install-code">curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | sh</code>
-                <button class="copy-btn" onclick="copyInstall()">Copy</button>
-            </div>
-            <p class="install-note">Works on macOS, Linux, and Windows. Requires <code>sh</code> (Unix) or <code>PowerShell</code> (Windows).</p>
-            <p class="install-note" style="margin-top: 0.5rem;">Windows (PowerShell): <code style="font-size: 0.85em;">irm https://docs-origin.onrender.com/cliinstall.ps1 | iex</code></p>
+        <div class="os-tabs">
+            <button class="os-tab active" onclick="switchOS('unix')">macOS / Linux</button>
+            <button class="os-tab" onclick="switchOS('windows')">Windows</button>
         </div>
-
-        <div class="hero-actions" style="justify-content: center;">
-            <a href="#features" class="btn btn-primary">Features</a>
-            <a href="#compare" class="btn btn-secondary">Why CLI?</a>
+        <div class="install-box">
+            <div class="os-panel active" id="panel-unix">
+                <div class="install-row">
+                    <span class="dollar">$</span>
+                    <code id="install-code-unix">curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | sh</code>
+                    <button class="copy-btn" onclick="copyCmd('unix')">Copy</button>
+                </div>
+            </div>
+            <div class="os-panel" id="panel-windows">
+                <div class="install-row">
+                    <span class="dollar">PS&gt;</span>
+                    <code id="install-code-windows">irm https://docs-origin.onrender.com/cliinstall.ps1 | iex</code>
+                    <button class="copy-btn" onclick="copyCmd('windows')">Copy</button>
+                </div>
+            </div>
+            <p class="install-note">Then run <code style="color:#fff;background:#222;border:1px solid #333;padding:0.15em 0.4em;border-radius:3px;font-size:0.85em;">origin</code> to start the interactive REPL.</p>
         </div>
     </header>
 
     <section class="section container" id="features">
-        <h2 class="section-title">Everything you need</h2>
+        <h2 class="section-title">Built for developers</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">⚡</div>
+                <span class="feature-icon">&#9889;</span>
                 <h3>Instant Install</h3>
                 <p>One command. No Python, no pip, no package managers. Just curl and go.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔧</div>
+                <span class="feature-icon">&#9881;</span>
                 <h3>Project Scaffolding</h3>
                 <p>Create new Origin projects with <code>origin create</code>. Folder structure generated instantly.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">▶️</div>
+                <span class="feature-icon">&#9654;</span>
                 <h3>Run Anything</h3>
                 <p>Execute <code>.or</code>, <code>.py</code>, and <code>.java</code> files from one interface.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🔄</div>
+                <span class="feature-icon">&#8635;</span>
                 <h3>Auto-Update</h3>
                 <p>Keep your CLI current with <code>origin update cli</code>. Always on the latest version.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🎯</div>
-                <h3>REPL Mode</h3>
-                <p>Interactive session for testing code snippets. Just type <code>origin</code> to start.</p>
+                <span class="feature-icon">&#9675;</span>
+                <h3>Interactive REPL</h3>
+                <p>Test code snippets live. Just type <code>origin</code> with no arguments to start.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">🩺</div>
+                <span class="feature-icon">&#9673;</span>
                 <h3>Doctor Checks</h3>
                 <p>Diagnose issues with <code>origin doctor</code>. Verifies dependencies and environment.</p>
             </div>
@@ -263,79 +408,66 @@
 
     <section class="section container">
         <h2 class="section-title">See it in action</h2>
-        <div class="terminal-demo">
-            <div class="line">
-                <span class="prompt">$</span>
-                <span class="highlight">curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | sh</span>
+        <div class="terminal">
+            <div class="terminal-chrome">
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+                <div class="terminal-dot"></div>
+                <div class="terminal-title">bash</div>
             </div>
-            <div class="line">
-                <span class="output">Installing Origin CLI...</span>
-            </div>
-            <div class="line">
-                <span class="output">Detected: linux x86_64</span>
-            </div>
-            <div class="line">
-                <span class="output">Downloaded origin to /usr/local/bin</span>
-            </div>
-            <div class="line">
-                <span class="output" style="color: #22c55e;">Installation complete! Run 'origin' to get started.</span>
-            </div>
-            <div class="line" style="margin-top: 1rem;">
-                <span class="prompt">$</span>
-                <span class="highlight">origin</span>
-            </div>
-            <div class="line">
-                <span class="output">========================================================</span>
-            </div>
-            <div class="line">
-                <span class="output"> ▄██████▄     ▄████████  ▄█    ▄██████▄    ▄█   ███▄▄▄▄</span>
-            </div>
-            <div class="line">
-                <span class="output">Welcome to the Origin Interactive CLI!</span>
-            </div>
-            <div class="line">
-                <span class="output">Type 'origin help' for a list of commands.</span>
-            </div>
-            <div class="line">
-                <span class="prompt" style="color: #22c55e;">&gt;</span>
-                <span class="output" style="color: #888;">_</span>
+            <div class="terminal-body">
+<span class="line"><span class="prompt">$ </span><span class="cmd">curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | sh</span></span>
+<span class="line"><span class="dim"></span></span>
+<span class="line"><span class="dim">  &#9660;████&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;     &#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;  &#9660;&#9660;    &#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;    &#9660;&#9660;   &#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;&#9660;</span></span>
+<span class="line"><span class="dim">&#9608;&#9608;&#9608;    &#9608;&#9608;&#9608;   &#9608;&#9608;&#9608;    &#9608;&#9608;&#9608; &#9608;&#9608;&#9608;  &#9608;&#9608;&#9608;      &#9608;&#9608;&#9608; &#9608;&#9608;&#9608;  &#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;&#9608;</span></span>
+<span class="line"><span class="cyan">Origin CLI Installer</span></span>
+<span class="line"><span class="yellow">Detected: linux x86_64</span></span>
+<span class="line"><span class="dim">Downloading from: https://github.com/.../origin</span></span>
+<span class="line"><span class="dim">Installing to /usr/local/bin/origin...</span></span>
+<span class="line"><span class="green">Installed origin to /usr/local/bin/origin</span></span>
+<span class="line"><span class="green">Installation complete!</span></span>
+<span class="line"></span>
+<span class="line"><span class="prompt">$ </span><span class="cmd">origin</span></span>
+<span class="line"><span class="cyan">Welcome to the Origin Interactive CLI!</span></span>
+<span class="line"><span class="dim">Type 'origin help' for a list of commands.</span></span>
+<span class="line"><span class="green">&gt; </span><span class="dim">_</span></span>
             </div>
         </div>
     </section>
 
     <section class="section container" id="compare">
-        <h2 class="section-title">Why use the CLI?</h2>
+        <h2 class="section-title">Why CLI?</h2>
         <table class="compare-table">
             <thead>
                 <tr>
                     <th>Method</th>
-                    <th>Requires Python</th>
-                    <th>Cross-Platform</th>
+                    <th>Python Required</th>
                     <th>Standalone</th>
+                    <th>Auto-Update</th>
                     <th>Best For</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>CLI (curl install)</strong></td>
-                    <td><span class="cross">No</span></td>
-                    <td><span class="check">Yes</span></td>
-                    <td><span class="check">Yes</span></td>
+                    <td><strong>curl / irm</strong> <span class="badge-inline badge-recommended">RECOMMENDED</span></td>
+                    <td><span class="check">&#10003; No</span></td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="check">&#10003;</span></td>
                     <td>Quick setup, any machine</td>
                 </tr>
                 <tr>
                     <td><strong>pip install</strong></td>
-                    <td><span class="check">Yes (3.10+)</span></td>
-                    <td><span class="check">Yes</span></td>
-                    <td><span class="cross">No</span></td>
+                    <td>Yes (3.10+)</td>
+                    <td><span class="cross">&#10007;</span></td>
+                    <td><span class="check">&#10003;</span></td>
                     <td>Python projects, Raspberry Pi</td>
                 </tr>
                 <tr>
-                    <td><strong>Standalone binary</strong></td>
-                    <td><span class="cross">No</span></td>
-                    <td><span class="check">Yes</span></td>
-                    <td><span class="check">Yes</span></td>
-                    <td>Manual download, air-gapped</td>
+                    <td><strong>Manual download</strong></td>
+                    <td><span class="check">&#10003; No</span></td>
+                    <td><span class="check">&#10003;</span></td>
+                    <td><span class="cross">&#10007;</span></td>
+                    <td>Air-gapped systems</td>
                 </tr>
             </tbody>
         </table>
@@ -343,33 +475,64 @@
 
     <section class="section container">
         <h2 class="section-title">Commands</h2>
-        <div class="terminal-demo">
-            <div class="line">
-                <span class="prompt">$</span>
-                <span class="highlight">origin help</span>
+        <p>Everything you need from a single binary.</p>
+        <div class="cmd-grid">
+            <div class="cmd-item">
+                <code>origin</code>
+                <span>Start interactive REPL</span>
             </div>
-            <div class="line"><span class="output">Available commands:</span></div>
-            <div class="line"><span class="output">  origin help                                    - Show this help message</span></div>
-            <div class="line"><span class="output">  origin clear                                   - Clear the console</span></div>
-            <div class="line"><span class="output">  origin exit                                    - Exit the CLI</span></div>
-            <div class="line"><span class="output">  origin &lt;file&gt;.or                               - Run an Origin file</span></div>
-            <div class="line"><span class="output">  origin &lt;file&gt;.py                               - Run a Python file</span></div>
-            <div class="line"><span class="output">  origin &lt;file&gt;.java                             - Compile and run a Java file</span></div>
-            <div class="line"><span class="output">  origin c &lt;file&gt;.java                           - Compile a Java file</span></div>
-            <div class="line"><span class="output">  origin create &lt;structure&gt;.otxt &lt;location&gt;       - Generate folder structure</span></div>
+            <div class="cmd-item">
+                <code>origin &lt;file&gt;.or</code>
+                <span>Run an Origin file</span>
+            </div>
+            <div class="cmd-item">
+                <code>origin &lt;file&gt;.py</code>
+                <span>Run a Python file</span>
+            </div>
+            <div class="cmd-item">
+                <code>origin &lt;file&gt;.java</code>
+                <span>Compile and run Java</span>
+            </div>
+            <div class="cmd-item">
+                <code>origin c &lt;file&gt;.java</code>
+                <span>Compile a Java file</span>
+            </div>
+            <div class="cmd-item">
+                <code>origin create</code>
+                <span>Scaffold a new project</span>
+            </div>
+            <div class="cmd-item">
+                <code>origin doctor</code>
+                <span>Check environment health</span>
+            </div>
+            <div class="cmd-item">
+                <code>origin update cli</code>
+                <span>Update to latest version</span>
+            </div>
         </div>
     </section>
 
-    <section class="section container">
-        <h2 class="section-title">Get started</h2>
-        <div class="install-box" style="margin: 0 auto;">
-            <div class="label">Install now</div>
-            <div class="install-command">
-                <code>curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | sh</code>
-                <button class="copy-btn" onclick="copyInstall()">Copy</button>
+    <section class="cli-cta container">
+        <h2>Start building with Origin</h2>
+        <div class="os-tabs" style="margin-bottom: 0;">
+            <button class="os-tab active" onclick="switchOS2('unix')">macOS / Linux</button>
+            <button class="os-tab" onclick="switchOS2('windows')">Windows</button>
+        </div>
+        <div class="install-box" style="max-width: 640px;">
+            <div class="os-panel active" id="panel2-unix">
+                <div class="install-row">
+                    <span class="dollar">$</span>
+                    <code>curl -fsSL https://docs-origin.onrender.com/cliinstall.sh | sh</code>
+                    <button class="copy-btn" onclick="copyCmd('unix')">Copy</button>
+                </div>
             </div>
-            <p class="install-note">Then run <code>origin</code> to start the interactive CLI.</p>
-            <p class="install-note" style="margin-top: 0.5rem;">Windows: <code style="font-size: 0.85em;">irm https://docs-origin.onrender.com/cliinstall.ps1 | iex</code></p>
+            <div class="os-panel" id="panel2-windows">
+                <div class="install-row">
+                    <span class="dollar">PS&gt;</span>
+                    <code>irm https://docs-origin.onrender.com/cliinstall.ps1 | iex</code>
+                    <button class="copy-btn" onclick="copyCmd('windows')">Copy</button>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -388,16 +551,31 @@
     </footer>
 
     <script>
-        function copyInstall() {
-            const code = document.getElementById('install-code').textContent;
-            navigator.clipboard.writeText(code).then(() => {
+        function switchOS(os) {
+            document.querySelectorAll('.os-tabs')[0].querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.os-tabs')[0].querySelectorAll('.os-tab')[os === 'unix' ? 0 : 1].classList.add('active');
+            document.getElementById('panel-unix').classList.toggle('active', os === 'unix');
+            document.getElementById('panel-windows').classList.toggle('active', os === 'windows');
+        }
+        function switchOS2(os) {
+            document.querySelectorAll('.os-tabs')[1].querySelectorAll('.os-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.os-tabs')[1].querySelectorAll('.os-tab')[os === 'unix' ? 0 : 1].classList.add('active');
+            document.getElementById('panel2-unix').classList.toggle('active', os === 'unix');
+            document.getElementById('panel2-windows').classList.toggle('active', os === 'windows');
+        }
+        function copyCmd(os) {
+            const id = os === 'unix' ? 'install-code-unix' : 'install-code-windows';
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(text).then(() => {
                 document.querySelectorAll('.copy-btn').forEach(btn => {
-                    btn.textContent = 'Copied!';
-                    btn.classList.add('copied');
-                    setTimeout(() => {
-                        btn.textContent = 'Copy';
-                        btn.classList.remove('copied');
-                    }, 2000);
+                    if (btn.closest('.os-panel.active')) {
+                        btn.textContent = 'Copied!';
+                        btn.classList.add('copied');
+                        setTimeout(() => {
+                            btn.textContent = 'Copy';
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    }
                 });
             });
         }
