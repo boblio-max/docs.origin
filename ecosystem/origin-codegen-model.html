@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Origin Codegen Model — AI-Powered Origin Code Generation</title>
+    <link rel="icon" href="../images/Origin_tiger.png" type="image/png">
+    <link rel="stylesheet" href="../styles.css">
+    <meta name="description" content="A fine-tuned LLM that generates Origin code from natural language instructions. Built on Qwen2.5-1.5B with LoRA.">
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">Origin</a>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="https://mintlify.wiki/boblio-max/origin">Docs</a></li>
+                <li><a href="../tutorials.html">Tutorials</a></li>
+                <li><a href="../download.html">Download</a></li>
+                <li><a href="../cli.html">CLI</a></li>
+                <li><a href="../repl.html">REPL</a></li>
+                <li><a href="../osf.html">Origin Systems</a></li>
+                <li><a href="../community.html">Community</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="padding-bottom: 4rem;">
+        <div class="container">
+            <h1>Origin Codegen Model</h1>
+            <p>An AI model that generates Origin code from natural language instructions.</p>
+        </div>
+    </header>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h3>What It Does</h3>
+                    <p>Type a plain-English instruction like "Print the product of 2093 and 2516" and the model generates valid Origin code: <code>print 2093 * 2516</code>.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>How It Works</h3>
+                    <p>Built on Qwen2.5-1.5B, fine-tuned with LoRA on a curated dataset of Origin instruction-output pairs. Trained for 3 epochs with AdamW optimization.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🚀</span>
+                    <h3>Get Started</h3>
+                    <p>Clone the repo, install dependencies, and run training or inference in minutes.</p>
+                    <a href="https://github.com/boblio-max/origin-codegen-model" class="btn btn-secondary" style="margin-top: 1.5rem;">View on GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Quick Start</h2>
+        <div class="content-grid">
+            <div class="content-block">
+                <h3>Install Dependencies</h3>
+                <div class="terminal-window">
+                    <div class="terminal-line"><span class="prompt">$</span> python -m venv .venv</div>
+                    <div class="terminal-line"><span class="prompt">$</span> .venv\Scripts\activate</div>
+                    <div class="terminal-line"><span class="prompt">$</span> pip install torch transformers peft accelerate</div>
+                </div>
+            </div>
+            <div class="content-block">
+                <h3>Train the Model</h3>
+                <div class="terminal-window">
+                    <div class="terminal-line"><span class="prompt">$</span> python train.py</div>
+                    <div class="terminal-line" style="color: var(--text-muted);">Epoch 1 loss: 1.234</div>
+                    <div class="terminal-line" style="color: var(--text-muted);">Epoch 2 loss: 0.567</div>
+                    <div class="terminal-line" style="color: var(--text-muted);">Epoch 3 loss: 0.234</div>
+                </div>
+            </div>
+            <div class="content-block">
+                <h3>Run Inference</h3>
+                <div class="terminal-window">
+                    <div class="terminal-line"><span class="prompt">$</span> python origin-codegen.py</div>
+                    <div class="terminal-line" style="color: var(--text-muted);">> Print the sum of 100 and 200</div>
+                    <div class="terminal-line" style="color: var(--text-muted);">print 100 + 200</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <h2 class="section-title">Architecture</h2>
+        <div class="content-grid">
+            <div class="content-block">
+                <div style="margin-top: 1rem;">
+                    <p style="margin-bottom: 0.5rem;"><strong>Base Model:</strong> Qwen2.5-1.5B (1.5B parameters)</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Fine-Tuning:</strong> LoRA (Low-Rank Adaptation)</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Rank:</strong> 8, Alpha: 16</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Target Modules:</strong> q_proj, v_proj</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Training Data:</strong> 1,800 instruction-output pairs</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>Epochs:</strong> 3</p>
+                    <p><strong>Optimizer:</strong> AdamW (lr=2e-4)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-container">
+            <div class="logo" style="font-size: 1rem;">Origin</div>
+            <div class="copyright">© 2026 Origin Organization</div>
+        </div>
+    </footer>
+
+    <script src="../main.js"></script>
+</body>
+</html>
