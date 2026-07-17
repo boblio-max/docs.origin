@@ -62,8 +62,10 @@ nav {
 
 .nav-links {
     display: flex;
-    gap: 2rem;
+    gap: 2.5rem;
     list-style: none;
+    flex-wrap: wrap;
+    justify-content: flex-end;
 }
 
 .nav-links a {
