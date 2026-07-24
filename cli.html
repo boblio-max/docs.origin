@@ -366,7 +366,7 @@
                     <button class="copy-btn" onclick="copyCmd('windows')">Copy</button>
                 </div>
             </div>
-            <p class="install-note">Then run <code style="color:#fff;background:#222;border:1px solid #333;padding:0.15em 0.4em;border-radius:3px;font-size:0.85em;">origin</code> to start the interactive REPL.</p>
+            <p class="install-note">Then run <code style="color:#fff;background:#222;border:1px solid #333;padding:0.15em 0.4em;border-radius:3px;font-size:0.85em;">origin</code> to start the interactive CLI, or <code style="color:#fff;background:#222;border:1px solid #333;padding:0.15em 0.4em;border-radius:3px;font-size:0.85em;">origin code.or</code> to run a file directly.</p>
         </div>
     </header>
 
@@ -390,8 +390,8 @@
             </div>
             <div class="feature-card">
                 <span class="feature-icon">&#8635;</span>
-                <h3>Auto-Update</h3>
-                <p>Keep your CLI current with <code>origin update cli</code>. Always on the latest version.</p>
+                <h3>Direct Execution</h3>
+                <p>Run files straight from the command line: <code>origin code.or</code>, <code>origin script.py</code>.</p>
             </div>
             <div class="feature-card">
                 <span class="feature-icon">&#9675;</span>
@@ -400,8 +400,8 @@
             </div>
             <div class="feature-card">
                 <span class="feature-icon">&#9673;</span>
-                <h3>Doctor Checks</h3>
-                <p>Diagnose issues with <code>origin doctor</code>. Verifies dependencies and environment.</p>
+                <h3>Language Manager</h3>
+                <p>Install, update, and uninstall Origin language support with <code>origin install</code>.</p>
             </div>
         </div>
     </section>
@@ -479,7 +479,7 @@
         <div class="cmd-grid">
             <div class="cmd-item">
                 <code>origin</code>
-                <span>Start interactive REPL</span>
+                <span>Start interactive CLI</span>
             </div>
             <div class="cmd-item">
                 <code>origin &lt;file&gt;.or</code>
@@ -502,12 +502,12 @@
                 <span>Scaffold a new project</span>
             </div>
             <div class="cmd-item">
-                <code>origin doctor</code>
-                <span>Check environment health</span>
+                <code>origin in &lt;path&gt;</code>
+                <span>Change working directory</span>
             </div>
             <div class="cmd-item">
-                <code>origin update cli</code>
-                <span>Update to latest version</span>
+                <code>origin install &lt;lang&gt;</code>
+                <span>Install a language</span>
             </div>
         </div>
     </section>
