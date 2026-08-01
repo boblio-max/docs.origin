@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.14. Covers syntax, data types, control flow, functions, classes, IMU sensors, hardware control, and more.">
+    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.15. Covers syntax, data types, control flow, functions, classes, IMU sensors, hardware control, and more.">
     <title>Origin Documentation — Complete Reference</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -77,9 +77,9 @@
         <main class="docs-content">
             <div class="docs-header">
                 <h1>Documentation</h1>
-                <p class="subtitle">Complete reference for the Origin programming language v1.7.14.</p>
+                <p class="subtitle">Complete reference for the Origin programming language v1.7.15.</p>
                 <div class="callout" style="margin-top: 1.5rem; padding: 1rem 1.25rem; border-left: 4px solid var(--text); background: rgba(0,0,0,0.03); border-radius: 6px;">
-                    <strong>v1.7.14 update (July 2026):</strong> adds NN library for fine-tuning transformer models from pure Origin code (<code>import transformer</code>), bytecode VM improvements (function scope chaining, .or file inlining), native IMU sensor support, and more. The bytecode VM continues on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
+                    <strong>v1.7.15 update (July 2026):</strong> adds typed parameters and typed class fields (<code>def add(a: int, b: int)</code>, <code>class Point(x: int, y: int)</code>), typed loop variables and condition casts, type-aware casts on builtin arguments (<code>len(x: str)</code>, <code>sqrt(x: float)</code>, <code>rand_num(1: int, 100: int)</code>, <code>range(0: int, 10: int, 2: int)</code>), auto-inference for untyped <code>let</code>/<code>const</code> declarations with a warning nudge, a <code>range(start, end, step)</code> step argument, and stricter const immutability. The bytecode VM continues on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
                 </div>
             </div>
 
@@ -146,7 +146,7 @@ let count = 0
 
 # Constants — immutable after assignment
 const PI: float = 3.14159
-const VERSION: str = "1.7.14"
+const VERSION: str = "1.7.15"
 const MAX_SERVOS: int = 6
 
 # Reassignment
@@ -347,6 +347,18 @@ greet("Origin")
 let result = add(10, 20)
 print result    # 30</code></pre>
 
+                <h3>Typed Parameters</h3>
+                <p>Parameters may carry a <code>:type</code> annotation (<code>int</code>, <code>float</code>, <code>str</code>, <code>bool</code>) for strict, self-documenting signatures. Untyped parameters remain fully supported.</p>
+<pre><code>def add(a: int, b: int) {
+    return a + b
+}
+
+let result = add(2, 3)
+print result    # 5
+
+# Casts on call arguments work too
+print add(2: int, 3: int)</code></pre>
+
                 <h3>Recursion</h3>
 <pre><code>def factorial(n) {
     if n &lt;= 1 {
@@ -379,11 +391,11 @@ let val = calculate(
             <!-- ============================================================ -->
             <section id="classes">
                 <h2>Classes</h2>
-                <p>Origin supports class definitions with constructor fields defined in parentheses, methods with <code>self</code>, and attribute access via dot notation.</p>
-<pre><code>class Drone(x, y) {
-    def setPos(self, nx, ny) {
-        self.x = nx
-        self.y = ny
+                <p>Origin supports class definitions with constructor fields defined in parentheses, methods with <code>self</code>, and attribute access via dot notation. Fields may carry <code>:type</code> annotations.</p>
+<pre><code>class Point(x: int, y: int) {
+    def scale(self, factor: float) {
+        self.x = self.x * factor
+        self.y = self.y * factor
     }
 
     def show(self, label) {
@@ -394,8 +406,9 @@ let val = calculate(
 }
 
 # Create instance with initial values
-let d = Drone(100, 200)
-d.show("Position:")
+let p = Point(3, 4)
+p.scale(2.0)
+p.show("Point:")
 
 # Update via method
 d.setPos(500, 600)
@@ -503,12 +516,23 @@ let b: bool = bool(1)          # true</code></pre>
             <!-- ============================================================ -->
             <section id="range">
                 <h2>Range</h2>
-                <p>Generate a sequence of integers from <code>start</code> (inclusive) to <code>end</code> (exclusive). Commonly used with <code>for</code> loops.</p>
+                <p>Generate a sequence of integers from <code>start</code> (inclusive) to <code>end</code> (exclusive). An optional third argument sets the <code>step</code>. Commonly used with <code>for</code> loops.</p>
 <pre><code># range(start, end)
 for i in range(0, 5) {
     print i
 }
 # Output: 0 1 2 3 4
+
+# range(start, end, step)
+for i in range(0, 10, 2) {
+    print i
+}
+# Output: 0 2 4 6 8
+
+# Typed loop variable
+for i: int in range(0, 5) {
+    print i
+}
 
 # Use with variables
 let count: int = 10
