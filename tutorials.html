@@ -162,17 +162,15 @@ set pin 17, 0    # LOW</code></pre>
 
     <section class="section container">
         <h2 class="section-title">Using the standard library</h2>
-        <p>Origin ships with <code>calc.or</code> and <code>graph.or</code> in <code>lib/</code>. Import them by name:</p>
+        <p>Origin ships with <code>calc.or</code> (and <code>graph.or</code>) in <code>lib/</code>. Import them by name:</p>
         <pre><code>import calc
-import graph
 
-calc = calc()
-print calc.sqrt(25)
-print calc.pi
-
-graph "Sine Wave" with {
-    X: color(0, 0, 1) as "Line 1",
-}</code></pre>
+let c = calc()
+print c.sin(0, "r")
+print c.cos(0, "d")
+print floor(3.7)   // 3
+print 7 // 2       // 3
+</code></pre>
         <p>Libraries are just <code>.or</code> files. You can write your own and put them next to your script — <code>import mylib</code> will pick them up automatically.</p>
     </section>
 

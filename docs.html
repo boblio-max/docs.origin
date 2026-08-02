@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.16. Covers syntax, data types, control flow, functions, classes, IMU sensors, hardware control, and more.">
+    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.18. Covers syntax, data types, control flow, functions, classes, IMU sensors, hardware control, and more.">
     <title>Origin Documentation — Complete Reference</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -77,9 +77,9 @@
         <main class="docs-content">
             <div class="docs-header">
                 <h1>Documentation</h1>
-                <p class="subtitle">Complete reference for the Origin programming language v1.7.16.</p>
+                <p class="subtitle">Complete reference for the Origin programming language v1.7.18.</p>
                 <div class="callout" style="margin-top: 1.5rem; padding: 1rem 1.25rem; border-left: 4px solid var(--text); background: rgba(0,0,0,0.03); border-radius: 6px;">
-                    <strong>v1.7.16 update (August 2026):</strong> adds a built-in <code>pi</code> constant (<code>print pi</code>) and the <code>abs</code> keyword function (<code>print abs(-5)</code>) for absolute value of numeric literals. The v1.7.15 release added typed parameters and typed class fields (<code>def add(a: int, b: int)</code>, <code>class Point(x: int, y: int)</code>), typed loop variables and condition casts, type-aware casts on builtin arguments (<code>len(x: str)</code>, <code>sqrt(x: float)</code>, <code>rand_num(1: int, 100: int)</code>, <code>range(0: int, 10: int, 2: int)</code>), auto-inference for untyped <code>let</code>/<code>const</code> declarations with a warning nudge, a <code>range(start, end, step)</code> step argument, and stricter const immutability. The bytecode VM continues on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
+                    <strong>v1.7.18 update (August 2026):</strong> adds built-in <code>floor</code> and <code>ceil</code> keyword functions (<code>print floor(3.7)</code> → <code>3</code>, <code>print ceil(3.2)</code> → <code>4</code>), floor division with <code>//</code> (<code>print 7 // 2</code> → <code>3</code>), a <code>skip</code> alias for <code>continue</code>, and precise syntax-error diagnostics that report the exact line and column with a caret pointer and a helpful suggestion. The v1.7.16 release added a built-in <code>pi</code> constant (<code>print pi</code>) and the <code>abs</code> keyword function (<code>print abs(-5)</code>) for absolute value of numeric literals. The bytecode VM continues on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
                 </div>
             </div>
 
@@ -146,7 +146,7 @@ let count = 0
 
 # Constants — immutable after assignment
 const PI: float = 3.14159
-const VERSION: str = "1.7.16"
+ const VERSION: str = "1.7.18"
 const MAX_SERVOS: int = 6
 
 # Reassignment
@@ -308,7 +308,7 @@ while i &lt; 100 {
     }
     if i % 2 == 0 {
         i = i + 1
-        continue       # skip to next iteration
+        continue       # skip to next iteration (skip also works)
     }
     print i
     i = i + 1
@@ -493,7 +493,11 @@ let age: int = int(input "Enter your age: ")</code></pre>
 
                 <h3>Math</h3>
 <pre><code>let root = sqrt(16.0)          # 4.0
-let r = rand_num(1, 100)       # random int between 1 and 100</code></pre>
+let r = rand_num(1, 100)       # random int between 1 and 100
+let a = abs(-5)                # 5
+let f = floor(3.7)             # 3
+let c = ceil(3.2)              # 4
+print pi                       # 3.141592653589793</code></pre>
 
                 <h3>Collections</h3>
 <pre><code>let items = [1, 2, 3, 4, 5]

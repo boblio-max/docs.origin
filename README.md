@@ -23,12 +23,12 @@ It contains:
 
 Open `index.html` to view the site locally.
 
-### Current Version: v1.7.16
+### Current Version: v1.7.18
 
 The site tracks the latest stable Origin release. Download bundles live under `assets/`:
 
-- `OriginInstallerV1.7.16.zip` -- current stable (August 2026)
-- `OriginInstallerV1.7.14.zip`, `V1.7.9`, `V1.7.8`, `V1.7.7`, `V1.7.6`, `V1.7.5` -- legacy archives
+- `OriginInstallerV1.7.18.zip` -- current stable (August 2026)
+- `OriginInstallerV1.7.16.zip`, `OriginInstallerV1.7.14.zip`, `V1.7.9`, `V1.7.8`, `V1.7.7`, `V1.7.6`, `V1.7.5` -- legacy archives
 
 ### Page map
 

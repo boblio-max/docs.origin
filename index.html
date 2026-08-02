@@ -39,7 +39,7 @@
         <p align="left">A hardware-first, domain-specific language built for robotics, AI, and low-latency systems. Expressive syntax meets reliable control. Now shipping standalone installers for Windows, macOS, and Linux.</p>
 
         <div class="hero-actions">
-            <a href="download.html" class="btn btn-primary" align="left">Download v1.7.16</a>
+            <a href="download.html" class="btn btn-primary" align="left">Download v1.7.18</a>
             <a href="cli.html" class="btn btn-primary">Install CLI</a>
             <a href="docs.html" class="btn btn-secondary">Documentation</a>
         </div>
@@ -74,20 +74,22 @@
     </section>
 
     <section class="section container">
-        <h2 class="section-title">v1.7.16 Stable Now Live</h2>
+        <h2 class="section-title">v1.7.18 Stable Now Live</h2>
         <div class="content-grid">
             <div class="content-block">
-                <p>The latest release adds a built-in <code>pi</code> constant and <code>abs</code> keyword function, alongside the v1.7.15 additions of typed parameters, typed class fields, type-aware casts on builtin arguments, auto-inference for untyped declarations, a <code>range</code> step argument, and stricter const immutability. Origin is designed to be the ultimate bridge between software logic and hardware execution.</p>
+                <p>The latest release adds built-in <code>floor</code> and <code>ceil</code> keyword functions, floor division (<code>//</code>), a <code>skip</code> alias for <code>continue</code>, and precise syntax-error diagnostics with line/column caret reporting. The v1.7.16 additions of a <code>pi</code> constant and <code>abs</code> keyword function continue to work as before. Origin is designed to be the ultimate bridge between software logic and hardware execution.</p>
                 <div style="margin-top: 1.5rem;">
-                    <p style="margin-bottom: 0.5rem;"><strong>• Pi Constant:</strong> The <code>pi</code> constant is now a built-in keyword (<code>print pi</code> → <code>3.141592653589793</code>).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Abs Function:</strong> The <code>abs</code> keyword computes absolute value of numeric literals (<code>print abs(-5)</code> → <code>5</code>).</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Floor / Ceil:</strong> New built-in <code>floor</code> and <code>ceil</code> keyword functions (<code>print floor(3.7)</code> → <code>3</code>, <code>print ceil(3.2)</code> → <code>4</code>).</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Floor Division:</strong> The <code>//</code> operator performs integer floor division in both the VM and interpreter (<code>print 7 // 2</code> → <code>3</code>).</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Skip Alias:</strong> <code>skip</code> now works as an alias for <code>continue</code> inside loops.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Better Syntax Errors:</strong> Parse failures now report the exact line and column with a caret pointer and a helpful suggestion instead of a bare message.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Pi &amp; Abs:</strong> The <code>pi</code> constant and <code>abs</code> keyword function from v1.7.16 (<code>print pi</code> → <code>3.141592653589793</code>).</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Typed Parameters:</strong> Annotate function and method parameters (<code>def add(a: int, b: int)</code>) and class fields (<code>class Point(x: int, y: int)</code>) for strict, self-documenting code.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Typed Loops &amp; Conditions:</strong> Typed loop variables (<code>for i: int in range(0, 10)</code>) and optional condition casts (<code>if (cond): bool</code>).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Builtin Arg Casts:</strong> Type-aware casts on builtin calls (<code>len(x: str)</code>, <code>sqrt(x: float)</code>, <code>rand_num(1: int, 100: int)</code>, <code>range(0: int, 10: int, 2: int)</code>).</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Auto-Inference:</strong> <code>let</code>/<code>const</code> without a type annotation infer the type automatically, with a friendly warning nudging you toward strict typing.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Range Step:</strong> <code>range(start, end, step)</code> supports an optional third argument.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Const Safety:</strong> Reassigning a <code>const</code> is now rejected with a clear error in both the VM and interpreter.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Rebuilt Installer (August 2026):</strong> The Windows binary has been rebuilt from the v1.7.16 reference sources with the flat-layout imports normalized, so the released <code>origin.exe</code> no longer depends on the in-progress bytecode VM packages.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Rebuilt Installer (August 2026):</strong> The Windows binary has been rebuilt from the v1.7.18 reference sources with the flat-layout imports normalized, so the released <code>origin.exe</code> no longer depends on the in-progress bytecode VM packages.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Cross-Platform Builds:</strong> Native installers are now produced for Windows (x64), macOS (universal: Apple Silicon + Intel), and Linux (x64 + Raspberry Pi). A new GitHub Actions matrix builds each platform's bundle with per-binary <code>SHA256SUMS</code> verification.</p>
                     <p><strong>• Coming Next (v1.8):</strong> A dedicated bytecode compiler and VM (<code>runnerByte.py</code>) is in active development on the <code>origin-dev</code> branch — it will replace the AST-to-Python interpreter behind the scenes while keeping the Origin surface stable.</p>
                 </div>
