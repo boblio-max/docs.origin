@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.18. Covers syntax, data types, control flow, functions, classes, IMU sensors, hardware control, and more.">
+    <meta name="description" content="Complete reference documentation for the Origin programming language v1.7.19. Covers syntax, data types, control flow, functions, classes, IMU sensors, hardware control, and more.">
     <title>Origin Documentation — Complete Reference</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -77,9 +77,9 @@
         <main class="docs-content">
             <div class="docs-header">
                 <h1>Documentation</h1>
-                <p class="subtitle">Complete reference for the Origin programming language v1.7.18.</p>
+                <p class="subtitle">Complete reference for the Origin programming language v1.7.19.</p>
                 <div class="callout" style="margin-top: 1.5rem; padding: 1rem 1.25rem; border-left: 4px solid var(--text); background: rgba(0,0,0,0.03); border-radius: 6px;">
-                    <strong>v1.7.18 update (August 2026):</strong> adds built-in <code>floor</code> and <code>ceil</code> keyword functions (<code>print floor(3.7)</code> → <code>3</code>, <code>print ceil(3.2)</code> → <code>4</code>), floor division with <code>//</code> (<code>print 7 // 2</code> → <code>3</code>), a <code>skip</code> alias for <code>continue</code>, and precise syntax-error diagnostics that report the exact line and column with a caret pointer and a helpful suggestion. The v1.7.16 release added a built-in <code>pi</code> constant (<code>print pi</code>) and the <code>abs</code> keyword function (<code>print abs(-5)</code>) for absolute value of numeric literals. The bytecode VM continues on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
+                    <strong>v1.7.19 update (August 2026):</strong> adds multi-assignment declarations (<code>let a, b = 1, 2</code>) with per-name type annotations (<code>let p, q: int, str = 6, "hi"</code>), stricter type checking on <code>let</code> across both the interpreter and the bytecode VM, <code>__file__</code> support for library imports, and an expanded HuggingFace-style transformer library (device selection, tokenization, generation, evaluation, LoRA adapters, and a one-shot <code>run_pipeline</code> fine-tuner). The v1.7.18 release added built-in <code>floor</code>/<code>ceil</code> keyword functions, floor division with <code>//</code>, a <code>skip</code> alias for <code>continue</code>, and precise syntax-error diagnostics with a caret pointer. The bytecode VM continues on the <a href="https://github.com/boblio-max/origin-dev">origin-dev</a> branch and will become the default backend in v1.8.
                 </div>
             </div>
 
@@ -146,7 +146,7 @@ let count = 0
 
 # Constants — immutable after assignment
 const PI: float = 3.14159
- const VERSION: str = "1.7.18"
+const VERSION: str = "1.7.19"
 const MAX_SERVOS: int = 6
 
 # Reassignment
