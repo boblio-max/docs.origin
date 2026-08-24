@@ -35,7 +35,7 @@
         <p align="left">A hardware-first, domain-specific language built for robotics, AI, and low-latency systems. Expressive syntax meets reliable control.</p>
         
         <div class="hero-actions">
-            <a href="download.html" class="btn btn-primary" align="left">Download v1.7.19</a>
+            <a href="download.html" class="btn btn-primary" align="left">Download v1.7.20</a>
             <a href="docs.html" class="btn btn-secondary">Documentation</a>
         </div>
 
@@ -69,12 +69,15 @@
     </section>
 
     <section class="section container">
-        <h2 class="section-title">v1.7.19 Stable Now Live</h2>
+        <h2 class="section-title">v1.7.20 Stable Now Live</h2>
         <div class="content-grid">
             <div class="content-block">
-                <p>The latest release adds multi-assignment declarations (<code>let a, b = 1, 2</code>) with per-name type annotations, stricter type checking on <code>let</code> across both the interpreter and the bytecode VM, <code>__file__</code> support for library imports, and an expanded HuggingFace-style transformer library (device selection, tokenization, generation, evaluation, LoRA adapters, and a one-shot <code>run_pipeline</code> fine-tuner). Origin is designed to be the ultimate bridge between software logic and hardware execution.</p>
+                <p>The v1.7.20 release adds a GUI automation library and a <code>run command</code> shell construct, plus bytecode VM stability fixes. It builds on the v1.7.19 additions of multi-assignment declarations (<code>let a, b = 1, 2</code>), <code>__file__</code> support, and the expanded transformer library. Origin is designed to be the ultimate bridge between software logic and hardware execution.</p>
                 <div style="margin-top: 1.5rem;">
-                    <p style="margin-bottom: 0.5rem;"><strong>• Multi-Assignment:</strong> Declare several variables at once — <code>let a, b = 1, 2</code> — with per-name type annotations (<code>let p, q: int, str = 6, "hi"</code>) checked in both the interpreter and the bytecode VM.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• GUI Automation (New in v1.7.20):</strong> <code>import gui</code> — a <code>GUI</code> class wrapping <code>pyautogui</code> for mouse, keyboard, screenshot and dialogs (<code>moveTo</code>, <code>click</code>, <code>typewrite</code>, <code>screenshot</code>, <code>alert</code> and more).</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Run Command (New in v1.7.20):</strong> <code>run command "echo hello"</code> executes shell commands via <code>subprocess.run</code> for system automation.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• VM Reliability (v1.7.20):</strong> Isolated <code>parallel</code> threads, <code>0xFF</code> read fix, and hardware-call constant handling.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Multi-Assignment (v1.7.19):</strong> Declare several variables at once — <code>let a, b = 1, 2</code> — with per-name type annotations (<code>let p, q: int, str = 6, "hi"</code>) checked in both the interpreter and the bytecode VM.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Stricter Type Checking:</strong> <code>let</code> declarations are now type-checked consistently across all three backends (interpreter, VM, and compiler).</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• <code>__file__</code> Support:</strong> Library imports can resolve relative to the running script, so bundled libraries work inside the pip package and standalone binary.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Expanded Transformer Library:</strong> The built-in HuggingFace-style <code>transformer</code> library now ships device selection, tokenization, text generation, model evaluation, LoRA adapters, and a one-shot <code>run_pipeline</code> fine-tuner.</p>
