@@ -39,7 +39,7 @@
         <p align="left">A hardware-first, domain-specific language built for robotics, AI, and low-latency systems. Expressive syntax meets reliable control. Now shipping standalone installers for Windows, macOS, and Linux.</p>
 
         <div class="hero-actions">
-            <a href="download.html" class="btn btn-primary" align="left">Download v1.7.20</a>
+            <a href="download.html" class="btn btn-primary" align="left">Download v1.7.21</a>
             <a href="cli.html" class="btn btn-primary">Install CLI</a>
             <a href="docs.html" class="btn btn-secondary">Documentation</a>
         </div>
@@ -74,14 +74,14 @@
     </section>
 
     <section class="section container">
-        <h2 class="section-title">v1.7.20 Stable Now Live</h2>
+        <h2 class="section-title">v1.7.21 Stable Now Live</h2>
         <div class="content-grid">
             <div class="content-block">
-                <p>The v1.7.20 release adds a GUI automation library and a <code>run command</code> shell construct, plus bytecode VM stability fixes. It builds on the v1.7.19 additions of multi-assignment declarations (<code>let a, b = 1, 2</code>) with per-name type annotations, stricter type checking on <code>let</code> across both the interpreter and the bytecode VM, <code>__file__</code> support for library imports, and an expanded HuggingFace-style transformer library. Origin is designed to be the ultimate bridge between software logic and hardware execution.</p>
+                <p>The v1.7.21 release adds a GUI automation library and a <code>run command</code> shell construct, plus bytecode VM stability fixes. It builds on the v1.7.19 additions of multi-assignment declarations (<code>let a, b = 1, 2</code>) with per-name type annotations, stricter type checking on <code>let</code> across both the interpreter and the bytecode VM, <code>__file__</code> support for library imports, and an expanded HuggingFace-style transformer library. Origin is designed to be the ultimate bridge between software logic and hardware execution.</p>
                 <div style="margin-top: 1.5rem;">
-                    <p style="margin-bottom: 0.5rem;"><strong>• GUI Automation (New in v1.7.20):</strong> <code>import gui</code> — a <code>GUI</code> class wrapping <code>pyautogui</code> for mouse control (<code>moveTo</code>, <code>click</code>, <code>dragTo</code>, <code>scroll</code>), keyboard (<code>typewrite</code>, <code>press</code>, <code>hotkey</code>), screenshots (<code>screenshot</code>, <code>pixel</code>, <code>locateOnScreen</code>), and dialogs (<code>alert</code>, <code>confirm</code>, <code>prompt</code>) via lazy imports. Module-level helpers <code>guiMoveTo</code>, <code>guiClick</code>, <code>guiTypewrite</code> also available.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Run Command (New in v1.7.20):</strong> <code>run command "echo hello"</code> executes shell commands via <code>subprocess.run</code> — use it for system automation and tooling. Supports a trailing block for flags (<code>run command "ls" { }</code>).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• VM Reliability (v1.7.20):</strong> Bytecode VM now isolates <code>parallel</code> threads with per-thread VMs and merges variables safely, handles <code>0xFF</code> as <code>-1</code> for file reads, fixes <code>HARDWARE_CALL</code> constant lookup, and improves compiler <code>emit</code> to accept multiple operands.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• GUI Automation (New in v1.7.21):</strong> <code>import gui</code> — a <code>GUI</code> class wrapping <code>pyautogui</code> for mouse control (<code>moveTo</code>, <code>click</code>, <code>dragTo</code>, <code>scroll</code>), keyboard (<code>typewrite</code>, <code>press</code>, <code>hotkey</code>), screenshots (<code>screenshot</code>, <code>pixel</code>, <code>locateOnScreen</code>), and dialogs (<code>alert</code>, <code>confirm</code>, <code>prompt</code>) via lazy imports. Module-level helpers <code>guiMoveTo</code>, <code>guiClick</code>, <code>guiTypewrite</code> also available.</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• Run Command (New in v1.7.21):</strong> <code>run command "echo hello"</code> executes shell commands via <code>subprocess.run</code> — use it for system automation and tooling. Supports a trailing block for flags (<code>run command "ls" { }</code>).</p>
+                    <p style="margin-bottom: 0.5rem;"><strong>• VM Reliability (v1.7.21):</strong> Bytecode VM now isolates <code>parallel</code> threads with per-thread VMs and merges variables safely, handles <code>0xFF</code> as <code>-1</code> for file reads, fixes <code>HARDWARE_CALL</code> constant lookup, and improves compiler <code>emit</code> to accept multiple operands.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Multi-Assignment (v1.7.19):</strong> Declare several variables at once — <code>let a, b = 1, 2</code> — with per-name type annotations (<code>let p, q: int, str = 6, "hi"</code>) checked in both the interpreter and the bytecode VM.</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• Stricter Type Checking:</strong> <code>let</code> declarations are now type-checked consistently across all three backends (interpreter, VM, and compiler).</p>
                     <p style="margin-bottom: 0.5rem;"><strong>• <code>__file__</code> Support:</strong> Library imports can resolve relative to the running script, so bundled libraries work inside the pip package and standalone binary.</p>
