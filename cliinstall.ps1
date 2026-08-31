@@ -115,7 +115,7 @@ Write-Host ""
 Write-Host "Get started:" -ForegroundColor Cyan
 Write-Host "  Open a NEW terminal window, then:"
 Write-Host "  $BINARY_NAME help        # Show available commands"
-Write-Host "  $BINARY_NAME             # Start interactive REPL"
+Write-Host "  $BINARY_NAME cli         # Start interactive REPL"
 Write-Host "  $BINARY_NAME myfile.or   # Run an Origin file"
 Write-Host ""
 Write-Host "Documentation:" -ForegroundColor Cyan
