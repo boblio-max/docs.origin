@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -116,7 +116,7 @@
     <header class="hero container">
         <h1>Install Origin.</h1>
         <p>Start building intelligent systems today. Origin ships as a standalone toolchain for Windows, macOS, and
-            Linux — and as a one-command pip install for Raspberry Pi.</p>
+            Linux â€” and as a one-command pip install for Raspberry Pi.</p>
 
         <div class="hero-actions">
             <a href="#quick-install" class="btn btn-primary">Quick Install</a>
@@ -167,23 +167,23 @@ irm https://docs-origin.onrender.com/cliinstall.ps1 | iex</code></pre>
             <div class="platform-card">
                 <h3>Windows (x64)</h3>
                 <p>Native <code>origin.exe</code> bundled with the PowerShell secure installer.</p>
-                <a href="assets/OriginInstallerV1.7.22.zip" class="btn btn-primary">Download .zip</a>
-                <pre><code>Expand-Archive .\OriginInstallerV1.7.22.zip
-cd OriginInstallerV1.7.22
+                <a href="assets/OriginInstallerV1.7.23.zip" class="btn btn-primary">Download .zip</a>
+                <pre><code>Expand-Archive .\OriginInstallerV1.7.23.zip
+cd OriginInstallerV1.7.23
 .\secure_install.ps1
 origin --version</code></pre>
             </div>
 
             <div class="platform-card">
                 <h3>macOS (Universal) <span class="badge badge-new">pip</span></h3>
-                <p>Install via <code>pip install origin-or</code>. The standalone macOS bundle is in development — use the one-command pip install for now.</p>
+                <p>Install via <code>pip install origin-or</code>. The standalone macOS bundle is in development â€” use the one-command pip install for now.</p>
                 <pre><code>pip install origin-or
 origin hello.or</code></pre>
             </div>
 
             <div class="platform-card">
                 <h3>Linux (x64)</h3>
-                <p>Install via pip on any Linux distro. The standalone ELF binary is in development — use the one-command pip install for now.</p>
+                <p>Install via pip on any Linux distro. The standalone ELF binary is in development â€” use the one-command pip install for now.</p>
                 <pre><code>pip install origin-or
 origin hello.or</code></pre>
             </div>
@@ -250,7 +250,7 @@ sudo apt install openjdk-17-jdk
 cd ~/.local/lib/python3.11/site-packages/origin/bc/JavaImplement
 javac *.java
 
-# Compile .or → .obc on any machine:
+# Compile .or â†’ .obc on any machine:
 python -m origin.bc.dump_obc hello.or hello.obc
 
 # Copy hello.obc to Pi and run:
@@ -263,15 +263,22 @@ java Main hello.obc</code></pre>
         <pre><code>pip install origin-or[pi]</code></pre>
         <p>This installs <code>RPi.GPIO</code>, <code>adafruit-circuitpython-servokit</code>, and
            <code>smbus2</code>. When hardware is absent, Origin gracefully falls back to <code>[SIM]</code>
-           stubs — the same code runs on any platform without modification.</p>
-        <p>Example — blink an LED:</p>
+           stubs â€” the same code runs on any platform without modification.</p>
+        <p>Example â€” blink an LED:</p>
         <pre><code># blink.or
 let pin: int = 17
-loop 10:
-    set pin 17 to true
-    wait 0.5
-    set pin 17 to false
-    wait 0.5</code></pre>
+for i in range(0, 10) {
+    set pin 17, 1
+    py {
+        import time
+        time.sleep(0.5)
+    }
+    set pin 17, 0
+    py {
+        import time
+        time.sleep(0.5)
+    }
+}</code></pre>
         <pre><code>origin blink.or</code></pre>
     </section>
 
@@ -306,7 +313,7 @@ loop 10:
                 <p>Open a new terminal session so the updated <code>PATH</code> takes effect, then run:</p>
                 <div class="terminal-window" style="margin-top: 1rem; padding: 1rem;">
                     <div class="terminal-line"><span class="prompt">$</span> origin --version</div>
-                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.22
+                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.23
                     </div>
                 </div>
                 <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
@@ -323,16 +330,16 @@ loop 10:
             <div class="content-block">
                 <p>Every installer bundle provides the same toolchain regardless of platform:</p>
                 <ul style="margin-top: 1.5rem; list-style: none; color: var(--text-muted);">
-                    <li style="margin-bottom: 0.5rem;">• <strong>origin binary:</strong> The core compiler and
+                    <li style="margin-bottom: 0.5rem;">â€¢ <strong>origin binary:</strong> The core compiler and
                         runtime engine.</li>
-                    <li style="margin-bottom: 0.5rem;">• <strong>Origin Builder:</strong> Tooling to compile your
+                    <li style="margin-bottom: 0.5rem;">â€¢ <strong>Origin Builder:</strong> Tooling to compile your
                         scripts into standalone executables.</li>
-                    <li style="margin-bottom: 0.5rem;">• <strong>Module System:</strong> Full support for multi-file
+                    <li style="margin-bottom: 0.5rem;">â€¢ <strong>Module System:</strong> Full support for multi-file
                         projects and namespacing (<code>calc.or</code>, <code>graph.or</code>).</li>
-                    <li style="margin-bottom: 0.5rem;">• <strong>Hardware Drivers:</strong> Pre-bundled, gracefully degrading to <code>[SIM]</code>
+                    <li style="margin-bottom: 0.5rem;">â€¢ <strong>Hardware Drivers:</strong> Pre-bundled, gracefully degrading to <code>[SIM]</code>
                         stubs when real hardware is unavailable.</li>
-                    <li style="margin-bottom: 0.5rem;">• <strong>Bytecode VM:</strong> Stack-based virtual machine with 74 opcodes, included in the pip package.</li>
-                    <li>• <strong>IMU Sensor Support:</strong> Native driver for <code>mpu6050</code> and compatible MEMS IMU chips — read <code>accel</code>, <code>gyro</code>, and <code>temp</code> with a single line of Origin.</li>
+                    <li style="margin-bottom: 0.5rem;">â€¢ <strong>Bytecode VM:</strong> Stack-based virtual machine with 74 opcodes, included in the pip package.</li>
+                    <li>â€¢ <strong>IMU Sensor Support:</strong> Native driver for <code>mpu6050</code> and compatible MEMS IMU chips â€” read <code>accel</code>, <code>gyro</code>, and <code>temp</code> with a single line of Origin.</li>
                 </ul>
             </div>
         </div>
@@ -348,7 +355,7 @@ loop 10:
                 <li><a href="community.html">Community</a></li>
                 <li><a href="support.html">Support</a></li>
             </ul>
-            <div class="copyright">© 2026 Origin Organization</div>
+            <div class="copyright">Â© 2026 Origin Organization</div>
         </div>
     </footer>
 

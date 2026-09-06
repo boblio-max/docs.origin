@@ -6,17 +6,12 @@
     <title>Welcome to Origin</title>
     <link rel="icon" href="images/Origin_tiger.png" type="image/png">
     <link rel="stylesheet" href="styles.css">
-    <meta name="description" content="Origin is a hardware-first programming language built for robotics, AI, and low-latency systems. Install on Windows, macOS, Linux, and Raspberry Pi.">
+    <meta name="description" content="Origin is a hardware-first programming language built for robotics, AI, and low-latency systems.">
 </head>
 <body>
-
     <nav>
         <div class="nav-container">
-            <!-- <p align="left">
-                <img src="images\Origin_tiger.png" alt="Origin Logo" width="60">
-            </p> -->
-            <!-- Fix the logo and nav alignment to be on the same line, with the logo on the left and the nav links on the right -->
-            <a href="index.html" class="logo" align="left">Welcome to Origin</a>
+            <a href="index.html" class="logo"><span class="logo-mark"><img src="images/Origin_tiger.png" alt="Origin" width="28" height="28" style="display:block; border-radius:6px;"></span> Origin</a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="https://mintlify.wiki/boblio-max/origin">Docs</a></li>
@@ -25,83 +20,145 @@
                 <li><a href="cli.html">CLI</a></li>
                 <li><a href="repl.html">REPL</a></li>
                 <li><a href="osf.html">Origin Systems</a></li>
-                <li><a href="https://logor.origin-lang.org">LogOr</a></li>
                 <li><a href="community.html">Community</a></li>
             </ul>
+            <a href="download.html" class="nav-cta">Download</a>
         </div>
     </nav>
 
-    <header class="hero container">
-
-        <h1 align="left" class="hero-title">
-            <span id="typing-text"></span><span class="cursor">|</span>
-        </h1>
-        <p align="left">A hardware-first, domain-specific language built for robotics, AI, and low-latency systems. Expressive syntax meets reliable control. Now shipping standalone installers for Windows, macOS, and Linux.</p>
-
-        <div class="hero-actions">
-            <a href="download.html" class="btn btn-primary" align="left">Download v1.7.21</a>
-            <a href="cli.html" class="btn btn-primary">Install CLI</a>
-            <a href="docs.html" class="btn btn-secondary">Documentation</a>
-        </div>
-
-        <div class="terminal-window">
-            <div class="terminal-line"><span class="prompt">$</span> origin run hello.or</div>
-            <div class="terminal-line" style="color: var(--text-muted); margin-top: 0.5rem;">[sys] Servo 1 initialized at 90°</div>
-            <div class="terminal-line" style="color: var(--text-muted);">[sys] Execution completed in 12ms</div>
-        </div>
-    </header>
-
-    <section class="section container">
-        <h2 class="section-title">Built for the physical world</h2>
-        <div class="content-grid">
-            <div class="content-block">
-                <h3>Hardware Safety</h3>
-                <p>Automatic 0-180° servo clamping prevents physical gear damage natively. Safety is built into the compiler so your hardware remains protected.</p>
+    <!-- HOME HERO — sharplink home_hero -->
+    <section class="sl-hero">
+        <div class="container sl-hero-grid">
+            <div class="sl-hero-left">
+                <div class="sl-hero-eyebrow"><span>HARDWARE-FIRST LANGUAGE</span> <span style="opacity:0.35;">—</span> <span style="font-weight:700; letter-spacing:0.02em;">v1.7.21 STABLE</span></div>
+                <h1 class="sl-hero-title"><span id="typing-text"></span><span class="cursor">|</span></h1>
+                <p class="sl-hero-blurb">A hardware-first, domain-specific language for robotics, AI, and low-latency systems. Expressive Origin syntax, reliable Python execution — from servos to sensors in one file.</p>
+                <div class="sl-hero-ctas">
+                    <a href="repl.html" class="btn btn-primary">Explore the REPL</a>
+                    <a href="download.html" class="btn btn-ghost">Download v1.7.21</a>
+                </div>
+                <div class="sl-hero-meta">Runs on Windows · macOS · Linux · Raspberry Pi — pip install origin-or</div>
             </div>
-            <div class="content-block">
-                <h3>Python Native</h3>
-                <p>Robust translation to Python ensures maximum library compatibility while maintaining a clean, hardware-focused syntax. You get the speed of custom scripting with the ecosystem of Python.</p>
-            </div>
-            <div class="content-block">
-                <h3>Structured Logic</h3>
-                <p>Formal error handling with try-except blocks ensures system stability during complex robotics tasks.</p>
-            </div>
-            <div class="content-block">
-                <h3>AI-Native by Design</h3>
-                <p>Origin's English-like, unambiguous syntax reads naturally to humans and language models alike, helping AI assistants generate correct, production-ready code on the first try — fewer rewrites, less debugging, faster iteration.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section container">
-        <h2 class="section-title">v1.7.21 Stable Now Live</h2>
-        <div class="content-grid">
-            <div class="content-block">
-                <p>The v1.7.21 release adds a GUI automation library and a <code>run command</code> shell construct, plus bytecode VM stability fixes. It builds on the v1.7.19 additions of multi-assignment declarations (<code>let a, b = 1, 2</code>) with per-name type annotations, stricter type checking on <code>let</code> across both the interpreter and the bytecode VM, <code>__file__</code> support for library imports, and an expanded HuggingFace-style transformer library. Origin is designed to be the ultimate bridge between software logic and hardware execution.</p>
-                <div style="margin-top: 1.5rem;">
-                    <p style="margin-bottom: 0.5rem;"><strong>• GUI Automation (New in v1.7.21):</strong> <code>import gui</code> — a <code>GUI</code> class wrapping <code>pyautogui</code> for mouse control (<code>moveTo</code>, <code>click</code>, <code>dragTo</code>, <code>scroll</code>), keyboard (<code>typewrite</code>, <code>press</code>, <code>hotkey</code>), screenshots (<code>screenshot</code>, <code>pixel</code>, <code>locateOnScreen</code>), and dialogs (<code>alert</code>, <code>confirm</code>, <code>prompt</code>) via lazy imports. Module-level helpers <code>guiMoveTo</code>, <code>guiClick</code>, <code>guiTypewrite</code> also available.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Run Command (New in v1.7.21):</strong> <code>run command "echo hello"</code> executes shell commands via <code>subprocess.run</code> — use it for system automation and tooling. Supports a trailing block for flags (<code>run command "ls" { }</code>).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• VM Reliability (v1.7.21):</strong> Bytecode VM now isolates <code>parallel</code> threads with per-thread VMs and merges variables safely, handles <code>0xFF</code> as <code>-1</code> for file reads, fixes <code>HARDWARE_CALL</code> constant lookup, and improves compiler <code>emit</code> to accept multiple operands.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Multi-Assignment (v1.7.19):</strong> Declare several variables at once — <code>let a, b = 1, 2</code> — with per-name type annotations (<code>let p, q: int, str = 6, "hi"</code>) checked in both the interpreter and the bytecode VM.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Stricter Type Checking:</strong> <code>let</code> declarations are now type-checked consistently across all three backends (interpreter, VM, and compiler).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• <code>__file__</code> Support:</strong> Library imports can resolve relative to the running script, so bundled libraries work inside the pip package and standalone binary.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Expanded Transformer Library:</strong> The built-in HuggingFace-style <code>transformer</code> library now ships device selection, tokenization, text generation, model evaluation, LoRA adapters, and a one-shot <code>run_pipeline</code> fine-tuner.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Floor / Ceil:</strong> New built-in <code>floor</code> and <code>ceil</code> keyword functions (<code>print floor(3.7)</code> → <code>3</code>, <code>print ceil(3.2)</code> → <code>4</code>).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Floor Division:</strong> The <code>//</code> operator performs integer floor division in both the VM and interpreter (<code>print 7 // 2</code> → <code>3</code>).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Skip Alias:</strong> <code>skip</code> now works as an alias for <code>continue</code> inside loops.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Better Syntax Errors:</strong> Parse failures now report the exact line and column with a caret pointer and a helpful suggestion instead of a bare message.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Pi &amp; Abs:</strong> The <code>pi</code> constant and <code>abs</code> keyword function from v1.7.16 (<code>print pi</code> → <code>3.141592653589793</code>).</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Auto-Inference:</strong> <code>let</code>/<code>const</code> without a type annotation infer the type automatically, with a friendly warning nudging you toward strict typing.</p>
-                    <p style="margin-bottom: 0.5rem;"><strong>• Cross-Platform Builds:</strong> Native installers are produced for Windows (x64), macOS (universal), and Linux (x64 + Raspberry Pi) with per-binary <code>SHA256SUMS</code> verification.</p>
-                    <p><strong>• Coming Next (v1.8):</strong> A dedicated bytecode compiler and VM (<code>runnerByte.py</code>) is in active development on the <code>origin-dev</code> branch — it will replace the AST-to-Python interpreter behind the scenes while keeping the Origin surface stable.</p>
+            <div class="sl-hero-asset" style="padding:0; background:#0b1626; display:block;">
+                <div class="terminal-window" style="border:none; box-shadow:none; border-radius:14px; height:100%;">
+                    <div class="terminal-body" style="padding:1.5rem;">
+                        <div class="terminal-line"><span class="prompt">$</span> origin hello.or</div>
+                        <div class="terminal-line" style="color:#94a3b8; margin-top:0.6rem;">[sys] Servo 1 initialized at 90°</div>
+                        <div class="terminal-line" style="color:#94a3b8;">[sys] Execution completed in 12ms</div>
+                        <div class="terminal-line" style="color:#5a6d82; margin-top:0.9rem; font-size:0.74rem;">let angle: int = 90 · set servo.angle 1, 90</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- PRODUCTIVITY — sharplink home_productivity -->
+    <section class="sl-section">
+        <div class="container">
+            <div class="sl-kicker">PRODUCTIVITY</div>
+            <div class="sl-productivity-grid">
+                <div>
+                    <h2 class="sl-h2">Pioneering<br>Productivity</h2>
+                    <p class="sl-body">By combining native servo clamping, Python interop, and 12ms execution, we set a new standard for how hardware code works — and compounds over time.</p>
+                    <a href="docs.html" class="sl-link">More in Documentation →</a>
+                    <div class="sl-stats">
+                        <div class="sl-stat"><div class="sl-stat-label">AVG EXECUTION</div><div class="sl-stat-value">12ms</div><div class="sl-stat-sub">servo → Python</div></div>
+                        <div class="sl-stat"><div class="sl-stat-label">STABLE RELEASE</div><div class="sl-stat-value">1.7.21</div><div class="sl-stat-sub">Windows · Mac · Pi</div></div>
+                    </div>
+                </div>
+                <div class="sl-productivity-cards">
+                    <div class="sl-pcard">
+                        <div class="sl-pcard-media">◈</div>
+                        <div class="sl-pcard-title">Clamped at<br>compile time</div>
+                        <p>0–180° servo clamping lives in the compiler. No damaged gears, no runtime guards.</p>
+                    </div>
+                    <div class="sl-pcard">
+                        <div class="sl-pcard-media">⟡</div>
+                        <div class="sl-pcard-title">Python native<br>interop</div>
+                        <p>Clean transpilation to Python. Use any library — no shims, no FFI.</p>
+                    </div>
+                    <div class="sl-pcard">
+                        <div class="sl-pcard-media">⬡</div>
+                        <div class="sl-pcard-title">Trackable<br>diagnostics</div>
+                        <p>Caret errors with line:column + suggestion. See the bug before you run.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROPOSITIONS — sharplink home_propositions 5-col -->
+    <section class="sl-section sl-section--alt">
+        <div class="container">
+            <div class="sl-kicker">PROPOSITIONS</div>
+            <h2 class="sl-h2">The Stack for<br>Stacking Intelligence</h2>
+            <div class="sl-props">
+                <div class="sl-prop">
+                    <div class="sl-prop-img">01</div>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">SAFETY</div>
+                    <h3>Built by Hardware Pioneers</h3>
+                    <p>Servo and IMU drivers co-designed with the language — not bolted on.</p>
+                </div>
+                <div class="sl-prop">
+                    <div class="sl-prop-img">02</div>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">OPERATIONS</div>
+                    <h3>Hardware as an Operating System</h3>
+                    <p>GPIO, I²C, SPI, parallel, and raw py blocks — one runtime.</p>
+                </div>
+                <div class="sl-prop">
+                    <div class="sl-prop-img">03</div>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">DISTRIBUTION</div>
+                    <h3>Install Everywhere</h3>
+                    <p>pip install origin-or on Pi, Mac, Linux, Windows. Auditable and forkable.</p>
+                </div>
+                <div class="sl-prop">
+                    <div class="sl-prop-img">04</div>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">CLARITY</div>
+                    <h3>Real-time Diagnostics</h3>
+                    <p>Caret errors, typed let, SIM fallback — full visibility as it runs.</p>
+                </div>
+                <div class="sl-prop">
+                    <div class="sl-prop-img">05</div>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">ECOSYSTEM</div>
+                    <h3>Python Without Leaving</h3>
+                    <p>Numpy, OpenCV, transformers, pyautogui — all callable from Origin.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BANNER — sharplink home_banner -->
+    <section class="sl-banner">
+        <div class="container">
+            <h2>Origin for Everyone,<br>Engineered to Compound.</h2>
+            <div class="sl-banner-ctas">
+                <a href="download.html" class="btn btn-primary" style="background:#fff; color:var(--denim);">Download v1.7.21</a>
+                <a href="docs.html" class="btn btn-ghost" style="border-color: var(--card-border); color: var(--denim);">See Documentation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- RELEASE — keep Origin content, now in Sharplink density -->
+    <section class="sl-section">
+        <div class="container">
+            <div class="sl-kicker">RELEASE NOTES</div>
+            <h2 class="sl-h2" style="margin-bottom:0.6rem;">v1.7.21 Stable <span class="badge">STABLE</span></h2>
+            <p class="sl-body" style="max-width:720px; margin-bottom:1.5rem;">GUI automation + <code>run command</code> + VM hardening — built on v1.7.19 multi-assign and typed let. The ultimate bridge between software logic and hardware execution.</p>
+            <div class="sl-release">
+                <div><strong>GUI Automation</strong> — <code>import gui</code> wraps <code>pyautogui</code> (<code>moveTo</code>, <code>click</code>, <code>typewrite</code>, <code>screenshot</code>, <code>alert</code>).</div>
+                <div><strong>Run Command</strong> — <code>run command "echo hello"</code> via <code>subprocess.run</code>.</div>
+                <div><strong>VM Reliability</strong> — isolated <code>parallel</code> VMs, <code>0xFF</code>→<code>-1</code>, <code>HARDWARE_CALL</code> fix.</div>
+                <div><strong>Also:</strong> <code>let a, b = 1, 2</code> per-name types, <code>floor</code>/<code>ceil</code>, <code>//</code>, <code>skip</code>, caret errors, <code>pi</code>/<code>abs</code>.</div>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <div class="container footer-container">
-            <div class="logo">Origin Programming Language</div>
+        <div class="container footer-grid">
+            <div>
+                <div class="logo" style="margin-bottom:0.6rem;">Origin</div>
+                <p style="color: var(--muted); font-size:0.88rem; max-width:320px;">Origin is proudly open source. Hardware-first, Python-native, and built to last.</p>
+            </div>
             <ul class="footer-links">
                 <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
                 <li><a href="docs.html">Documentation</a></li>
@@ -109,10 +166,13 @@
                 <li><a href="community.html">Community</a></li>
                 <li><a href="support.html">Support</a></li>
             </ul>
-            <div class="copyright">© 2026 Origin Organization</div>
         </div>
+        <div class="container copyright">© 2026 Origin Organization · Hardware-first, Python-native.</div>
     </footer>
 
+    <script>
+        // Sharplink-style minimal typing — keep your existing main.js behavior
+    </script>
     <script src="main.js"></script>
 </body>
 </html>

@@ -47,11 +47,14 @@
 
     <section class="section container">
         <h2 class="section-title">Variables and types</h2>
-        <p>Every variable needs a type annotation. Origin checks types at compile time and won't let you assign mismatched values:</p>
+        <p>Variables are declared with <code>let</code> and can include an optional type annotation. If you omit the type, Origin infers it automatically (with a warning nudging you toward strict typing):</p>
         <pre><code>let name: str  = "Origin"
 let year: int  = 2026
 let e:  float = 2.71828
-let ok:  bool  = true</code></pre>
+let ok:  bool  = true
+
+# Type is inferred when omitted
+let count = 0</code></pre>
         <p>Constants use <code>const</code> and can't be reassigned:</p>
         <pre><code>const app_name: str = "Origin"
 # app_name = "Something else"  ← compile error</code></pre>
@@ -102,9 +105,10 @@ if temp > 80 {
 }</code></pre>
 
         <h3>Loops</h3>
-        <p>Use <code>loop</code> for counted iteration and <code>while</code> for condition-based:</p>
-        <pre><code>loop 5:
+        <p>Use <code>for ... in range()</code> for counted iteration and <code>while</code> for condition-based:</p>
+        <pre><code>for i in range(0, 5) {
     print "Iteration"
+}
 
 let count: int = 0
 while count < 3 {
@@ -115,12 +119,12 @@ while count < 3 {
 
     <section class="section container">
         <h2 class="section-title">Functions</h2>
-        <p>Functions are defined with <code>def</code> and must declare their return type after <code>-&gt;</code>:</p>
-        <pre><code>def add(a: int, b: int) -> int {
+        <p>Functions are defined with <code>def</code> (or <code>func</code> as an alias). Type annotations on parameters are optional but recommended:</p>
+        <pre><code>def add(a: int, b: int) {
     return a + b
 }
 
-def greet(name: str) -> none {
+def greet(name: str) {
     print "Hello, " + name
 }
 
@@ -133,17 +137,25 @@ greet("Origin")</code></pre>
         <h2 class="section-title">Controlling a servo (Raspberry Pi)</h2>
         <p>Origin's hardware syntax is the main reason it exists. On a Raspberry Pi with a servo on channel 0 of a PCA9685 driver:</p>
         <pre><code>set servo.angle 0, 90
-wait 1
+py {
+    import time
+    time.sleep(1)
+}
 set servo.angle 0, 180
-wait 1
+py {
+    import time
+    time.sleep(1)
+}
 set servo.angle 0, 0</code></pre>
-        <p>The servo angle is automatically clamped to 0-180&deg; — if you try to set 200, Origin silently caps it to 180. This prevents physical gear damage.</p>
-        <p><code>wait</code> pauses execution in seconds (accepts floats like <code>0.5</code>).</p>
+        <p>The servo angle is automatically clamped to 0-180&deg; — if you try to set 200, Origin silently caps it to 180. This prevents physical gear damage. Use <code>py { import time; time.sleep(...) }</code> for delays.</p>
 
         <h3>GPIO output</h3>
         <p>Drive a BCM pin high or low:</p>
         <pre><code>set pin 17, 1    # HIGH
-wait 0.5
+py {
+    import time
+    time.sleep(0.5)
+}
 set pin 17, 0    # LOW</code></pre>
         <p>When hardware isn't available (e.g., on a laptop), Origin falls back to <code>[SIM]</code> stubs — the same code runs without modification.</p>
     </section>
@@ -168,8 +180,8 @@ set pin 17, 0    # LOW</code></pre>
 let c = calc()
 print c.sin(0, "r")
 print c.cos(0, "d")
-print floor(3.7)   // 3
-print 7 // 2       // 3
+print floor(3.7)   # 3
+print 7 // 2       # 3
 </code></pre>
         <p>Libraries are just <code>.or</code> files. You can write your own and put them next to your script — <code>import mylib</code> will pick them up automatically.</p>
     </section>
