@@ -167,9 +167,9 @@ irm https://docs-origin.onrender.com/cliinstall.ps1 | iex</code></pre>
             <div class="platform-card">
                 <h3>Windows (x64)</h3>
                 <p>Native <code>origin.exe</code> bundled with the PowerShell secure installer.</p>
-                <a href="assets/OriginInstallerV1.7.26.zip" class="btn btn-primary">Download .zip</a>
-                <pre><code>Expand-Archive .\OriginInstallerV1.7.26.zip
-cd OriginInstallerV1.7.26
+                <a href="assets/OriginInstallerV1.7.27.zip" class="btn btn-primary">Download .zip</a>
+                <pre><code>Expand-Archive .\OriginInstallerV1.7.27.zip
+cd OriginInstallerV1.7.27
 .\secure_install.ps1
 origin --version</code></pre>
             </div>
@@ -188,6 +188,21 @@ origin hello.or</code></pre>
 origin hello.or</code></pre>
             </div>
 
+        </div>
+    </section>
+
+    <section class="section container" id="whats-new">
+        <h2 class="section-title">What's new in v1.7.27?</h2>
+        <div class="content-grid">
+            <div class="content-block">
+                <p>Same language, maintainable structure — the toolchain is now a set of focused subpackages:</p>
+                <ul style="margin-top: 1rem; list-style: none; color: var(--text-muted);">
+                    <li style="margin-bottom: 0.5rem;">• <strong>Modular parser:</strong> base + expression, statement, and block mixins — all 26 methods preserved.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Modular interpreter:</strong> five per-domain codegen mixins with output verified byte-identical to the legacy translator.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Grouped AST nodes:</strong> 66 node types organized into 10 files (literals, operators, control flow, collections, hardware, and more).</li>
+                    <li>• <strong>Bytecode VM by default:</strong> <code>origin app.or</code> compiles and runs on the stack VM; <code>origin i app.or</code> uses the AST interpreter. Both verified output-identical.</li>
+                </ul>
+            </div>
         </div>
     </section>
 
@@ -233,14 +248,14 @@ origin hello.or</code></pre>
         <pre><code>from origin.lexer import lex
 from origin.parser import Parser
 from origin.bc.to_byte import Compiler
-from origin.bc.svm import VM
+from origin.bc.svm import sVM
 
 code = ['print "hello from bytecode VM"']
 tokens = lex(code)
 ast = Parser(tokens).program()
 compiler = Compiler()
 compiler.compile(ast)
-VM(compiler.bytecode, compiler.constants).run()</code></pre>
+sVM(compiler.bytecode, compiler.constants).run()</code></pre>
 
         <h3>Java VM on Raspberry Pi</h3>
         <p>The Java VM is a 1:1 port of the Python bytecode VM, with JIT compilation via the HotSpot
@@ -313,7 +328,7 @@ for i in range(0, 10) {
                 <p>Open a new terminal session so the updated <code>PATH</code> takes effect, then run:</p>
                 <div class="terminal-window" style="margin-top: 1rem; padding: 1rem;">
                     <div class="terminal-line"><span class="prompt">$</span> origin --version</div>
-                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.26
+                    <div class="terminal-line" style="color: var(--text-muted);">Origin Programming Language v1.7.27
                     </div>
                 </div>
                 <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">
