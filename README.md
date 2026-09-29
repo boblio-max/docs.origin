@@ -1,40 +1,24 @@
-# Origin Documentation Website
+# docs.origin
 
-Documentation website for the **Origin programming language** -- built with static HTML and CSS.
+the official documentation website for the Origin programming language. hand-authored static HTML/CSS — no framework, no build step, no npm. deliberately boring tech so the docs load instantly and anyone can edit them.
 
-## Website
+## what's here
 
-[https://docs-origin.onrender.com](https://docs-origin.onrender.com)
+- `index.html` — landing page (`<title>Welcome to Origin</title>`)
+- `docs.html` — language reference, `tutorials.html` — guided examples
+- `download.html` — installer downloads (versioned zips live under `assets/`, currently v1.7.28)
+- `archives.html` — old versions, plus community/ecosystem pages
+- `styles.css` + `main.js` — shared styling and a typing-effect flourish
 
-## Description
+## run it locally
 
-This repository contains the **public-facing documentation site** for Origin, built entirely with static HTML and CSS. It serves as the canonical source of truth for learning, using, and contributing to Origin.
+```bash
+python -m http.server 8000
+# → http://localhost:8000/
+```
 
-Origin is designed to be simple, powerful, and expressive, especially for robotics, systems programming, and AI-adjacent workflows.
+deploy anywhere static (GitHub Pages, Cloudflare, Netlify, Render — it's currently on Render at docs-origin.onrender.com). when cutting an Origin release, update `download.html` versions + drop the new zip in `assets/` (the "sync from dev" workflow covers this).
 
-### What This Repository Is
+## stack
 
-This repo is **the website itself** -- not source markdown, not a generator config.
-
-It contains:
-- Hand-authored **HTML pages**
-- Shared **CSS styling**
-- Ready for **static hosting** (GitHub Pages, Cloudflare Pages, Netlify, etc.)
-
-Open `index.html` to view the site locally.
-
-### Current Version: v1.7.20
-
-The site tracks the latest stable Origin release. Download bundles live under `assets/`:
-
-- `OriginInstallerV1.7.20.zip` -- current stable (August 2026) *(or `pip install origin-or==1.7.20`)*
-- `OriginInstallerV1.7.19.zip`, `OriginInstallerV1.7.18.zip`, `OriginInstallerV1.7.16.zip`, `OriginInstallerV1.7.14.zip`, `V1.7.9`, `V1.7.8`, `V1.7.7`, `V1.7.6`, `V1.7.5` -- legacy archives
-
-### Page map
-
-- `index.html` -- landing page (current version + terminal preview)
-- `docs.html` -- full language reference
-- `tutorials.html` -- guided learning cards
-- `download.html` -- installer quick-start
-- `archives.html` -- legacy version directory
-- `community.html`, `support.html`, `osf.html`, `others.html`, `logOr.html` -- supporting pages
+HTML5, CSS3, tiny vanilla ES6. zero dependencies, on purpose.
