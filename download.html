@@ -194,16 +194,15 @@ origin hello.or</code></pre>
     </section>
 
     <section class="section container" id="whats-new">
-        <h2 class="section-title">What's new in v1.7.30?</h2>
+        <h2 class="section-title">What's new in v1.7.31?</h2>
         <div class="content-grid">
             <div class="content-block">
-                <p><code>open "file", "mode" as f</code> — bind file handles with plain or f-string paths, on both the VM and the interpreter — plus a dialect guard so template mappings never hijack keyword-led lines. Dialects:</p>
+                <p>The bundled <code>origin.toml</code> is now a JavaScript-shaped dialect: write JS-style lines and they compile to real Origin before they run — plus a preset pack (<code>py/ts/c/cpp/rs/java</code>) in <code>tomls/</code>. Highlights:</p>
                 <ul style="margin-top: 1rem; list-style: none; color: var(--text-muted);">
-                    <li style="margin-bottom: 0.5rem;">• <strong>TOML dialect table:</strong> each line is matched against the bundled <code>origin.toml</code> (<code>"&lt;origin source&gt;" _ "&lt;dialect line&gt;"</code>) and compiled to real Origin before it runs.</li>
-                    <li style="margin-bottom: 0.5rem;">• <strong>Template captures:</strong> <code>"let $n:int = $v" _ "$n:$v"</code> turns <code>x:5</code> into <code>let x:int = 5</code>, with unlimited variants.</li>
-                    <li style="margin-bottom: 0.5rem;">• <strong>Print shorthand:</strong> <code>"print $n" _ "p $n"</code> turns <code>p x</code> into <code>print x</code>.</li>
-                    <li style="margin-bottom: 0.5rem;">• <strong>Inline expansion:</strong> mapped source shares the program's constants and control flow on the bytecode VM.</li>
-                    <li>• <strong>Preinstalled table:</strong> every install ships <code>origin.toml</code> so dialects work out of the box.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Console output:</strong> <code>console.log(x);</code> turns into <code>print x</code> (<code>error/warn/info</code> too).</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Operators &amp; builtins:</strong> <code>x++;</code> &rarr; <code>x += 1</code>, <code>a === b;</code> &rarr; <code>a == b</code>, <code>Math.floor(x);</code> &rarr; <code>floor(x)</code>, <code>arr.push(v);</code> &rarr; <code>arr.append(v)</code>.</li>
+                    <li style="margin-bottom: 0.5rem;">• <strong>Trailing semicolons</strong> are stripped on plain lines; keyword-led lines (<code>let</code>, <code>if</code>, <code>while</code>, ...) parse natively, semicolon-free.</li>
+                    <li>• <strong>Inline expansion:</strong> mapped source shares the program's constants and control flow on the bytecode VM.</li>
                 </ul>
             </div>
         </div>
