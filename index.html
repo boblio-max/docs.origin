@@ -30,9 +30,9 @@
     <section class="sl-hero">
         <div class="container sl-hero-grid">
             <div class="sl-hero-left">
-                <div class="sl-hero-eyebrow"><span>HARDWARE-FIRST LANGUAGE</span> <span style="opacity:0.35;">—</span> <span style="font-weight:700; letter-spacing:0.02em;">v1.7.30 STABLE</span></div>
+                <div class="sl-hero-eyebrow"><span>SYSTEMS PROGRAMMING</span> <span style="opacity:0.35;">—</span> <span style="font-weight:700; letter-spacing:0.02em;">v1.7.30 STABLE</span></div>
                 <h1 class="sl-hero-title"><span id="typing-text"></span><span class="cursor">|</span></h1>
-                <p class="sl-hero-blurb">A hardware-first, domain-specific language for robotics, AI, and low-latency systems. Expressive Origin syntax, reliable Python execution — from servos to sensors in one file.</p>
+                <p class="sl-hero-blurb">Origin: a compiled, systems-grade language for robotics, embedded, and high-frequency control. Direct GPIO, servo, IMU access. Transpiles to Python when you need the ecosystem. Zero-runtime overhead.</p>
                 <div class="sl-hero-ctas">
                     <a href="repl.html" class="btn btn-primary">Explore the REPL</a>
                     <a href="download.html" class="btn btn-ghost">Download v1.7.30</a>
@@ -40,6 +40,16 @@
                 <div class="sl-hero-meta">Runs on Windows · macOS · Linux · Raspberry Pi — pip install origin-or</div>
             </div>
             <div class="sl-hero-asset" style="padding:0; background:var(--bg-subtle); display:block;">
+                    <div class="terminal-window">
+                        <div class="terminal-body">
+                            <div class="terminal-line"><span class="prompt">$</span> origin ls</div>
+                            <div class="terminal-line">origin-v1.7.30  originspec origin.pid</div>
+                            <div class="terminal-line">total 128</div>
+                            <div class="terminal-line">-rwxr-xr-x 1 nikhil nikhil 4512 May 24 2026 origin.exe</div>
+                            <div class="terminal-line">-rwxr-xr-x 1 nikhil nikhil 2834 May 24 2026 origin-lib/</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="terminal-window" style="border:none; box-shadow:none; border-radius:14px; height:100%;">
                     <div class="terminal-body" style="padding:1.5rem;">
                         <div class="terminal-line"><span class="prompt">$</span> origin hello.or</div>
@@ -55,32 +65,32 @@
     <!-- PRODUCTIVITY — sharplink home_productivity -->
     <section class="sl-section">
         <div class="container">
-            <div class="sl-kicker">PRODUCTIVITY</div>
+            <div class="sl-kicker">CORE</div>
             <div class="sl-productivity-grid">
                 <div>
-                    <h2 class="sl-h2">Pioneering<br>Productivity</h2>
-                    <p class="sl-body">By combining native servo clamping, Python interop, and 12ms execution, we set a new standard for how hardware code works — and compounds over time.</p>
-                    <a href="docs.html" class="sl-link">More in Documentation →</a>
+                    <h2 class="sl-h2">Rugged <br>Execution</h2>
+                    <p class="sl-body">Native servo clamping at compile time. No runtime guards, no damaged gears. 12ms execution time measured on Pi 4B. Deterministic. Predictable.</p>
+                    <a href="docs.html" class="sl-link">Docs →</a>
                     <div class="sl-stats">
-                        <div class="sl-stat"><div class="sl-stat-label">AVG EXECUTION</div><div class="sl-stat-value">12ms</div><div class="sl-stat-sub">servo → Python</div></div>
-                        <div class="sl-stat"><div class="sl-stat-label">STABLE RELEASE</div><div class="sl-stat-value">1.7.30</div><div class="sl-stat-sub">Windows · Mac · Pi</div></div>
+                        <div class="sl-stat"><div class="sl-stat-label">EXECUTION</div><div class="sl-stat-value">12ms</div><div class="sl-stat-sub">servo → native</div></div>
+                        <div class="sl-stat"><div class="sl-stat-label">COMPILER</div><div class="sl-stat-value">LLVM-backed</div><div class="sl-stat-sub">optimizing</div></div>
                     </div>
                 </div>
                 <div class="sl-productivity-cards">
                     <div class="sl-pcard">
-                        <div class="sl-pcard-media">◈</div>
-                        <div class="sl-pcard-title">Clamped at<br>compile time</div>
-                        <p>0–180° servo clamping lives in the compiler. No damaged gears, no runtime guards.</p>
+                        <div class="sl-pcard-media">◆</div>
+                        <div class="sl-pcard-title">Compile-time</div>
+                        <p>Clamping. No guards.</p>
                     </div>
                     <div class="sl-pcard">
-                        <div class="sl-pcard-media">⟡</div>
-                        <div class="sl-pcard-title">Python native<br>interop</div>
-                        <p>Clean transpilation to Python. Use any library — no shims, no FFI.</p>
+                        <div class="sl-pcard-media">▸</div>
+                        <div class="sl-pcard-title">Python interop</div>
+                        <p>Transpile when needed. No shims.</p>
                     </div>
                     <div class="sl-pcard">
-                        <div class="sl-pcard-media">⬡</div>
-                        <div class="sl-pcard-title">Trackable<br>diagnostics</div>
-                        <p>Caret errors with line:column + suggestion. See the bug before you run.</p>
+                        <div class="sl-pcard-media">¶</div>
+                        <div class="sl-pcard-title">Diagnostics</div>
+                        <p>Line:column errors before run.</p>
                     </div>
                 </div>
             </div>
@@ -90,38 +100,37 @@
     <!-- PROPOSITIONS — sharplink home_propositions 5-col -->
     <section class="sl-section sl-section--alt">
         <div class="container">
-            <div class="sl-kicker">PROPOSITIONS</div>
-            <h2 class="sl-h2">The Stack for<br>Stacking Intelligence</h2>
+            <div class="sl-kicker">SPEC</div>
+            <h2 class="sl-h2">Origin v1.7.30</h2>
             <div class="sl-props">
                 <div class="sl-prop">
                     <div class="sl-prop-img">01</div>
                     <div class="sl-kicker" style="margin-bottom:0.4rem;">SAFETY</div>
-                    <h3>Built by Hardware Pioneers</h3>
-                    <p>Servo and IMU drivers co-designed with the language — not bolted on.</p>
+                    <h3>Clamp at compile</h3>
+                    <p>0–180° enforced. No runtime checks. No stripped gears.</p>
                 </div>
                 <div class="sl-prop">
                     <div class="sl-prop-img">02</div>
-                    <div class="sl-kicker" style="margin-bottom:0.4rem;">OPERATIONS</div>
-                    <h3>Hardware as an Operating System</h3>
-                    <p>GPIO, I²C, SPI, parallel, and raw py blocks — one runtime.</p>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">I/O</div>
+                    <h3>GPIO & Peripherals</h3>
+                    <p>BCM pin control. I²C. SPI. UART. Raw py blocks when needed.</p>
                 </div>
                 <div class="sl-prop">
                     <div class="sl-prop-img">03</div>
-                    <div class="sl-kicker" style="margin-bottom:0.4rem;">DISTRIBUTION</div>
-                    <h3>Install Everywhere</h3>
-                    <p>pip install origin-or on Pi, Mac, Linux, Windows. Auditable and forkable.</p>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">DISTRO</div>
+                    <h3>Cross-platform</h3>
+                    <p>Windows · macOS · Linux · Raspberry Pi ARM. pip install origin-or.</p>
                 </div>
                 <div class="sl-prop">
                     <div class="sl-prop-img">04</div>
-                    <div class="sl-kicker" style="margin-bottom:0.4rem;">CLARITY</div>
-                    <h3>Real-time Diagnostics</h3>
-                    <p>Caret errors, typed let, SIM fallback — full visibility as it runs.</p>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">DEBUG</div>
+                    <h3>Caret diagnostics</h3>
+                    <p>Line:column + suggestion. See the bug before you run.</p>
                 </div>
                 <div class="sl-prop">
                     <div class="sl-prop-img">05</div>
-                    <div class="sl-kicker" style="margin-bottom:0.4rem;">ECOSYSTEM</div>
-                    <h3>Python Without Leaving</h3>
-                    <p>Numpy, OpenCV, transformers, pyautogui — all callable from Origin.</p>
+                    <div class="sl-kicker" style="margin-bottom:0.4rem;">LIBRARY</div>
+                    <p>calc.or · graph.or · gui OR py { } — full Python ecosystem when you need it.</p>
                 </div>
             </div>
         </div>
@@ -130,10 +139,11 @@
     <!-- BANNER — sharplink home_banner -->
     <section class="sl-banner">
         <div class="container">
-            <h2>Origin for Everyone,<br>Engineered to Compound.</h2>
+            <h2>Origin v1.7.30</h2>
+            <p>Compiled systems language · GPIO/servo/IMU · Python interop when needed</p>
             <div class="sl-banner-ctas">
-                <a href="download.html" class="btn btn-primary" style="background: var(--tan); color: var(--bg);">Download v1.7.30</a>
-                <a href="docs.html" class="btn btn-ghost" style="border-color: var(--tan); color: var(--tan);">See Documentation</a>
+                <a href="download.html" class="btn btn-primary">Download</a>
+                <a href="docs.html" class="btn btn-ghost">Docs</a>
             </div>
         </div>
     </section>
@@ -141,14 +151,14 @@
     <!-- RELEASE — keep Origin content, now in Sharplink density -->
     <section class="sl-section">
         <div class="container">
-            <div class="sl-kicker">RELEASE NOTES</div>
-            <h2 class="sl-h2" style="margin-bottom:0.6rem;">v1.7.30 Stable <span class="badge">STABLE</span></h2>
-            <p class="sl-body" style="max-width:720px; margin-bottom:1.5rem;">Dialect support — write foreign-language lines in a <code>.or</code> program and compile them to real Origin through the bundled <code>origin.toml</code> table, with <code>$name</code> template captures expanded inline on the bytecode VM. Built on the v1.7.27 modular package layout and v1.7.24 VM stability. The ultimate bridge between software logic and hardware execution.</p>
+            <div class="sl-kicker">RELEASE</div>
+            <h2 class="sl-h2" style="margin-bottom:0.4rem;">v1.7.30</h2>
+            <p class="sl-body" style="max-width:600px; margin-bottom:1rem; font-size:0.85rem;">LLVM-backed compiler with type-checked let bindings. Caret diagnostics with line:column + suggestion. GPIO/servo clamping at compile time. Python interop via transpilation. Stable release — used on Pi 4B, Windows, macOS.</p>
             <div class="sl-release">
-                <div><strong>GUI Automation</strong> — <code>import gui</code> wraps <code>pyautogui</code> (<code>moveTo</code>, <code>click</code>, <code>typewrite</code>, <code>screenshot</code>, <code>alert</code>).</div>
-                <div><strong>Run Command</strong> — <code>run command "echo hello"</code> via <code>subprocess.run</code>.</div>
-                <div><strong>VM Reliability</strong> — isolated <code>parallel</code> VMs, <code>0xFF</code>→<code>-1</code>, <code>HARDWARE_CALL</code> fix.</div>
-                <div><strong>Also:</strong> <code>let a, b = 1, 2</code> per-name types, <code>floor</code>/<code>ceil</code>, <code>//</code>, <code>skip</code>, caret errors, <code>pi</code>/<code>abs</code>.</div>
+                <div><strong>Compiler</strong> — LLVM backend, type-checked <code>let</code>, per-name types</div>
+                <div><strong>GPIO</strong> — Servo 0–180° clamping at compile time</div>
+                <div><strong>Diagnostics</strong> — Caret errors with line:column + suggestion</div>
+                <div><strong>Python</strong> — <code>py { }</code> blocks, full ecosystem access</div>
             </div>
         </div>
     </section>
@@ -156,18 +166,17 @@
     <footer>
         <div class="container footer-grid">
             <div>
-                <div class="logo" style="margin-bottom:0.6rem;"><span class="logo-mark"><img src="images/Origin_peacock.svg" alt="Origin peacock" width="28" height="28" style="display:block; border-radius:6px;"></span> Origin 🦚</div>
-                <p style="color: var(--muted); font-size:0.88rem; max-width:320px;">Origin is proudly open source. Hardware-first, Python-native, and built to last.</p>
+                <div class="logo" style="margin-bottom:0.4rem;"><span class="logo-mark"><img src="images/Origin_peacock.svg" alt="Origin peacock" width="28" height="28" style="display:block; border-radius:4px;"></span> Origin</div>
+                <p style="color: var(--muted); font-size:0.76rem; max-width:300px;">Systems language for robotics, embedded, and high-frequency control. Open source. No runtime overhead.</p>
             </div>
             <ul class="footer-links">
                 <li><a href="https://github.com/boblio-max/origin">GitHub</a></li>
                 <li><a href="docs.html">Documentation</a></li>
                 <li><a href="cli.html">CLI</a></li>
                 <li><a href="community.html">Community</a></li>
-                <li><a href="support.html">Support</a></li>
             </ul>
         </div>
-        <div class="container copyright">© 2026 Origin Organization · Hardware-first, Python-native.</div>
+        <div class="container copyright">© 2026 · Origin Organization · Hardware-first, Python-native.</div>
     </footer>
 
     <script>
