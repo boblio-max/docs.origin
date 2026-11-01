@@ -1,18 +1,21 @@
-/* Origin docs — experimental masonry/dashboard layout */
+/* Origin docs — white background, black text, masonry layout */
 :root {
-    /* Unique color palette for this layout */
-    --bg: #0a0f1a;
-    --bg-subtle: #111827;
-    --surface: #1a2235;
-    --accent: #00d4aa;
-    --accent-soft: #38bdf8;
-    --accent-muted: #0d9488;
-    --ink: #f1f5f9;
-    --ink-soft: #94a3b8;
-    --muted: #64748b;
-    --line: #334155;
-    --card-bg: #1e263a;
-    --card-border: #334155;
+    /* White canvas — maximum readability */
+    --bg: #ffffff;
+    --bg-subtle: #f8fafc;
+    --surface: #ffffff;
+    /* Black accent system */
+    --black: #0f0f0f;
+    --black-soft: #1a1a1a;
+    --black-muted: #2a2a2a;
+    /* Text system — pure black on white for easy long-form reading */
+    --ink: #1e293b;
+    --ink-soft: #64748b;
+    --muted: #7f8c8d;
+    --line: #e2e8f0;
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    /* Fonts — system fonts, highly readable */
     --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-ui: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-code: 'Fira Code', 'Droid Sans Mono', 'monospace';
@@ -25,7 +28,8 @@ body {
     font-family: var(--font-ui); 
     background: var(--bg); 
     color: var(--ink); 
-    line-height: 1.5; 
+    line-height: 1.6; 
+    -webkit-font-smoothing: antialiased; 
 }
 
 /* Masonry layout container */
@@ -50,15 +54,15 @@ nav {
 .nav-links { display:flex; gap:2px; list-style:none; align-items:center; }
 .nav-links a { color: var(--ink-soft); text-decoration:none; font-size:0.7rem; font-weight:500; padding:0.3rem 0.5rem; border-radius:4px; transition:all 0.12s; }
 .nav-links a:hover { color: var(--bg); background: var(--accent); }
-.nav-links a.active { color: var(--accent); background: rgba(0,212,170,0.08); }
+.nav-links a.active { color: var(--accent); background: rgba(15,15,15,0.08); }
 .nav-cta {
     display:inline-flex; align-items:center; padding:0.3rem 0.6rem; border-radius:4px; background: var(--accent); color: var(--bg); font-weight:500; font-size:0.7rem; text-decoration:none; border:1px solid var(--accent);
 }
 .nav-cta:hover { background: var(--accent-soft); border-color: var(--accent-soft); color: var(--bg); }
 
-/* HERO — repositioned as a large card in the grid */
+/* HERO — repositioned as first grid card */
 .hero { padding: 32px 0; margin: 0 0 24px; }
-.hero-grid { display:grid; grid-template-columns: 1fr; gap: 24px; max-width: 1200px; margin: 0 auto; }
+.hero-grid { display:grid; grid-template-columns: 1fr; gap: 24px; max-width: 1200x; margin: 0 auto; }
 .hero-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 32px; transition: transform 0.2s; }
 .hero-card:hover { transform: translateY(-4px); }
 .hero-eyebrow { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; display: flex; gap: 6px; align-items: center; }
@@ -76,7 +80,7 @@ nav {
 @media (min-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
 .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 24px; transition: box-shadow 0.2s; }
-.card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+.card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
 .card h3 { font-size: 1.1rem; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
 .card p { color: var(--muted); font-size: 0.875rem; line-height: 1.5; }
 .card .btn { width: 100%; margin-top: 12px; background: var(--accent); color: var(--bg); border: none; border-radius: 6px; padding: 8px 12px; font-size: 0.75rem; font-weight: 500; cursor: pointer; }
@@ -111,8 +115,11 @@ footer { padding: 32px 0; background: var(--bg-subtle); margin-top: 48px; }
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .grid { grid-template-columns: 1fr; }
-    .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; background: var(--bg-subtle); flex-direction: column; align-items: stretch; padding: 12px; border-top: 1px solid var(--accent); }
+    .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; background: var(--bg-subtle); flex-direction: column; align-items: stretch; padding: 12px; border-top: 2px solid var(--accent); }
     .nav-links.open { display: flex; }
     .nav-toggle { display: block; background: none; border: none; color: var(--accent); padding: 0.3rem 0; font-size: 1rem; cursor: pointer; }
     .footer { flex-direction: column; gap: 16px; }
+}
+@media (max-width: 640px) {
+    .sl-props { grid-template-columns:1fr; }
 }
