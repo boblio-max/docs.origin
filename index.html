@@ -9,78 +9,78 @@
 </head>
 <body>
 
-    <!-- FIXED NAV -->
-    <nav>
-        <div class="nav-container">
-            <a href="#features" class="logo"><span class="logo-mark"><img src="images/Origin_peacock.svg" alt="Origin peacock" width="24" height="24"></span> Origin</a>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#docs">Docs</a></li>
-                <li><a href="#download">Download</a></li>
-                <li><a href="#community">Community</a></li>
-            </ul>
-            <a href="#download" class="nav-cta">Get Origin</a>
-        </div>
-    </nav>
+    <!-- Fixed Nav -->
+<nav>
+    <div class="nav-container">
+        <a href="#features" class="logo"><span class="logo-mark"><img src="images/Origin_peacock.svg" alt="Origin peacock"></span> Origin</a>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#docs">Docs</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#community">Community</a></li>
+        </ul>
+        <a href="#download" class="nav-cta">Get Origin</a>
+    </div>
+</nav>
 
-    <!-- HERO CARD — first card in the masonry grid -->
-    <section class="hero">
-        <div class="layout">
-            <div class="hero-card">
-                <div class="hero-eyebrow">SYSTEMS LANGUAGE</div>
-                <h1 class="hero-title"><span id="typing-text"></span><span class="cursor">|</span></h1>
-                <p class="hero-blurb">Origin: a compiled, systems-grade language for robotics, embedded, and high-frequency control. Direct GPIO, servo, IMU access. Transpiles to Python when you need the ecosystem. Zero-runtime overhead.</p>
-                <div class="hero-ctas">
-                    <a href="#download" class="btn">Download</a>
-                    <a href="#docs" class="btn secondary">Docs</a>
-                </div>
+<!-- Hero -->
+<section class="hero">
+    <div class="hero-grid">
+        <div class="hero-card">
+            <div class="hero-eyebrow">SYSTEMS LANGUAGE</div>
+            <h1 class="hero-title"><span id="typing-text"></span><span class="cursor">|</span></h1>
+            <p class="hero-blurb">Origin: a compiled, systems-grade language for robotics, embedded, and high-frequency control. Direct GPIO, servo, IMU access. Transpiles to Python when you need the ecosystem. Zero-runtime overhead.</p>
+            <div class="hero-ctas">
+                <a href="#download" class="btn btn-primary">Download</a>
+                <a href="#docs" class="btn btn-secondary">Docs</a>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- MASONRY GRID LAYOUT -->
-    <main class="layout">
-        <div class="grid">
+<!-- Masonry Grid Layout -->
+<main class="layout">
+    <div class="grid">
 
-            <!-- FEATURES CARD -->
-            <section class="features">
-                <div class="card">
-                    <h3>Execution</h3>
-                    <p>Native servo clamping at compile time. No runtime guards, no damaged gears. 12ms execution time on Pi 4B. LLVM-backed optimizing compiler.</p>
-                    <a href="#core" class="btn">Learn more</a>
-                </div>
-                <div class="card">
-                    <h3>GPIO & Peripherals</h3>
-                    <p>BCM pin control. I²C. SPI. UART. Raw Python blocks when needed. Cross-platform support for Pi, Windows, macOS, Linux.</p>
-                    <a href="#spec" class="btn">Learn more</a>
-                </div>
-            </section>
+        <!-- Features -->
+        <section class="features">
+            <div class="card">
+                <h3>Execution</h3>
+                <p>Native servo clamping at compile time. No runtime guards, no damaged gears. 12ms execution time on Pi 4B. LLVM-backed optimizing compiler.</h3>
+                <a href="#core" class="btn">Learn more</a>
+            </div>
+            <div class="card">
+                <h3>GPIO & Peripherals</h3>
+                <p>BCM pin control. I²C. SPI. UART. Raw Python blocks when needed. Cross-platform support for Pi, Windows, macOS, Linux.</p>
+                <a href="#spec" class="btn">Learn more</a>
+            </div>
+        </section>
 
-            <!-- DOCS LINKS CARD -->
-            <section class="docs">
-                <div class="card">
-                    <h3>Documentation</h3>
-                    <p>Comprehensive reference for Origin language syntax, standard library, hardware control, and troubleshooting.</p>
-                    <a href="#core" class="btn">Explore docs</a>
-                </div>
-                <div class="card">
-                    <h3>Tutorials</h3>
-                    <p>Step-by-step guides for getting started with Origin, from hello world to hardware control.</p>
-                    <a href="#tutorials" class="btn">View tutorials</a>
-                </div>
-            </section>
+        <!-- Docs Links -->
+        <section class="docs">
+            <div class="card">
+                <h3>Documentation</h3>
+                <p>Comprehensive reference for Origin language syntax, standard library, hardware control, and troubleshooting.</p>
+                <a href="#core" class="btn">Explore docs</a>
+            </div>
+            <div class="card">
+                <h3>Tutorials</h3>
+                <p>Step-by-step guides for getting started with Origin, from hello world to hardware control.</p>
+                <a href="#tutorials" class="btn">View tutorials</a>
+            </div>
+        </section>
 
-            <!-- DOWNLOAD CARD -->
-            <section class="download">
-                <div class="card">
-                    <h3>Download v1.7.30</h3>
-                    <p>Ready to start building? Download Origin and begin your project today.</p>
-                    <a href="https://pypi.org/project/origin-or/" class="btn" style="background: var(--accent); color: var(--bg); width: auto; margin: 16px auto 0; padding: 12px 24px; font-size: 1rem;">Download Now</a>
-                </div>
-            </section>
+        <!-- Download -->
+        <section class="download">
+            <div class="card">
+                <h3>Download v1.7.30</h3>
+                <p>Ready to start building? Download Origin and begin your project today.</p>
+                <a href="https://pypi.org/project/origin-or/" class="btn btn-primary">Download Now</a>
+            </div>
+        </section>
 
-        </div>
-    </main>
+    </div>
+</main>
 
     <!-- CORE SECTION -->
     <section class="section" id="core" style="background: var(--bg-subtle);">
